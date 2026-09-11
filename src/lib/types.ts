@@ -32,4 +32,25 @@ export type QuizResults = {
   total: number;
 };
 
-export type AppTab = "study" | "review";
+export type ExamQuestion = {
+  id: string;
+  category: string;
+  question: string;
+  choices: string[];
+  answerIndex: number;
+  explanation?: string;
+};
+
+export type ExamSettings = {
+  category: string;
+  countOption: QuestionCountOption;
+  customCount: number;
+};
+
+export type ExamResults = {
+  correct: number;
+  incorrect: number;
+  total: number;
+};
+
+export type AppTab = "study" | "review" | "exam" | "terms";

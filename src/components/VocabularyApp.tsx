@@ -1,10 +1,18 @@
 "use client";
 
 import { BottomNav } from "@/components/BottomNav";
+import { ExamQuizScreen } from "@/components/ExamQuizScreen";
+import { ExamResultScreen } from "@/components/ExamResultScreen";
+import { ExamSetup } from "@/components/ExamSetup";
 import { QuizScreen } from "@/components/QuizScreen";
 import { ResultScreen } from "@/components/ResultScreen";
 import { ReviewSetup } from "@/components/ReviewSetup";
 import { StudySetup } from "@/components/StudySetup";
+import { TermsList } from "@/components/TermsList";
+import {
+  buildExamDeck,
+  getExamCategoryCounts,
+} from "@/lib/exam";
 import { buildReviewDeck, buildStudyDeck } from "@/lib/quiz";
 import {
   loadLearningRecord,
@@ -12,6 +20,9 @@ import {
 } from "@/lib/storage";
 import type {
   AppTab,
+  ExamQuestion,
+  ExamResults,
+  ExamSettings,
   QuizResults,
   ReviewSettings,
   StudySettings,
@@ -24,13 +35,20 @@ type Phase = "setup" | "quiz" | "result";
 type VocabularyAppProps = {
   terms: TermItem[];
   categories: string[];
+  examQuestions: ExamQuestion[];
 };
 
-export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
+export function VocabularyApp({
+  terms,
+  categories,
+  examQuestions,
+}: VocabularyAppProps) {
   const [tab, setTab] = useState<AppTab>("study");
   const [phase, setPhase] = useState<Phase>("setup");
   const [deck, setDeck] = useState<TermItem[]>([]);
+  const [examDeck, setExamDeck] = useState<ExamQuestion[]>([]);
   const [results, setResults] = useState<QuizResults | null>(null);
+  const [examResults, setExamResults] = useState<ExamResults | null>(null);
   const [record, setRecord] = useState<LearningRecord>({
     incorrectIds: [],
     uncertainIds: [],
@@ -47,6 +65,22 @@ export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
     countOption: "all",
     customCount: 10,
   });
+
+  const [examSettings, setExamSettings] = useState<ExamSettings>({
+    category: "all",
+    countOption: "5",
+    customCount: 5,
+  });
+
+  const examCategories = useMemo(
+    () => [...new Set(examQuestions.map((q) => q.category))],
+    [examQuestions],
+  );
+
+  const examCategoryCounts = useMemo(
+    () => getExamCategoryCounts(examQuestions),
+    [examQuestions],
+  );
 
   useEffect(() => {
     setRecord(loadLearningRecord());
@@ -75,6 +109,11 @@ export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
     return new Set([...record.incorrectIds, ...record.uncertainIds]).size;
   }, [record, reviewSettings.filter]);
 
+  const examPoolSize = useMemo(() => {
+    if (examSettings.category === "all") return examQuestions.length;
+    return examCategoryCounts[examSettings.category] ?? 0;
+  }, [examQuestions.length, examSettings.category, examCategoryCounts]);
+
   function refreshRecord() {
     setRecord(loadLearningRecord());
   }
@@ -83,7 +122,9 @@ export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
     setTab(next);
     setPhase("setup");
     setDeck([]);
+    setExamDeck([]);
     setResults(null);
+    setExamResults(null);
     refreshRecord();
   }
 
@@ -116,18 +157,43 @@ export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
     setPhase("quiz");
   }
 
+  function startExam() {
+    const nextDeck = buildExamDeck(
+      examQuestions,
+      examSettings.category,
+      examSettings.countOption,
+      examSettings.customCount,
+    );
+    if (nextDeck.length === 0) return;
+    setExamDeck(nextDeck);
+    setExamResults(null);
+    setPhase("quiz");
+  }
+
   function handleFinish(nextResults: QuizResults) {
     setResults(nextResults);
     setPhase("result");
     refreshRecord();
   }
 
+  function handleExamFinish(nextResults: ExamResults) {
+    setExamResults(nextResults);
+    setPhase("result");
+  }
+
   function backToSetup() {
     setPhase("setup");
     setDeck([]);
+    setExamDeck([]);
     setResults(null);
+    setExamResults(null);
     refreshRecord();
   }
+
+  const inSession =
+    (tab === "study" || tab === "review") && phase === "quiz"
+      ? true
+      : tab === "exam" && phase === "quiz";
 
   return (
     <div className="min-h-dvh bg-gradient-to-b from-blue-50 via-slate-50 to-white text-slate-800">
@@ -160,7 +226,21 @@ export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
           />
         )}
 
-        {phase === "quiz" && (
+        {phase === "setup" && tab === "exam" && (
+          <ExamSetup
+            categories={examCategories}
+            categoryCounts={examCategoryCounts}
+            totalCount={examQuestions.length}
+            settings={examSettings}
+            poolSize={examPoolSize}
+            onChange={setExamSettings}
+            onStart={startExam}
+          />
+        )}
+
+        {tab === "terms" && <TermsList terms={terms} categories={categories} />}
+
+        {phase === "quiz" && (tab === "study" || tab === "review") && (
           <QuizScreen
             key={`${tab}-${deck.map((d) => d.id).join("-")}`}
             deck={deck}
@@ -169,14 +249,25 @@ export function VocabularyApp({ terms, categories }: VocabularyAppProps) {
           />
         )}
 
-        {phase === "result" && results && (
+        {phase === "quiz" && tab === "exam" && (
+          <ExamQuizScreen
+            key={examDeck.map((q) => q.id).join("-")}
+            questions={examDeck}
+            onFinish={handleExamFinish}
+            onExit={backToSetup}
+          />
+        )}
+
+        {phase === "result" && (tab === "study" || tab === "review") && results && (
           <ResultScreen results={results} onBack={backToSetup} />
+        )}
+
+        {phase === "result" && tab === "exam" && examResults && (
+          <ExamResultScreen results={examResults} onBack={backToSetup} />
         )}
       </div>
 
-      {phase !== "quiz" && (
-        <BottomNav activeTab={tab} onChange={handleTabChange} />
-      )}
+      {!inSession && <BottomNav activeTab={tab} onChange={handleTabChange} />}
     </div>
   );
 }
