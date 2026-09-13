@@ -225,6 +225,7 @@ function formatTable(table: AnyRecord): string | undefined {
 function collectMaterials(obj: AnyRecord): {
   context?: string;
   figure?: string;
+  figureImages?: string[];
 } {
   const context = joinText([
     typeof obj.question_text === "string" ? obj.question_text : null,
@@ -273,13 +274,27 @@ function collectMaterials(obj: AnyRecord): {
         f.caption ? String(f.caption) : null,
         f.structure ? String(f.structure) : null,
         f.description ? String(f.description) : null,
+        f.image ? `画像ファイル: ${String(f.image)}` : null,
       ]) ?? "",
     );
+  }
+
+  const figureImages: string[] = [];
+  for (const img of asArray(obj.figure_images)) {
+    if (typeof img === "string" && img.trim()) figureImages.push(img.trim());
+  }
+  for (const fig of asArray(obj.figures)) {
+    const f = asRecord(fig);
+    if (!f?.image) continue;
+    const name = String(f.image);
+    const url = name.startsWith("/") ? name : `/exam-figures/${name}`;
+    if (!figureImages.includes(url)) figureImages.push(url);
   }
 
   return {
     context,
     figure: figureParts.filter(Boolean).join("\n\n") || undefined,
+    figureImages: figureImages.length ? figureImages : undefined,
   };
 }
 
@@ -328,6 +343,7 @@ function flattenGenericQuestion(
           : undefined,
     context: materials.context,
     figure: materials.figure,
+    figureImages: materials.figureImages,
   };
 
   // Direct MCQ with options as { ア: [...], イ: [...] }
@@ -506,6 +522,10 @@ function flattenSubItem(
   const subMaterials = collectMaterials(sub);
   const context = joinText([parentMaterials.context, subMaterials.context]);
   const figure = joinText([parentMaterials.figure, subMaterials.figure]);
+  const figureImages = [
+    ...(parentMaterials.figureImages ?? []),
+    ...(subMaterials.figureImages ?? []),
+  ].filter((v, i, arr) => arr.indexOf(v) === i);
 
   const label = String(
     sub.target_label ??
@@ -519,9 +539,52 @@ function flattenSubItem(
     sub.prompt ?? sub.text ?? sub.question_text ?? "次の問いに答えよ。",
   );
 
-  // options object keyed by blank (r8本試)
+  // multi-select on sub
+  if (Array.isArray(sub.correct_choice_ids) && sub.correct_choice_ids.length) {
+    const indexes = sub.correct_choice_ids
+      .map((v) => parseAnswerIndex(v))
+      .filter((v): v is number => v != null);
+    const choices = normalizeOptions(sub.choices ?? sub.options);
+    const max = Math.max(
+      choices?.length ? choices.length - 1 : 0,
+      9,
+      ...indexes,
+    );
+    const finalChoices =
+      choices ??
+      Array.from({ length: max + 1 }, (_, i) =>
+        normalizeChoiceLabel(String(i), i),
+      );
+    pushMcq(list, {
+      id: `${source.id}:${String(parent.question_id ?? sectionId)}-${label}-multi`,
+      sourceId: source.id,
+      sourceTitle: source.title,
+      sectionId,
+      sectionTitle,
+      subId: String(sub.sub_id ?? sub.number ?? label),
+      targetLabel: label,
+      question: joinText([
+        String(sub.sub_id ?? sub.number ?? ""),
+        prompt,
+        "当てはまる番号をすべて選んでください（複数選択）。",
+      ])!,
+      context,
+      figure,
+      figureImages,
+      choices: finalChoices,
+      answerIndex: indexes[0] ?? null,
+      answerIndexes: indexes,
+      multiSelect: true,
+      explanation:
+        typeof sub.explanation === "string" ? sub.explanation : undefined,
+    });
+    return;
+  }
+
+  // options object keyed by blank (r8本試) OR correct_answer object with options object
   const optionsObj = asRecord(sub.options);
-  const answerObj = asRecord(sub.answer);
+  const answerObj =
+    asRecord(sub.answer) || asRecord(sub.correct_answer) || asRecord(sub.answers);
   if (optionsObj && !Array.isArray(sub.options) && answerObj) {
     for (const [blank, opts] of Object.entries(optionsObj)) {
       const choices = normalizeOptions(opts);
@@ -542,6 +605,7 @@ function flattenSubItem(
         ])!,
         context,
         figure,
+        figureImages,
         choices,
         answerIndex,
         explanation:
@@ -581,6 +645,7 @@ function flattenSubItem(
         question: joinText([prompt, `空欄［${blank}］に入る番号を選べ。`])!,
         context,
         figure,
+        figureImages,
         choices: markChoices,
         answerIndex: parseAnswerIndex(value),
         explanation:
@@ -606,6 +671,7 @@ function flattenSubItem(
     ])!,
     context,
     figure,
+    figureImages,
     choices,
     answerIndex,
     explanation: joinText([

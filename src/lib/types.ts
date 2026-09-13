@@ -50,6 +50,8 @@ export type ExamQuestion = {
   question: string;
   context?: string;
   figure?: string;
+  /** 図画像のURL（/exam-figures/...） */
+  figureImages?: string[];
   choices: string[];
   answerIndex: number;
   answerIndexes?: number[];

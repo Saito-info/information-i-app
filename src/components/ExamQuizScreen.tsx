@@ -148,6 +148,19 @@ export function ExamQuizScreen({
                 {current.figure}
               </div>
             ) : null}
+            {current.figureImages?.length ? (
+              <div className="space-y-2">
+                {current.figureImages.map((src) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={src}
+                    src={src}
+                    alt="問題の図"
+                    className="w-full rounded-xl border border-slate-200 bg-white object-contain"
+                  />
+                ))}
+              </div>
+            ) : null}
           </div>
         )}
 
