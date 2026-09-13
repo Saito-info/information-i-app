@@ -9,7 +9,7 @@ import { ResultScreen } from "@/components/ResultScreen";
 import { ReviewSetup } from "@/components/ReviewSetup";
 import { StudySetup } from "@/components/StudySetup";
 import { TermsList } from "@/components/TermsList";
-import { buildExamDeck } from "@/lib/exam";
+import { buildExamSession, getExamFields } from "@/lib/exam";
 import { buildReviewDeck, buildStudyDeck } from "@/lib/quiz";
 import {
   loadLearningRecord,
@@ -19,8 +19,8 @@ import type {
   AppTab,
   ExamQuestion,
   ExamResults,
+  ExamSessionMeta,
   ExamSettings,
-  ExamSourceInfo,
   QuizResults,
   ReviewSettings,
   StudySettings,
@@ -34,21 +34,22 @@ type VocabularyAppProps = {
   terms: TermItem[];
   categories: string[];
   examQuestions: ExamQuestion[];
-  examSources: ExamSourceInfo[];
   examSourceLabel: string;
+  examSourceCount: number;
 };
 
 export function VocabularyApp({
   terms,
   categories,
   examQuestions,
-  examSources,
   examSourceLabel,
+  examSourceCount,
 }: VocabularyAppProps) {
   const [tab, setTab] = useState<AppTab>("study");
   const [phase, setPhase] = useState<Phase>("setup");
   const [deck, setDeck] = useState<TermItem[]>([]);
   const [examDeck, setExamDeck] = useState<ExamQuestion[]>([]);
+  const [examMeta, setExamMeta] = useState<ExamSessionMeta | null>(null);
   const [results, setResults] = useState<QuizResults | null>(null);
   const [examResults, setExamResults] = useState<ExamResults | null>(null);
   const [record, setRecord] = useState<LearningRecord>({
@@ -69,8 +70,14 @@ export function VocabularyApp({
   });
 
   const [examSettings, setExamSettings] = useState<ExamSettings>({
-    sourceId: "all",
+    fieldId: "1",
+    reviewMode: "per-section",
   });
+
+  const examFields = useMemo(
+    () => getExamFields(examQuestions),
+    [examQuestions],
+  );
 
   useEffect(() => {
     setRecord(loadLearningRecord());
@@ -99,11 +106,12 @@ export function VocabularyApp({
     return new Set([...record.incorrectIds, ...record.uncertainIds]).size;
   }, [record, reviewSettings.filter]);
 
-  const examPoolSize = useMemo(() => {
-    if (examSettings.sourceId === "all") return examQuestions.length;
-    return examQuestions.filter((q) => q.sourceId === examSettings.sourceId)
-      .length;
-  }, [examQuestions, examSettings.sourceId]);
+  const canStartExam = useMemo(() => {
+    if (examSettings.fieldId === "all") {
+      return examQuestions.length > 0;
+    }
+    return examQuestions.some((q) => q.fieldId === examSettings.fieldId);
+  }, [examQuestions, examSettings.fieldId]);
 
   function refreshRecord() {
     setRecord(loadLearningRecord());
@@ -114,6 +122,7 @@ export function VocabularyApp({
     setPhase("setup");
     setDeck([]);
     setExamDeck([]);
+    setExamMeta(null);
     setResults(null);
     setExamResults(null);
     refreshRecord();
@@ -149,9 +158,10 @@ export function VocabularyApp({
   }
 
   function startExam() {
-    const nextDeck = buildExamDeck(examQuestions, examSettings.sourceId);
-    if (nextDeck.length === 0) return;
-    setExamDeck(nextDeck);
+    const session = buildExamSession(examQuestions, examSettings);
+    if (!session) return;
+    setExamDeck(session.questions);
+    setExamMeta(session.meta);
     setExamResults(null);
     setPhase("quiz");
   }
@@ -171,6 +181,7 @@ export function VocabularyApp({
     setPhase("setup");
     setDeck([]);
     setExamDeck([]);
+    setExamMeta(null);
     setResults(null);
     setExamResults(null);
     refreshRecord();
@@ -215,10 +226,10 @@ export function VocabularyApp({
         {phase === "setup" && tab === "exam" && (
           <ExamSetup
             sourceLabel={examSourceLabel}
-            sources={examSources}
-            totalCount={examQuestions.length}
+            fields={examFields}
+            sourceCount={examSourceCount}
             settings={examSettings}
-            poolSize={examPoolSize}
+            canStart={canStartExam}
             onChange={setExamSettings}
             onStart={startExam}
           />
@@ -235,10 +246,11 @@ export function VocabularyApp({
           />
         )}
 
-        {phase === "quiz" && tab === "exam" && (
+        {phase === "quiz" && tab === "exam" && examMeta && (
           <ExamQuizScreen
-            key={examDeck.map((q) => q.id).join("-")}
+            key={`${examMeta.sourceId}-${examMeta.fieldId}-${examDeck.map((q) => q.id).join("|")}`}
             questions={examDeck}
+            meta={examMeta}
             onFinish={handleExamFinish}
             onExit={backToSetup}
           />
@@ -251,7 +263,11 @@ export function VocabularyApp({
           )}
 
         {phase === "result" && tab === "exam" && examResults && (
-          <ExamResultScreen results={examResults} onBack={backToSetup} />
+          <ExamResultScreen
+            results={examResults}
+            sourceTitle={examMeta?.sourceTitle}
+            onBack={backToSetup}
+          />
         )}
       </div>
 

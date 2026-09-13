@@ -18,8 +18,8 @@ export default function HomePage() {
       terms={terms}
       categories={categories}
       examQuestions={examQuestions}
-      examSources={examSources}
       examSourceLabel={examSourceLabel}
+      examSourceCount={examSources.length}
     />
   );
 }

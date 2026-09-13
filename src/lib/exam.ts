@@ -3,11 +3,21 @@ import kawaiVol1 from "@/data/exams/kawai_common_test_vol1-v2.json";
 import kawaiVol2 from "@/data/exams/kawai_common_test_vol2.json";
 import kawaiVol3 from "@/data/exams/kawai_common_test_vol3.json";
 import kawaiVol4 from "@/data/exams/kawai_common_test_vol4.json";
+import pageRanges from "@/data/exams/page_ranges.json";
 import r7Honshi from "@/data/exams/r7_honshiken_info1_data.json";
 import r7Tsuishi from "@/data/exams/r7_tsuishiken_info1_data.json";
 import r8Honshi from "@/data/exams/r8_honshiken_info1_data.json";
 import r8Tsuishi from "@/data/exams/r8_tsuishiken_info1_data.json";
-import type { ExamQuestion, ExamSourceInfo } from "@/lib/types";
+import suken from "@/data/exams/suken_sogo_mondai.json";
+import type {
+  ExamFieldId,
+  ExamFieldInfo,
+  ExamQuestion,
+  ExamReviewMode,
+  ExamSessionMeta,
+  ExamSettings,
+  ExamSourceInfo,
+} from "@/lib/types";
 
 const CIRCLED = "⓪①②③④⑤⑥⑦⑧⑨";
 
@@ -17,6 +27,9 @@ type SourceDef = {
   id: string;
   title: string;
   data: unknown;
+  /** page_ranges.json のキー（省略時は id） */
+  pageKey?: string;
+  selfGradeOnly?: boolean;
 };
 
 const SOURCE_DEFS: SourceDef[] = [
@@ -44,6 +57,7 @@ const SOURCE_DEFS: SourceDef[] = [
     id: "info1-specimen",
     title: "共通テスト 試作問題",
     data: info1,
+    pageKey: "specimen",
   },
   {
     id: "r7-honshi",
@@ -65,8 +79,25 @@ const SOURCE_DEFS: SourceDef[] = [
     title: "令和8年度 追試験",
     data: r8Tsuishi,
   },
+  {
+    id: "suken",
+    title: "数研出版 総合問題",
+    data: suken,
+    selfGradeOnly: true,
+  },
 ];
 
+const PAGE_RANGES = pageRanges as Record<
+  string,
+  { pages?: Record<string, string[]> }
+>;
+
+const FIELD_TITLES: Record<ExamFieldId, string> = {
+  "1": "第1問",
+  "2": "第2問",
+  "3": "第3問",
+  "4": "第4問",
+};
 function asRecord(v: unknown): AnyRecord | null {
   return v && typeof v === "object" && !Array.isArray(v)
     ? (v as AnyRecord)
@@ -168,13 +199,9 @@ function normalizeOptions(raw: unknown): string[] | null {
   return null;
 }
 
-function shuffle<T>(items: T[]): T[] {
-  const arr = [...items];
-  for (let i = arr.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
+function pickRandom<T>(items: T[]): T | null {
+  if (!items.length) return null;
+  return items[Math.floor(Math.random() * items.length)] ?? null;
 }
 
 function joinText(parts: Array<string | undefined | null>): string | undefined {
@@ -182,9 +209,46 @@ function joinText(parts: Array<string | undefined | null>): string | undefined {
   return filtered.length ? filtered.join("\n\n") : undefined;
 }
 
+function toHalfWidthDigit(ch: string): string {
+  const map: Record<string, string> = {
+    "１": "1",
+    "２": "2",
+    "３": "3",
+    "４": "4",
+  };
+  return map[ch] ?? ch;
+}
+
+/** 大問タイトル / ID から第1〜4問を判定 */
+export function resolveFieldId(
+  sectionId: string,
+  sectionTitle: string,
+): ExamFieldId | null {
+  const text = `${sectionTitle} ${sectionId}`;
+  const m =
+    text.match(/第\s*([1-4１-４])\s*問/) ||
+    text.match(/section[_\s-]*([1-4])/i) ||
+    String(sectionId).match(/^([1-4])$/);
+  if (!m?.[1]) return null;
+  const n = toHalfWidthDigit(m[1]) as ExamFieldId;
+  return n === "1" || n === "2" || n === "3" || n === "4" ? n : null;
+}
+
+function getPageImages(source: SourceDef, fieldId: ExamFieldId): string[] {
+  const key = source.pageKey ?? source.id;
+  const pages = PAGE_RANGES[key]?.pages?.[fieldId];
+  return Array.isArray(pages) ? pages : [];
+}
+
+type RawExamQuestion = Omit<ExamQuestion, "fieldId" | "category" | "pageImages"> & {
+  fieldId?: ExamFieldId;
+  category?: string;
+  pageImages?: string[];
+};
+
 function pushMcq(
-  list: ExamQuestion[],
-  partial: Omit<ExamQuestion, "category" | "choices" | "answerIndex"> & {
+  list: RawExamQuestion[],
+  partial: Omit<RawExamQuestion, "choices" | "answerIndex"> & {
     choices: string[] | null;
     answerIndex: number | null;
     answerIndexes?: number[];
@@ -203,7 +267,6 @@ function pushMcq(
     ...partial,
     choices: partial.choices,
     answerIndex: partial.answerIndex,
-    category: partial.sectionTitle || partial.sourceTitle,
   });
 }
 
@@ -300,7 +363,7 @@ function collectMaterials(obj: AnyRecord): {
 
 /** ---- vol1-v2 style ---- */
 function flattenVol1Style(
-  list: ExamQuestion[],
+  list: RawExamQuestion[],
   source: SourceDef,
   data: AnyRecord,
 ) {
@@ -322,7 +385,7 @@ function flattenVol1Style(
 }
 
 function flattenGenericQuestion(
-  list: ExamQuestion[],
+  list: RawExamQuestion[],
   source: SourceDef,
   sectionId: string,
   sectionTitle: string,
@@ -510,7 +573,7 @@ function flattenGenericQuestion(
 }
 
 function flattenSubItem(
-  list: ExamQuestion[],
+  list: RawExamQuestion[],
   source: SourceDef,
   sectionId: string,
   sectionTitle: string,
@@ -700,7 +763,7 @@ function flattenSubItem(
 }
 
 function flattenBySections(
-  list: ExamQuestion[],
+  list: RawExamQuestion[],
   source: SourceDef,
   data: AnyRecord,
   sectionTitleKey: "section_title" | "title" = "section_title",
@@ -724,7 +787,7 @@ function flattenBySections(
 }
 
 function flattenTopLevelQuestions(
-  list: ExamQuestion[],
+  list: RawExamQuestion[],
   source: SourceDef,
   data: AnyRecord,
 ) {
@@ -752,14 +815,34 @@ function flattenTopLevelQuestions(
   }
 }
 
+function enrichQuestions(
+  source: SourceDef,
+  raw: RawExamQuestion[],
+): ExamQuestion[] {
+  const out: ExamQuestion[] = [];
+  for (const q of raw) {
+    const fieldId = resolveFieldId(q.sectionId, q.sectionTitle);
+    if (!fieldId) continue;
+    out.push({
+      ...q,
+      fieldId,
+      category: FIELD_TITLES[fieldId],
+      sectionTitle: FIELD_TITLES[fieldId],
+      pageImages: getPageImages(source, fieldId),
+      selfGradeOnly: source.selfGradeOnly || q.selfGradeOnly,
+    });
+  }
+  return out;
+}
+
 function normalizeSource(source: SourceDef): ExamQuestion[] {
-  const list: ExamQuestion[] = [];
+  const list: RawExamQuestion[] = [];
   const data = asRecord(source.data);
-  if (!data) return list;
+  if (!data) return [];
 
   if (source.id === "kawai-vol1") {
     flattenVol1Style(list, source, data);
-    return list;
+    return enrichQuestions(source, list);
   }
 
   if (asArray(data.sections).length) {
@@ -775,15 +858,19 @@ function normalizeSource(source: SourceDef): ExamQuestion[] {
     flattenTopLevelQuestions(list, source, data);
   }
 
-  return list;
+  return enrichQuestions(source, list);
 }
 
 const allQuestions: ExamQuestion[] = SOURCE_DEFS.flatMap((source) =>
   normalizeSource(source),
 );
 
+const sourceTitleById = Object.fromEntries(
+  SOURCE_DEFS.map((s) => [s.id, s.title]),
+) as Record<string, string>;
+
 export function getExamSourceLabel(): string {
-  return `共通テスト形式 問題集（全${SOURCE_DEFS.length}分野）`;
+  return `共通テスト形式（全${SOURCE_DEFS.length}冊・第1〜4問）`;
 }
 
 export function getAllExamQuestions(): ExamQuestion[] {
@@ -803,22 +890,151 @@ export function getExamSections(): ExamSourceInfo[] {
   return getExamSources();
 }
 
+export function getExamFields(all: ExamQuestion[] = allQuestions): ExamFieldInfo[] {
+  const sourceIds = new Set(SOURCE_DEFS.map((s) => s.id));
+  const fields: ExamFieldInfo[] = (["1", "2", "3", "4"] as ExamFieldId[]).map(
+    (id) => {
+      const sourcesWithField = new Set(
+        all.filter((q) => q.fieldId === id).map((q) => q.sourceId),
+      );
+      return {
+        id,
+        title: FIELD_TITLES[id],
+        sourceCount: [...sourcesWithField].filter((s) => sourceIds.has(s))
+          .length,
+      };
+    },
+  );
+
+  return [
+    {
+      id: "all",
+      title: "すべて（第1〜4問）",
+      sourceCount: SOURCE_DEFS.length,
+    },
+    ...fields,
+  ];
+}
+
 export function getExamCategoryCounts(
   all: ExamQuestion[],
 ): Record<string, number> {
   const counts: Record<string, number> = {};
   for (const q of all) {
-    counts[q.sourceId] = (counts[q.sourceId] ?? 0) + 1;
+    counts[q.fieldId] = (counts[q.fieldId] ?? 0) + 1;
   }
   return counts;
 }
 
-/** 分野を選び、その全問をランダム順で出題（出題数指定なし） */
-export function buildExamDeck(
+function sourcesForField(
+  all: ExamQuestion[],
+  fieldId: ExamFieldId,
+): string[] {
+  return [
+    ...new Set(all.filter((q) => q.fieldId === fieldId).map((q) => q.sourceId)),
+  ];
+}
+
+function sourcesForAllFields(all: ExamQuestion[]): string[] {
+  return SOURCE_DEFS.map((s) => s.id).filter((id) => {
+    const fields = new Set(
+      all.filter((q) => q.sourceId === id).map((q) => q.fieldId),
+    );
+    return (
+      fields.has("1") && fields.has("2") && fields.has("3") && fields.has("4")
+    );
+  });
+}
+
+function questionsForSourceField(
   all: ExamQuestion[],
   sourceId: string,
+  fieldId: ExamFieldId,
 ): ExamQuestion[] {
-  const filtered =
-    sourceId === "all" ? all : all.filter((q) => q.sourceId === sourceId);
-  return shuffle(filtered);
+  // 正規順（flatten 順）を維持。シャッフルしない
+  return all.filter((q) => q.sourceId === sourceId && q.fieldId === fieldId);
+}
+
+export type ExamSession = {
+  questions: ExamQuestion[];
+  meta: ExamSessionMeta;
+};
+
+/**
+ * 分野（大問）を選び、問題集ソースをランダム決定。
+ * 出題順は正規順。すべてならそのソースの第1〜4問を連続出題。
+ */
+export function buildExamSession(
+  all: ExamQuestion[],
+  settings: ExamSettings,
+): ExamSession | null {
+  const reviewMode: ExamReviewMode =
+    settings.fieldId === "all" ? settings.reviewMode : "per-section";
+
+  if (settings.fieldId === "all") {
+    const candidates = sourcesForAllFields(all);
+    const sourceId = pickRandom(candidates);
+    if (!sourceId) return null;
+
+    const questions = (["1", "2", "3", "4"] as ExamFieldId[]).flatMap((fieldId) =>
+      questionsForSourceField(all, sourceId, fieldId),
+    );
+    if (!questions.length) return null;
+
+    return {
+      questions,
+      meta: {
+        sourceId,
+        sourceTitle: sourceTitleById[sourceId] ?? sourceId,
+        fieldId: "all",
+        reviewMode,
+      },
+    };
+  }
+
+  const candidates = sourcesForField(all, settings.fieldId);
+  const sourceId = pickRandom(candidates);
+  if (!sourceId) return null;
+
+  const questions = questionsForSourceField(all, sourceId, settings.fieldId);
+  if (!questions.length) return null;
+
+  return {
+    questions,
+    meta: {
+      sourceId,
+      sourceTitle: sourceTitleById[sourceId] ?? sourceId,
+      fieldId: settings.fieldId,
+      reviewMode,
+    },
+  };
+}
+
+/** @deprecated 互換: 分野選択ベースへ移行済み */
+export function buildExamDeck(
+  all: ExamQuestion[],
+  sourceOrFieldId: string,
+): ExamQuestion[] {
+  if (sourceOrFieldId === "all") {
+    const session = buildExamSession(all, {
+      fieldId: "all",
+      reviewMode: "per-section",
+    });
+    return session?.questions ?? [];
+  }
+
+  if (
+    sourceOrFieldId === "1" ||
+    sourceOrFieldId === "2" ||
+    sourceOrFieldId === "3" ||
+    sourceOrFieldId === "4"
+  ) {
+    const session = buildExamSession(all, {
+      fieldId: sourceOrFieldId,
+      reviewMode: "per-section",
+    });
+    return session?.questions ?? [];
+  }
+
+  return all.filter((q) => q.sourceId === sourceOrFieldId);
 }

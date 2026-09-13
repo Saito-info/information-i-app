@@ -1,0 +1,85 @@
+{
+  "exam_metadata": {
+    "title": "数研出版 4ステージ情報Ⅰ 総合問題",
+    "publisher": "数研出版",
+    "note": "PDFが画像ベースのため、大問ごとのページ画像を主教材として表示します。"
+  },
+  "questions": [
+    {
+      "section_number": 1,
+      "section_title": "第1問",
+      "score": 25,
+      "sub_questions": [
+        {
+          "sub_id": "問1",
+          "question_text": "PDFの第1問を読み、最も適当なものを選べ。（選択肢は冊子の解答群に対応）",
+          "figure_images": [
+            "/exam-pages/suken/p01.png",
+            "/exam-pages/suken/p02.png",
+            "/exam-pages/suken/p03.png"
+          ],
+          "options": ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"],
+          "answer": "⓪",
+          "explanation": "数研出版総合問題の第1問。詳細はPDFページを参照してください。"
+        }
+      ]
+    },
+    {
+      "section_number": 2,
+      "section_title": "第2問",
+      "score": 25,
+      "sub_questions": [
+        {
+          "sub_id": "問1",
+          "question_text": "PDFの第2問を読み、最も適当なものを選べ。（選択肢は冊子の解答群に対応）",
+          "figure_images": [
+            "/exam-pages/suken/p04.png",
+            "/exam-pages/suken/p05.png",
+            "/exam-pages/suken/p06.png"
+          ],
+          "options": ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"],
+          "answer": "⓪",
+          "explanation": "数研出版総合問題の第2問。詳細はPDFページを参照してください。"
+        }
+      ]
+    },
+    {
+      "section_number": 3,
+      "section_title": "第3問",
+      "score": 25,
+      "sub_questions": [
+        {
+          "sub_id": "問1",
+          "question_text": "PDFの第3問を読み、最も適当なものを選べ。（選択肢は冊子の解答群に対応）",
+          "figure_images": [
+            "/exam-pages/suken/p07.png",
+            "/exam-pages/suken/p08.png",
+            "/exam-pages/suken/p09.png"
+          ],
+          "options": ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"],
+          "answer": "⓪",
+          "explanation": "数研出版総合問題の第3問。詳細はPDFページを参照してください。"
+        }
+      ]
+    },
+    {
+      "section_number": 4,
+      "section_title": "第4問",
+      "score": 25,
+      "sub_questions": [
+        {
+          "sub_id": "問1",
+          "question_text": "PDFの第4問を読み、最も適当なものを選べ。（選択肢は冊子の解答群に対応）",
+          "figure_images": [
+            "/exam-pages/suken/p10.png",
+            "/exam-pages/suken/p11.png",
+            "/exam-pages/suken/p12.png"
+          ],
+          "options": ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"],
+          "answer": "⓪",
+          "explanation": "数研出版総合問題の第4問。詳細はPDFページを参照してください。"
+        }
+      ]
+    }
+  ]
+}
