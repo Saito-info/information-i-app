@@ -116,6 +116,9 @@ export function ExamQuizScreen({
       <div className="rounded-2xl bg-white px-5 py-5 shadow-sm ring-1 ring-slate-100">
         <div className="mb-3 flex flex-wrap gap-1.5">
           <span className="inline-flex rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-medium text-blue-600">
+            {current.sourceTitle}
+          </span>
+          <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-medium text-slate-600">
             {current.sectionTitle}
           </span>
           {current.targetLabel ? (

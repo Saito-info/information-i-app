@@ -34,11 +34,15 @@ export type QuizResults = {
 
 export type ExamQuestion = {
   id: string;
-  /** 大問ID（section_1 など） */
+  /** テスト分野（ソース）ID */
+  sourceId: string;
+  /** テスト分野名 */
+  sourceTitle: string;
+  /** 大問ID */
   sectionId: string;
   /** 大問タイトル */
   sectionTitle: string;
-  /** 表示用カテゴリ（大問名） */
+  /** 表示用カテゴリ */
   category: string;
   topic?: string;
   subId?: string;
@@ -47,14 +51,19 @@ export type ExamQuestion = {
   context?: string;
   figure?: string;
   choices: string[];
-  /** 単一正解（マークシート番号） */
   answerIndex: number;
-  /** 複数正解（複数選択問題） */
   answerIndexes?: number[];
   multiSelect?: boolean;
   explanation?: string;
 };
 
+export type ExamSourceInfo = {
+  id: string;
+  title: string;
+  count: number;
+};
+
+/** @deprecated 互換用。分野選択に移行 */
 export type ExamSectionInfo = {
   id: string;
   title: string;
@@ -63,10 +72,8 @@ export type ExamSectionInfo = {
 };
 
 export type ExamSettings = {
-  /** "all" または sectionId */
-  sectionId: string;
-  countOption: QuestionCountOption;
-  customCount: number;
+  /** "all" または sourceId */
+  sourceId: string;
 };
 
 export type ExamResults = {

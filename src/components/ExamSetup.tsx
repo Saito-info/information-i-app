@@ -1,11 +1,10 @@
 "use client";
 
-import { QuestionCountSelector } from "@/components/QuestionCountSelector";
-import type { ExamSectionInfo, ExamSettings, QuestionCountOption } from "@/lib/types";
+import type { ExamSettings, ExamSourceInfo } from "@/lib/types";
 
 type ExamSetupProps = {
   sourceLabel: string;
-  sections: ExamSectionInfo[];
+  sources: ExamSourceInfo[];
   totalCount: number;
   settings: ExamSettings;
   poolSize: number;
@@ -15,7 +14,7 @@ type ExamSetupProps = {
 
 export function ExamSetup({
   sourceLabel,
-  sections,
+  sources,
   totalCount,
   settings,
   poolSize,
@@ -45,44 +44,32 @@ export function ExamSetup({
         <h1 className="mt-1 text-2xl font-bold text-slate-800">問題演習</h1>
         <p className="mt-1 text-sm text-slate-500">{sourceLabel}</p>
         <p className="mt-1 text-sm text-slate-500">
-          大問（単元）ごと、またはすべてを選んでマークシート形式で演習できます。
+          分野を選ぶと、その中からランダムな順で出題されます。
         </p>
       </header>
 
       <div className="space-y-2">
         <label className="block text-sm font-semibold text-slate-700">
-          出題範囲（大問）
+          分野（テスト）
         </label>
         <div className="space-y-2">
-          <SectionOption
-            selected={settings.sectionId === "all"}
+          <SourceOption
+            selected={settings.sourceId === "all"}
             title={`すべて（全${totalCount}問）`}
-            subtitle="第1問〜第4問"
-            onClick={() => onChange({ ...settings, sectionId: "all" })}
+            subtitle="全分野からランダム出題"
+            onClick={() => onChange({ sourceId: "all" })}
           />
-          {sections.map((section) => (
-            <SectionOption
-              key={section.id}
-              selected={settings.sectionId === section.id}
-              title={section.title}
-              subtitle={`${section.count}問${section.score != null ? `・配点${section.score}` : ""}`}
-              onClick={() => onChange({ ...settings, sectionId: section.id })}
+          {sources.map((source) => (
+            <SourceOption
+              key={source.id}
+              selected={settings.sourceId === source.id}
+              title={source.title}
+              subtitle={`${source.count}問・ランダム順`}
+              onClick={() => onChange({ sourceId: source.id })}
             />
           ))}
         </div>
       </div>
-
-      <QuestionCountSelector
-        countOption={settings.countOption}
-        customCount={settings.customCount}
-        maxCount={Math.max(1, poolSize)}
-        onCountOptionChange={(countOption: QuestionCountOption) =>
-          onChange({ ...settings, countOption })
-        }
-        onCustomCountChange={(customCount) =>
-          onChange({ ...settings, customCount })
-        }
-      />
 
       <button
         type="button"
@@ -90,13 +77,13 @@ export function ExamSetup({
         disabled={poolSize === 0}
         className="mt-2 w-full rounded-2xl bg-blue-600 py-3.5 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
       >
-        スタート（{poolSize}問から出題）
+        スタート（{poolSize}問・ランダム）
       </button>
     </div>
   );
 }
 
-function SectionOption({
+function SourceOption({
   selected,
   title,
   subtitle,

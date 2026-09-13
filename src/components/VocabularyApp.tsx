@@ -19,8 +19,8 @@ import type {
   AppTab,
   ExamQuestion,
   ExamResults,
-  ExamSectionInfo,
   ExamSettings,
+  ExamSourceInfo,
   QuizResults,
   ReviewSettings,
   StudySettings,
@@ -34,7 +34,7 @@ type VocabularyAppProps = {
   terms: TermItem[];
   categories: string[];
   examQuestions: ExamQuestion[];
-  examSections: ExamSectionInfo[];
+  examSources: ExamSourceInfo[];
   examSourceLabel: string;
 };
 
@@ -42,7 +42,7 @@ export function VocabularyApp({
   terms,
   categories,
   examQuestions,
-  examSections,
+  examSources,
   examSourceLabel,
 }: VocabularyAppProps) {
   const [tab, setTab] = useState<AppTab>("study");
@@ -69,9 +69,7 @@ export function VocabularyApp({
   });
 
   const [examSettings, setExamSettings] = useState<ExamSettings>({
-    sectionId: "all",
-    countOption: "all",
-    customCount: 10,
+    sourceId: "all",
   });
 
   useEffect(() => {
@@ -102,10 +100,10 @@ export function VocabularyApp({
   }, [record, reviewSettings.filter]);
 
   const examPoolSize = useMemo(() => {
-    if (examSettings.sectionId === "all") return examQuestions.length;
-    return examQuestions.filter((q) => q.sectionId === examSettings.sectionId)
+    if (examSettings.sourceId === "all") return examQuestions.length;
+    return examQuestions.filter((q) => q.sourceId === examSettings.sourceId)
       .length;
-  }, [examQuestions, examSettings.sectionId]);
+  }, [examQuestions, examSettings.sourceId]);
 
   function refreshRecord() {
     setRecord(loadLearningRecord());
@@ -151,12 +149,7 @@ export function VocabularyApp({
   }
 
   function startExam() {
-    const nextDeck = buildExamDeck(
-      examQuestions,
-      examSettings.sectionId,
-      examSettings.countOption,
-      examSettings.customCount,
-    );
+    const nextDeck = buildExamDeck(examQuestions, examSettings.sourceId);
     if (nextDeck.length === 0) return;
     setExamDeck(nextDeck);
     setExamResults(null);
@@ -222,7 +215,7 @@ export function VocabularyApp({
         {phase === "setup" && tab === "exam" && (
           <ExamSetup
             sourceLabel={examSourceLabel}
-            sections={examSections}
+            sources={examSources}
             totalCount={examQuestions.length}
             settings={examSettings}
             poolSize={examPoolSize}

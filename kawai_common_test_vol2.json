@@ -1,0 +1,568 @@
+{
+  "exam_title": "河合塾 共通テスト直前対策問題集 第2回 『情報Ⅰ』",
+  "total_score": 100,
+  "time_limit_minutes": 60,
+  "sections": [
+    {
+      "section_number": 1,
+      "section_title": "第1問 小問集合（情報モラル・デジタル画像・論理回路・通信速度）",
+      "score": 20,
+      "questions": [
+        {
+          "question_number": "問1",
+          "text": "スマートフォンに身に覚えのない電子マネー決済通知メールが届いた。家族も同じアドレスで登録している可能性がある。対応として「適当でないもの」を1つ選べ。",
+          "choices": [
+            "0: 新たにブラウザを立ち上げ、購入したサイトを確認する。",
+            "1: メールに添付されている電子署名をクリックし、発信元ドメインの確認をする。",
+            "2: メールに添付されているURLからチャットボットサイトにて誰が購入したのか質問する。",
+            "3: 家族に連絡を取り、当該商品を購入したかの確認をする。"
+          ],
+          "answer_key": {
+            "label": "ア",
+            "correct_option": "2",
+            "score": 2
+          },
+          "explanation": "メール本文中のURLをクリックして外部サイト（チャットボット等）にアクセスすることはフィッシング詐欺やウイルス感染の危険があるため不適当である。"
+        },
+        {
+          "question_number": "問2",
+          "context_text": "生徒と先生の会話文：マスコットキャラクター制作（ファイル形式、GIF・PNGの特徴、ベクタ・ラスタ形式、アニメーションフレームレート、パブリシティ権、肖像権）。",
+          "sub_questions": [
+            {
+              "label": "a (イ)",
+              "text": "下線部(A) GIF形式ファイルの特徴として最も適当なものを選べ。",
+              "choices": [
+                "0: 画像の劣化がない、標準的な無圧縮のファイル形式",
+                "1: 256色までしか利用できない可逆圧縮形式のファイル",
+                "2: Web上やデジタルカメラで標準的に使用されており、フルカラーに対応した不可逆圧縮形式のファイル",
+                "3: フルカラーに対応した、可逆圧縮形式のファイル"
+              ],
+              "answer_key": {
+                "label": "イ",
+                "correct_option": "1",
+                "score": 2
+              }
+            },
+            {
+              "label": "b (ウ)",
+              "text": "空欄 [ウ] に当てはまるファイル形式（静止画で背景が透過され、みんなのパソコンでも利用しやすい）として最も適当なものを選べ。",
+              "choices": [
+                "0: BMP",
+                "1: JPEG",
+                "2: HEIF",
+                "3: PNG",
+                "4: TIFF"
+              ],
+              "answer_key": {
+                "label": "ウ",
+                "correct_option": "3",
+                "score": 2
+              }
+            },
+            {
+              "label": "c (エ)",
+              "text": "下線部(B)「拡大したときはギザギザが目立ち、縮小したときにつぶれてしまった」となるデータ（ビットマップ/ラスタ画像）の特徴として適当でないものを選べ。",
+              "choices": [
+                "0: 直線の始点と終点、それらを結ぶ線の種類などを座標や数式で表現した、ベクトル画像である。",
+                "1: 画素といわれる小さな点が規則正しく並ぶことによって画像表現されている。",
+                "2: ペイント系ソフトで作られた静止画である。",
+                "3: 標本化、量子化、符号化の過程を経てデジタルデータとして記録・保存される静止画である。"
+              ],
+              "answer_key": {
+                "label": "エ",
+                "correct_option": "0",
+                "score": 2
+              }
+            },
+            {
+              "label": "d (オ)",
+              "text": "16fpsで8枚のアニメーションの再生時間（秒）として最も適当な数値を選べ。",
+              "choices": [
+                "0: 0.1",
+                "1: 0.3",
+                "2: 0.5",
+                "3: 0.7",
+                "4: 0.9",
+                "5: 1",
+                "6: 1.2",
+                "7: 80"
+              ],
+              "answer_key": {
+                "label": "オ",
+                "correct_option": "2",
+                "score": 2
+              },
+              "calculation": "8 ÷ 16 = 0.5 秒"
+            },
+            {
+              "label": "e (カ)",
+              "text": "パブリシティ権が侵害されたとみなされる可能性が高いケースとして最も適当なものを選べ。",
+              "choices": [
+                "0: ニュース番組で、アイドルの卒業コンサートの様子を報道した。",
+                "1: 卒業生名簿に、有名になった卒業生の氏名を事実として記載した。",
+                "2: ファンが自分の日記に、好きなアイドルの名前や似顔絵を描いた。",
+                "3: 人気スポーツ選手の写真を無断で自社の広告に使用し、商品の注目を高めようとした。"
+              ],
+              "answer_key": {
+                "label": "カ",
+                "correct_option": "3",
+                "score": 2
+              }
+            },
+            {
+              "label": "f (キ)",
+              "text": "インタビュー動画を撮影・公開する際、話し手からの「肖像権」同意プロセスとして最も適当なものを選べ。",
+              "choices": [
+                "0: 学校の行事なので、生徒や保護者には一切の確認をせず、学校側の判断のみで公開してよい。",
+                "1: 撮影時に口頭で「Webページに載せますね」と伝え、相手が黙っていたら同意したものとみなす。",
+                "2: 利用目的(Webページ掲載など)と公開範囲を明確に説明し、書面など記録に残る形で同意を得る。",
+                "3: 撮影後に話し手が確認として動画の最後に「映りたくない人は申し出てください」というテロップを1秒だけ流す。"
+              ],
+              "answer_key": {
+                "label": "キ",
+                "correct_option": "2",
+                "score": 2
+              }
+            }
+          ]
+        },
+        {
+          "question_number": "问3",
+          "context_text": "交差点における信号制御システム（東西車両信号Pの制御）。X:東西青指示(1/0), E:緊急モード(1/0)。",
+          "tables": [
+            {
+              "table_name": "表1 真理値表",
+              "columns": [
+                "X",
+                "E",
+                "P"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "1",
+                  "0",
+                  "(I)"
+                ],
+                [
+                  "1",
+                  "1",
+                  "(II)"
+                ]
+              ]
+            }
+          ],
+          "sub_questions": [
+            {
+              "label": "a (ク)",
+              "text": "表1中の(I)・(II)に入る値の組合せとして最も適当なものを選べ。",
+              "choices": [
+                "0: (I)=0, (II)=0",
+                "1: (I)=0, (II)=1",
+                "2: (I)=1, (II)=0",
+                "3: (I)=1, (II)=1"
+              ],
+              "answer_key": {
+                "label": "ク",
+                "correct_option": "2",
+                "score": 2
+              }
+            },
+            {
+              "label": "b (ケ)",
+              "text": "東西車両信号Pの動作（通常時はXに従い、緊急時E=1は強制的に赤0）を表す論理回路として最も適当なものを選べ。",
+              "answer_key": {
+                "label": "ケ",
+                "correct_option": "2",
+                "score": 2
+              },
+              "logic_formula": "P = X AND (NOT E)"
+            }
+          ]
+        },
+        {
+          "question_number": "問4",
+          "text": "通信速度が最大48Mbpsの無線LAN環境において、1秒あたり最大約何MBのデータを送信できるか。",
+          "choices": [
+            "0: 1MB",
+            "1: 6MB",
+            "2: 48MB",
+            "3: 432MB"
+          ],
+          "answer_key": {
+            "label": "コ",
+            "correct_option": "1",
+            "score": 2
+          },
+          "calculation": "48 Mbit ÷ 8 = 6 MB"
+        }
+      ]
+    },
+    {
+      "section_number": 2,
+      "section_title": "第2问 情報通信ネットワーク・誤り訂正 & シミュレーション",
+      "score": 30,
+      "part_A": {
+        "title": "A. ネットワークの誤り率とハミング符号",
+        "questions": [
+          {
+            "question_number": "問1",
+            "text": "符号誤り率（10^-6, 10^-8）とデータサイズ（1KB, 1MB, 1GB）における発生誤りビット数の計算（四捨五入整数）。",
+            "tables": [
+              {
+                "table_name": "データサイズと符号誤り率による誤りビット数",
+                "columns": [
+                  "符号誤り率",
+                  "1Kbyte (2^10)",
+                  "1Mbyte (2^20)",
+                  "1Gbyte (2^30)"
+                ],
+                "rows": [
+                  [
+                    "10^-6",
+                    "[ア] bit",
+                    "[イ] bit",
+                    "[ウ] bit"
+                  ],
+                  [
+                    "10^-8",
+                    "[エ] bit",
+                    "[オ] bit",
+                    "[カ] bit"
+                  ]
+                ]
+              }
+            ],
+            "answer_keys": [
+              {
+                "label": "ア",
+                "correct_option": "0",
+                "value": 0,
+                "score": 1
+              },
+              {
+                "label": "イ",
+                "correct_option": "2",
+                "value": 8,
+                "score": 1
+              },
+              {
+                "label": "ウ",
+                "correct_option": "6",
+                "value": 8590,
+                "score": 1
+              },
+              {
+                "label": "エ",
+                "correct_option": "0",
+                "value": 0,
+                "score": 1
+              },
+              {
+                "label": "オ",
+                "correct_option": "0",
+                "value": 0,
+                "score": 1
+              },
+              {
+                "label": "カ",
+                "correct_option": "6",
+                "value": 86,
+                "score": 1
+              }
+            ]
+          },
+          {
+            "question_number": "問2",
+            "text": "データ 1101 (x1=1, x2=1, x3=0, x4=1) から生成されるハミング符号 (x1,x2,x3,P3,x4,P2,P1)。",
+            "formula": [
+              "x1⊕x3⊕x4⊕P1 = 0",
+              "x1⊕x2⊕x4⊕P2 = 0",
+              "x1⊕x2⊕x3⊕P3 = 0"
+            ],
+            "answer_key": {
+              "label": "キ",
+              "correct_option": "1",
+              "value": "1100110",
+              "score": 3
+            }
+          },
+          {
+            "question_number": "問3",
+            "text": "受診ハミング符号 1110011 の1ビット誤り訂正結果。",
+            "answer_keys": [
+              {
+                "label": "ク",
+                "correct_option": "0",
+                "error_bit": "x1",
+                "score": 3
+              },
+              {
+                "label": "ケ",
+                "correct_option": "0",
+                "corrected_code": "0110011",
+                "score": 3
+              }
+            ]
+          }
+        ]
+      },
+      "part_B": {
+        "title": "B. サイコロ出目のシミュレーション（ランダムウォーク）",
+        "questions": [
+          {
+            "question_number": "問1",
+            "text": "表計算ソフトでのサイコロシミュレーション定義。",
+            "answer_keys": [
+              {
+                "label": "コ",
+                "correct_option": "1",
+                "meaning": "乱数",
+                "score": 3
+              },
+              {
+                "label": "サ",
+                "correct_option": "2",
+                "meaning": "17%",
+                "score": 3
+              },
+              {
+                "label": "シ",
+                "correct_option": "1",
+                "meaning": "試行数を増やす",
+                "score": 3
+              }
+            ]
+          },
+          {
+            "question_number": "問2",
+            "text": "偶数で+1、奇数で-1する位置推移計算と100回試行グラフ分析。",
+            "answer_keys": [
+              {
+                "label": "ス",
+                "correct_option": "2",
+                "meaning": "「結果」に対応する数値と、1回目の「位置」の値との和を求める。",
+                "score": 3
+              },
+              {
+                "label": "セ",
+                "correct_option": "3",
+                "meaning": "100回目で負の値でも200回目で正の値となる可能性がある",
+                "score": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "section_number": 3,
+      "section_title": "第3問 簡略ダイクストラ法による最短経路アルゴリズム",
+      "score": 25,
+      "questions": [
+        {
+          "question_number": "問1",
+          "text": "4駅（A, B, C, D）の路線図グラフデータ表現（Graph_data 2次元配列）。",
+          "graph_structure": {
+            "A-B": 5,
+            "B-D": 4,
+            "A-C": 6,
+            "C-D": 2
+          },
+          "answer_keys": [
+            {
+              "label": "ア",
+              "correct_option": "2",
+              "meaning": "ルートパターン数: 2",
+              "score": 3
+            },
+            {
+              "label": "イ",
+              "correct_option": "8",
+              "meaning": "最短時間: 8分",
+              "score": 3
+            },
+            {
+              "label": "ウ",
+              "correct_option": "2",
+              "meaning": "Graph_data[2] (B駅) = [5, 0, 0, 4]",
+              "score": 2
+            },
+            {
+              "label": "エ",
+              "correct_option": "0",
+              "meaning": "Graph_data[3] (C駅) = [6, 0, 0, 2]",
+              "score": 2
+            },
+            {
+              "label": "オ",
+              "correct_option": "1",
+              "meaning": "Graph_data[4] (D駅) = [0, 4, 2, 0]",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "question_number": "問2",
+          "text": "2段階繰り返しによる移動時間計算プログラム（Time_data配列更新）。",
+          "answer_keys": [
+            {
+              "label": "カ",
+              "correct_option": "0",
+              "code": "Graph_data",
+              "score": 2
+            },
+            {
+              "label": "キ",
+              "correct_option": "0",
+              "code": "0",
+              "score": 2
+            },
+            {
+              "label": "ク",
+              "correct_option": "1",
+              "code": "Time_data",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "question_number": "問3",
+          "text": "Time_dataを参照した最短ルート検索プログラム（最小値minと経由駅pos更新）。",
+          "answer_keys": [
+            {
+              "label": "ケ",
+              "correct_option": "1",
+              "code": "Time_data[i][destination]",
+              "score": 2
+            },
+            {
+              "label": "コ",
+              "correct_option": "3",
+              "code": "min",
+              "score": 2
+            },
+            {
+              "label": "サ",
+              "correct_option": "4",
+              "code": "pos",
+              "score": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_number": 4,
+      "section_title": "第4問 各都道府県の農業生産額と天候データの回帰分析",
+      "score": 25,
+      "questions": [
+        {
+          "question_number": "問1",
+          "text": "都道府県別農業生産額（総額、人口あたり、面積あたり）の箱ひげ図分析と代表値選択。",
+          "answer_keys": [
+            {
+              "label": "ア",
+              "correct_option": "1",
+              "meaning": "面積あたり農業生産額の中央値は最大値よりも最小值に近い",
+              "score": 2
+            },
+            {
+              "label": "イ",
+              "correct_option": "2",
+              "meaning": "極端に大きい値が存在する（外れ値）",
+              "score": 2
+            },
+            {
+              "label": "ウ",
+              "correct_option": "2",
+              "meaning": "中央値",
+              "score": 2
+            },
+            {
+              "label": "エ",
+              "correct_option": "3",
+              "meaning": "最頻値",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "question_number": "問2",
+          "text": "分野別生産額（耕種, 畜産, 加工農産物）と分野別割合の箱ひげ図分析。",
+          "answer_keys": [
+            {
+              "label": "オ",
+              "correct_option": "3",
+              "meaning": "畜産生産額1000億円以下の都道府県数は割合30%以下の都道府県数より多い",
+              "score": 2
+            },
+            {
+              "label": "カ",
+              "correct_option": "0",
+              "meaning": "耕種: 他の2分野よりも高い傾向",
+              "score": 2
+            },
+            {
+              "label": "キ",
+              "correct_option": "3",
+              "meaning": "畜産: 2番目に高く、最高と最低の金額差が最も大きい",
+              "score": 2
+            },
+            {
+              "label": "ク",
+              "correct_option": "5",
+              "meaning": "加工農産物: 他の2分野よりも低い傾向",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "question_number": "問3",
+          "text": "5項目の散布図行列分析と相関係数（疑似相関・制御変数）。",
+          "answer_keys": [
+            {
+              "label": "ケ",
+              "correct_option": "1",
+              "meaning": "相関係数絶対値が小さく天候条件だけでは十分説明できない可能性が高い",
+              "score": 2
+            },
+            {
+              "label": "コ",
+              "correct_option": "3",
+              "meaning": "日照時間と気温はともに高く他の条件を揃えて比較する追加分析が必要",
+              "score": 2
+            }
+          ]
+        },
+        {
+          "question_number": "問4",
+          "text": "回帰直線（予測値 = 280 × 日照時間 - 315000）による「日照時間補正額」の計算およびグループ分割回帰直線引き直し時の変化。",
+          "answer_keys": [
+            {
+              "label": "サ",
+              "correct_option": "2",
+              "meaning": "約65万円",
+              "score": 2
+            },
+            {
+              "label": "シ",
+              "correct_option": "1",
+              "meaning": "どちらのグループにおいても小さくなる傾向がみられる",
+              "score": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
