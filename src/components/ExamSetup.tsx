@@ -1,11 +1,11 @@
 "use client";
 
 import { QuestionCountSelector } from "@/components/QuestionCountSelector";
-import type { ExamSettings, QuestionCountOption } from "@/lib/types";
+import type { ExamSectionInfo, ExamSettings, QuestionCountOption } from "@/lib/types";
 
 type ExamSetupProps = {
-  categories: string[];
-  categoryCounts: Record<string, number>;
+  sourceLabel: string;
+  sections: ExamSectionInfo[];
   totalCount: number;
   settings: ExamSettings;
   poolSize: number;
@@ -14,8 +14,8 @@ type ExamSetupProps = {
 };
 
 export function ExamSetup({
-  categories,
-  categoryCounts,
+  sourceLabel,
+  sections,
   totalCount,
   settings,
   poolSize,
@@ -33,13 +33,6 @@ export function ExamSetup({
           <p className="text-sm font-semibold text-slate-700">
             まだテスト問題がありません
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-slate-500">
-            本番形式の問題を{" "}
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs text-blue-700">
-              src/data/exam_questions.json
-            </code>{" "}
-            に追加すると、ここで数分の択一演習ができます。
-          </p>
         </div>
       </div>
     );
@@ -50,37 +43,39 @@ export function ExamSetup({
       <header>
         <p className="text-sm font-medium text-blue-600">簡易テスト</p>
         <h1 className="mt-1 text-2xl font-bold text-slate-800">問題演習</h1>
+        <p className="mt-1 text-sm text-slate-500">{sourceLabel}</p>
         <p className="mt-1 text-sm text-slate-500">
-          本番形式の択一問題を、短時間で解いて確認できます。
+          大問（単元）ごと、またはすべてを選んでマークシート形式で演習できます。
         </p>
       </header>
 
       <div className="space-y-2">
-        <label
-          htmlFor="exam-category"
-          className="block text-sm font-semibold text-slate-700"
-        >
-          カテゴリ（分野）
+        <label className="block text-sm font-semibold text-slate-700">
+          出題範囲（大問）
         </label>
-        <select
-          id="exam-category"
-          value={settings.category}
-          onChange={(e) => onChange({ ...settings, category: e.target.value })}
-          className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-        >
-          <option value="all">すべて（{totalCount}問）</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}（{categoryCounts[cat] ?? 0}問）
-            </option>
+        <div className="space-y-2">
+          <SectionOption
+            selected={settings.sectionId === "all"}
+            title={`すべて（全${totalCount}問）`}
+            subtitle="第1問〜第4問"
+            onClick={() => onChange({ ...settings, sectionId: "all" })}
+          />
+          {sections.map((section) => (
+            <SectionOption
+              key={section.id}
+              selected={settings.sectionId === section.id}
+              title={section.title}
+              subtitle={`${section.count}問${section.score != null ? `・配点${section.score}` : ""}`}
+              onClick={() => onChange({ ...settings, sectionId: section.id })}
+            />
           ))}
-        </select>
+        </div>
       </div>
 
       <QuestionCountSelector
         countOption={settings.countOption}
         customCount={settings.customCount}
-        maxCount={poolSize}
+        maxCount={Math.max(1, poolSize)}
         onCountOptionChange={(countOption: QuestionCountOption) =>
           onChange({ ...settings, countOption })
         }
@@ -95,8 +90,39 @@ export function ExamSetup({
         disabled={poolSize === 0}
         className="mt-2 w-full rounded-2xl bg-blue-600 py-3.5 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
       >
-        スタート
+        スタート（{poolSize}問から出題）
       </button>
     </div>
+  );
+}
+
+function SectionOption({
+  selected,
+  title,
+  subtitle,
+  onClick,
+}: {
+  selected: boolean;
+  title: string;
+  subtitle: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`w-full rounded-xl px-4 py-3 text-left transition ${
+        selected
+          ? "bg-blue-600 text-white shadow-sm shadow-blue-200"
+          : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-blue-50"
+      }`}
+    >
+      <p className="text-sm font-semibold leading-snug">{title}</p>
+      <p
+        className={`mt-0.5 text-xs ${selected ? "text-blue-100" : "text-slate-400"}`}
+      >
+        {subtitle}
+      </p>
+    </button>
   );
 }

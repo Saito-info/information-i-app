@@ -16,13 +16,20 @@ export function ExamQuizScreen({
 }: ExamQuizScreenProps) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
+  const [selectedMulti, setSelectedMulti] = useState<number[]>([]);
   const [checked, setChecked] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const correctCountRef = useRef(0);
 
   const current = questions[index];
   const progress = ((index + 1) / questions.length) * 100;
-  const isCorrect = selected === current?.answerIndex;
+  const multi = Boolean(current?.multiSelect);
+
+  const isCorrect = current
+    ? multi
+      ? sameSet(selectedMulti, current.answerIndexes ?? [current.answerIndex])
+      : selected === current.answerIndex
+    : false;
 
   if (!current) {
     return (
@@ -39,9 +46,27 @@ export function ExamQuizScreen({
     );
   }
 
+  function handleToggleMulti(choiceIndex: number) {
+    if (checked) return;
+    setSelectedMulti((prev) =>
+      prev.includes(choiceIndex)
+        ? prev.filter((x) => x !== choiceIndex)
+        : [...prev, choiceIndex].sort((a, b) => a - b),
+    );
+  }
+
   function handleCheck() {
-    if (selected === null || checked) return;
-    const ok = selected === current.answerIndex;
+    if (checked || !current) return;
+    if (multi) {
+      if (selectedMulti.length === 0) return;
+    } else if (selected === null) {
+      return;
+    }
+
+    const ok = multi
+      ? sameSet(selectedMulti, current.answerIndexes ?? [current.answerIndex])
+      : selected === current.answerIndex;
+
     const nextCorrect = correctCount + (ok ? 1 : 0);
     correctCountRef.current = nextCorrect;
     setCorrectCount(nextCorrect);
@@ -60,8 +85,11 @@ export function ExamQuizScreen({
 
     setIndex((i) => i + 1);
     setSelected(null);
+    setSelectedMulti([]);
     setChecked(false);
   }
+
+  const canSubmit = multi ? selectedMulti.length > 0 : selected !== null;
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-col gap-5 px-4 pb-4 pt-2">
@@ -86,22 +114,53 @@ export function ExamQuizScreen({
       </div>
 
       <div className="rounded-2xl bg-white px-5 py-5 shadow-sm ring-1 ring-slate-100">
-        <p className="mb-2 inline-flex rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-medium text-blue-600">
-          {current.category}
-        </p>
-        <p className="text-base font-semibold leading-relaxed text-slate-800">
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          <span className="inline-flex rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-medium text-blue-600">
+            {current.sectionTitle}
+          </span>
+          {current.targetLabel ? (
+            <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-medium text-slate-600">
+              [{current.targetLabel}]
+            </span>
+          ) : null}
+          {multi ? (
+            <span className="inline-flex rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-medium text-amber-700">
+              複数選択
+            </span>
+          ) : null}
+        </div>
+
+        <p className="whitespace-pre-wrap text-base font-semibold leading-relaxed text-slate-800">
           {current.question}
         </p>
+
+        {current.context ? (
+          <div className="mt-4 rounded-xl bg-slate-50 px-3 py-3 text-sm leading-relaxed text-slate-600 whitespace-pre-wrap">
+            {current.context}
+          </div>
+        ) : null}
+
+        {current.figure ? (
+          <div className="mt-3 rounded-xl border border-dashed border-blue-200 bg-blue-50/50 px-3 py-3 text-xs leading-relaxed text-slate-600 whitespace-pre-wrap">
+            {current.figure}
+          </div>
+        ) : null}
       </div>
 
       <div className="space-y-2">
         {current.choices.map((label, choiceIndex) => {
-          const isSelected = selected === choiceIndex;
+          const isSelected = multi
+            ? selectedMulti.includes(choiceIndex)
+            : selected === choiceIndex;
+          const isAnswer = multi
+            ? (current.answerIndexes ?? []).includes(choiceIndex)
+            : choiceIndex === current.answerIndex;
+
           let style =
             "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-blue-50";
 
           if (checked) {
-            if (choiceIndex === current.answerIndex) {
+            if (isAnswer) {
               style = "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-300";
             } else if (isSelected) {
               style = "bg-rose-50 text-rose-800 ring-1 ring-rose-300";
@@ -117,13 +176,17 @@ export function ExamQuizScreen({
               key={choiceIndex}
               type="button"
               disabled={checked}
-              onClick={() => setSelected(choiceIndex)}
+              onClick={() =>
+                multi
+                  ? handleToggleMulti(choiceIndex)
+                  : setSelected(choiceIndex)
+              }
               className={`flex w-full items-start gap-3 rounded-xl px-4 py-3.5 text-left text-sm font-medium transition disabled:cursor-default ${style}`}
             >
               <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/5 text-xs font-bold">
-                {String.fromCharCode(65 + choiceIndex)}
+                {markDigit(choiceIndex)}
               </span>
-              <span className="leading-relaxed">{label}</span>
+              <span className="leading-relaxed">{stripLeadingMark(label)}</span>
             </button>
           );
         })}
@@ -138,8 +201,16 @@ export function ExamQuizScreen({
           }`}
         >
           <p className="font-bold">{isCorrect ? "正解！" : "不正解"}</p>
+          {!isCorrect && (
+            <p className="mt-1 text-xs opacity-90">
+              正解:{" "}
+              {(current.answerIndexes ?? [current.answerIndex])
+                .map(markDigit)
+                .join("・")}
+            </p>
+          )}
           {current.explanation ? (
-            <p className="mt-1 leading-relaxed opacity-90">
+            <p className="mt-1 whitespace-pre-wrap leading-relaxed opacity-90">
               {current.explanation}
             </p>
           ) : null}
@@ -150,7 +221,7 @@ export function ExamQuizScreen({
         <button
           type="button"
           onClick={handleCheck}
-          disabled={selected === null}
+          disabled={!canSubmit}
           className="w-full rounded-2xl bg-blue-600 py-3.5 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
         >
           解答する
@@ -166,4 +237,19 @@ export function ExamQuizScreen({
       )}
     </div>
   );
+}
+
+function markDigit(n: number): string {
+  return ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"][n] ?? String(n);
+}
+
+function stripLeadingMark(label: string): string {
+  return label.replace(/^[⓪①②③④⑤⑥⑦⑧⑨]\s*/, "");
+}
+
+function sameSet(a: number[], b: number[]): boolean {
+  if (a.length !== b.length) return false;
+  const sa = [...a].sort((x, y) => x - y);
+  const sb = [...b].sort((x, y) => x - y);
+  return sa.every((v, i) => v === sb[i]);
 }

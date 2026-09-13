@@ -9,10 +9,7 @@ import { ResultScreen } from "@/components/ResultScreen";
 import { ReviewSetup } from "@/components/ReviewSetup";
 import { StudySetup } from "@/components/StudySetup";
 import { TermsList } from "@/components/TermsList";
-import {
-  buildExamDeck,
-  getExamCategoryCounts,
-} from "@/lib/exam";
+import { buildExamDeck } from "@/lib/exam";
 import { buildReviewDeck, buildStudyDeck } from "@/lib/quiz";
 import {
   loadLearningRecord,
@@ -22,6 +19,7 @@ import type {
   AppTab,
   ExamQuestion,
   ExamResults,
+  ExamSectionInfo,
   ExamSettings,
   QuizResults,
   ReviewSettings,
@@ -36,12 +34,16 @@ type VocabularyAppProps = {
   terms: TermItem[];
   categories: string[];
   examQuestions: ExamQuestion[];
+  examSections: ExamSectionInfo[];
+  examSourceLabel: string;
 };
 
 export function VocabularyApp({
   terms,
   categories,
   examQuestions,
+  examSections,
+  examSourceLabel,
 }: VocabularyAppProps) {
   const [tab, setTab] = useState<AppTab>("study");
   const [phase, setPhase] = useState<Phase>("setup");
@@ -67,20 +69,10 @@ export function VocabularyApp({
   });
 
   const [examSettings, setExamSettings] = useState<ExamSettings>({
-    category: "all",
-    countOption: "5",
-    customCount: 5,
+    sectionId: "all",
+    countOption: "all",
+    customCount: 10,
   });
-
-  const examCategories = useMemo(
-    () => [...new Set(examQuestions.map((q) => q.category))],
-    [examQuestions],
-  );
-
-  const examCategoryCounts = useMemo(
-    () => getExamCategoryCounts(examQuestions),
-    [examQuestions],
-  );
 
   useEffect(() => {
     setRecord(loadLearningRecord());
@@ -110,9 +102,10 @@ export function VocabularyApp({
   }, [record, reviewSettings.filter]);
 
   const examPoolSize = useMemo(() => {
-    if (examSettings.category === "all") return examQuestions.length;
-    return examCategoryCounts[examSettings.category] ?? 0;
-  }, [examQuestions.length, examSettings.category, examCategoryCounts]);
+    if (examSettings.sectionId === "all") return examQuestions.length;
+    return examQuestions.filter((q) => q.sectionId === examSettings.sectionId)
+      .length;
+  }, [examQuestions, examSettings.sectionId]);
 
   function refreshRecord() {
     setRecord(loadLearningRecord());
@@ -160,7 +153,7 @@ export function VocabularyApp({
   function startExam() {
     const nextDeck = buildExamDeck(
       examQuestions,
-      examSettings.category,
+      examSettings.sectionId,
       examSettings.countOption,
       examSettings.customCount,
     );
@@ -228,8 +221,8 @@ export function VocabularyApp({
 
         {phase === "setup" && tab === "exam" && (
           <ExamSetup
-            categories={examCategories}
-            categoryCounts={examCategoryCounts}
+            sourceLabel={examSourceLabel}
+            sections={examSections}
             totalCount={examQuestions.length}
             settings={examSettings}
             poolSize={examPoolSize}
@@ -258,9 +251,11 @@ export function VocabularyApp({
           />
         )}
 
-        {phase === "result" && (tab === "study" || tab === "review") && results && (
-          <ResultScreen results={results} onBack={backToSetup} />
-        )}
+        {phase === "result" &&
+          (tab === "study" || tab === "review") &&
+          results && (
+            <ResultScreen results={results} onBack={backToSetup} />
+          )}
 
         {phase === "result" && tab === "exam" && examResults && (
           <ExamResultScreen results={examResults} onBack={backToSetup} />
