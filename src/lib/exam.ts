@@ -1,4 +1,4 @@
-import raw from "@/data/kawai_common_test_vol1.json";
+import raw from "@/data/kawai_common_test_vol1-v2.json";
 import { resolveQuestionCount } from "@/lib/quiz";
 import type {
   ExamQuestion,
@@ -9,6 +9,12 @@ import type {
 const MARK_DIGITS = ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"] as const;
 
 type Choice = { id: number; text: string };
+
+type TableData = {
+  title?: string;
+  columns?: string[];
+  rows?: unknown[][];
+};
 
 type SubQuestion = {
   target_label?: string;
@@ -27,9 +33,13 @@ type RawQuestion = {
   topic?: string;
   question_text?: string;
   context?: string;
+  figure_description?: string;
   figure?: { description?: string };
-  figure_sequence_diagram?: { mermaid_code?: string };
-  table_data?: { columns?: string[]; rows?: unknown[][] };
+  figure_sequence_diagram?: { type?: string; mermaid_code?: string };
+  table_data?: TableData;
+  table_1_data?: TableData;
+  table_3_1_data?: TableData;
+  table_3_2_data?: TableData;
   code_snippet?: string;
   choices?: Choice[];
   target_label?: string;
@@ -49,7 +59,7 @@ type RawSection = {
 };
 
 type RawExam = {
-  metadata?: { source?: string };
+  metadata?: { source?: string; version?: string };
   sections: RawSection[];
 };
 
@@ -69,28 +79,64 @@ function maxAnswerValue(values: number[]): number {
   return Math.max(3, ...values, 0);
 }
 
-function figureText(q: RawQuestion): string | undefined {
-  const parts: string[] = [];
-  if (q.figure?.description) parts.push(q.figure.description);
+function formatTable(table: TableData): string | undefined {
+  if (!table.columns?.length || !table.rows?.length) return undefined;
+  const lines: string[] = [];
+  if (table.title) lines.push(table.title);
+  lines.push(table.columns.join(" | "));
+  lines.push(table.columns.map(() => "---").join(" | "));
+  for (const row of table.rows) {
+    lines.push(row.map((cell) => String(cell)).join(" | "));
+  }
+  return lines.join("\n");
+}
+
+/** 親問が持つ文・図・表をすべて収集（小問すべてに引き継ぐ） */
+function collectSharedMaterials(q: RawQuestion): {
+  context?: string;
+  figure?: string;
+} {
+  const contextParts: string[] = [];
+  if (q.question_text) contextParts.push(q.question_text);
+  if (q.context) contextParts.push(q.context);
+
+  const figureParts: string[] = [];
+  if (q.figure_description) {
+    figureParts.push(`【図の説明】\n${q.figure_description}`);
+  }
+  if (q.figure?.description) {
+    figureParts.push(`【図の説明】\n${q.figure.description}`);
+  }
   if (q.figure_sequence_diagram?.mermaid_code) {
-    parts.push("【シーケンス図の流れ】\n" + q.figure_sequence_diagram.mermaid_code);
+    figureParts.push(
+      `【シーケンス図】\n${q.figure_sequence_diagram.mermaid_code}`,
+    );
   }
-  if (q.table_data?.columns && q.table_data.rows) {
-    const header = q.table_data.columns.join(" | ");
-    const rows = q.table_data.rows
-      .slice(0, 5)
-      .map((r) => r.join(" | "))
-      .join("\n");
-    const more =
-      q.table_data.rows.length > 5
-        ? `\n…他 ${q.table_data.rows.length - 5} 行`
-        : "";
-    parts.push(`【表】\n${header}\n${rows}${more}`);
+
+  const tables = [
+    q.table_data,
+    q.table_1_data,
+    q.table_3_1_data,
+    q.table_3_2_data,
+  ];
+  for (const table of tables) {
+    if (!table) continue;
+    const formatted = formatTable(table);
+    if (formatted) figureParts.push(`【表】\n${formatted}`);
   }
+
   if (q.code_snippet) {
-    parts.push("【プログラム】\n" + q.code_snippet);
+    figureParts.push(`【プログラム】\n${q.code_snippet}`);
   }
-  return parts.length ? parts.join("\n\n") : undefined;
+
+  return {
+    context: contextParts.length ? contextParts.join("\n\n") : undefined,
+    figure: figureParts.length ? figureParts.join("\n\n") : undefined,
+  };
+}
+
+function normalizeSectionTitle(title: string): string {
+  return title.replace("第4问", "第4問");
 }
 
 function pushItem(
@@ -103,6 +149,12 @@ function pushItem(
   });
 }
 
+function headingFor(q: RawQuestion, label?: string): string {
+  return [q.sub_id, label ? `[${label}]` : null, q.topic]
+    .filter(Boolean)
+    .join(" / ");
+}
+
 function flattenSub(
   list: ExamQuestion[],
   section: RawSection,
@@ -111,27 +163,22 @@ function flattenSub(
   index: number,
 ) {
   const baseId = `${q.question_id}-${sub.target_label ?? index}`;
-  const titleParts = [
-    q.sub_id,
-    sub.target_label ? `[${sub.target_label}]` : null,
-    q.topic,
-  ].filter(Boolean);
-  const stem =
-    [q.question_text, sub.prompt].filter(Boolean).join("\n\n") ||
-    q.topic ||
-    "問題";
+  const materials = collectSharedMaterials(q);
+  const sectionTitle = normalizeSectionTitle(section.section_title);
 
   const shared = {
     sectionId: section.section_id,
-    sectionTitle: section.section_title,
+    sectionTitle,
     topic: q.topic,
     subId: q.sub_id,
     targetLabel: sub.target_label,
-    question: titleParts.length
-      ? `${titleParts.join(" / ")}\n\n${stem}`
-      : stem,
-    context: q.context,
-    figure: figureText(q),
+    // 設問本文はプロンプト中心。共通の文・図は context / figure に載せる
+    question: [
+      headingFor(q, sub.target_label),
+      sub.prompt ?? "次の問いに答えよ。",
+    ].join("\n\n"),
+    context: materials.context,
+    figure: materials.figure,
     explanation: sub.explanation ?? q.explanation,
   };
 
@@ -151,9 +198,18 @@ function flattenSub(
         id: `${baseId}-${label}`,
         ...shared,
         targetLabel: label,
-        question: `${shared.question}\n\n空欄［${label}］に入る番号を選べ。`,
+        question: [
+          headingFor(q, label),
+          sub.prompt,
+          `空欄［${label}］に入る番号を選べ。`,
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
         choices: markChoices(maxAnswerValue(Object.values(sub.answers))),
         answerIndex: value,
+        // 同じ親資料を全空欄に引き継ぐ
+        context: materials.context,
+        figure: materials.figure,
         explanation: sub.explanation ?? q.explanation,
       });
     }
@@ -166,9 +222,19 @@ function flattenSub(
         id: `${baseId}-${label}`,
         ...shared,
         targetLabel: label,
-        question: `${shared.question}\n\n空欄［${label}］に入る番号を選べ。`,
-        choices: markChoices(maxAnswerValue(Object.values(sub.correct_values))),
+        question: [
+          headingFor(q, label),
+          sub.prompt,
+          `空欄［${label}］に入る番号を選べ。`,
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
+        choices: markChoices(
+          maxAnswerValue(Object.values(sub.correct_values)),
+        ),
         answerIndex: value,
+        context: materials.context,
+        figure: materials.figure,
         explanation: sub.explanation ?? q.explanation,
       });
     }
@@ -179,7 +245,13 @@ function flattenSub(
     pushItem(list, {
       id: baseId,
       ...shared,
-      question: `${shared.question}\n\nマークシートに記入する番号を選べ。`,
+      question: [
+        headingFor(q, sub.target_label),
+        sub.prompt,
+        "マークシートに記入する番号を選べ。",
+      ]
+        .filter(Boolean)
+        .join("\n\n"),
       choices: markChoices(maxAnswerValue([sub.correct_value])),
       answerIndex: sub.correct_value,
     });
@@ -191,23 +263,30 @@ function flattenQuestion(
   section: RawSection,
   q: RawQuestion,
 ) {
+  const materials = collectSharedMaterials(q);
+  const sectionTitle = normalizeSectionTitle(section.section_title);
+
   const sharedBase = {
     sectionId: section.section_id,
-    sectionTitle: section.section_title,
+    sectionTitle,
     topic: q.topic,
     subId: q.sub_id,
-    context: q.context,
-    figure: figureText(q),
+    context: materials.context,
+    figure: materials.figure,
     explanation: q.explanation,
   };
 
   if (q.choices && q.correct_choice_id != null) {
-    const heading = [q.sub_id, q.topic].filter(Boolean).join(" / ");
     pushItem(list, {
       id: q.question_id,
       ...sharedBase,
       targetLabel: q.target_label,
-      question: [heading, q.question_text].filter(Boolean).join("\n\n"),
+      // 単体問題は設問文を question に。context に重複しないよう整理
+      question: [headingFor(q, q.target_label), q.question_text]
+        .filter(Boolean)
+        .join("\n\n"),
+      context: q.context,
+      figure: materials.figure,
       choices: choiceTexts(q.choices),
       answerIndex: q.correct_choice_id,
     });
@@ -220,7 +299,6 @@ function flattenQuestion(
   }
 
   if (q.answers) {
-    const heading = [q.sub_id, q.topic].filter(Boolean).join(" / ");
     const details = q.answer_details;
     for (const [label, value] of Object.entries(q.answers)) {
       const detail = details?.[label];
@@ -228,9 +306,13 @@ function flattenQuestion(
         id: `${q.question_id}-${label}`,
         ...sharedBase,
         targetLabel: label,
-        question: [heading, q.question_text, `空欄［${label}］に入る番号を選べ。`]
-          .filter(Boolean)
-          .join("\n\n"),
+        question: [
+          headingFor(q, label),
+          `空欄［${label}］に入る番号を選べ。`,
+        ].join("\n\n"),
+        // 同じ表・問題文を全空欄に表示
+        context: materials.context,
+        figure: materials.figure,
         choices: markChoices(maxAnswerValue(Object.values(q.answers))),
         answerIndex: value,
         explanation: [detail ? `正解の内容: ${detail}` : null, q.explanation]
@@ -242,18 +324,15 @@ function flattenQuestion(
   }
 
   if (q.correct_choice_ids?.length) {
-    const heading = [q.sub_id, q.topic].filter(Boolean).join(" / ");
     const max = maxAnswerValue(q.correct_choice_ids);
     pushItem(list, {
       id: q.question_id,
       ...sharedBase,
       question: [
-        heading,
-        q.question_text ?? "正しいものをすべて選べ。",
+        headingFor(q),
+        q.topic ?? "正しいものをすべて選べ。",
         "当てはまる番号をすべて選んでください（複数選択）。",
-      ]
-        .filter(Boolean)
-        .join("\n\n"),
+      ].join("\n\n"),
       choices: markChoices(max),
       answerIndex: q.correct_choice_ids[0],
       answerIndexes: q.correct_choice_ids,
@@ -264,17 +343,14 @@ function flattenQuestion(
   }
 
   if (q.correct_choice_id != null) {
-    const heading = [q.sub_id, q.topic].filter(Boolean).join(" / ");
     pushItem(list, {
       id: q.question_id,
       ...sharedBase,
       question: [
-        heading,
-        q.question_text ?? q.topic ?? "問題",
+        headingFor(q),
+        q.topic ?? "問題",
         "マークシートに記入する番号を選べ。",
-      ]
-        .filter(Boolean)
-        .join("\n\n"),
+      ].join("\n\n"),
       choices: markChoices(9),
       answerIndex: q.correct_choice_id,
       explanation: q.explanation,
@@ -295,7 +371,9 @@ function buildQuestions(): ExamQuestion[] {
 const questions = buildQuestions();
 
 export function getExamSourceLabel(): string {
-  return data.metadata?.source ?? "共通テスト対策問題";
+  const source = data.metadata?.source ?? "共通テスト対策問題";
+  const version = data.metadata?.version;
+  return version ? `${source}（v${version}）` : source;
 }
 
 export function getAllExamQuestions(): ExamQuestion[] {
@@ -305,7 +383,7 @@ export function getAllExamQuestions(): ExamQuestion[] {
 export function getExamSections(): ExamSectionInfo[] {
   return data.sections.map((s) => ({
     id: s.section_id,
-    title: s.section_title,
+    title: normalizeSectionTitle(s.section_title),
     score: s.score,
     count: questions.filter((q) => q.sectionId === s.section_id).length,
   }));
@@ -328,10 +406,7 @@ export function buildExamDeck(
   customCount: number,
 ): ExamQuestion[] {
   const filtered =
-    sectionId === "all"
-      ? all
-      : all.filter((q) => q.sectionId === sectionId);
+    sectionId === "all" ? all : all.filter((q) => q.sectionId === sectionId);
   const count = resolveQuestionCount(filtered.length, countOption, customCount);
-  // 本番順を保つ（シャッフルしない）
   return filtered.slice(0, count);
 }

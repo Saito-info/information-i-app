@@ -130,21 +130,30 @@ export function ExamQuizScreen({
           ) : null}
         </div>
 
+        {(current.context || current.figure) && (
+          <div className="mb-4 space-y-3">
+            <p className="text-xs font-semibold tracking-wide text-blue-600">
+              共通の問題文・資料
+            </p>
+            {current.context ? (
+              <div className="max-h-56 overflow-y-auto rounded-xl bg-slate-50 px-3 py-3 text-sm leading-relaxed text-slate-700 whitespace-pre-wrap">
+                {current.context}
+              </div>
+            ) : null}
+            {current.figure ? (
+              <div className="max-h-64 overflow-auto rounded-xl border border-dashed border-blue-200 bg-blue-50/50 px-3 py-3 text-xs leading-relaxed text-slate-600 whitespace-pre-wrap">
+                {current.figure}
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        <p className="mb-1 text-xs font-semibold tracking-wide text-slate-500">
+          設問
+        </p>
         <p className="whitespace-pre-wrap text-base font-semibold leading-relaxed text-slate-800">
           {current.question}
         </p>
-
-        {current.context ? (
-          <div className="mt-4 rounded-xl bg-slate-50 px-3 py-3 text-sm leading-relaxed text-slate-600 whitespace-pre-wrap">
-            {current.context}
-          </div>
-        ) : null}
-
-        {current.figure ? (
-          <div className="mt-3 rounded-xl border border-dashed border-blue-200 bg-blue-50/50 px-3 py-3 text-xs leading-relaxed text-slate-600 whitespace-pre-wrap">
-            {current.figure}
-          </div>
-        ) : null}
       </div>
 
       <div className="space-y-2">

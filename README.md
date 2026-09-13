@@ -22,6 +22,7 @@ npm run dev
 ## データ
 
 - 用語: `src/data/essentials_informatics_terms.json`
-- テスト問題: `src/data/kawai_common_test_vol1.json`（河合塾 共通テスト直前対策 第1回）
+- テスト問題: `src/data/kawai_common_test_vol1-v2.json`（河合塾 共通テスト直前対策 第1回 v2）
 
 テストタブでは大問（第1問〜第4問）ごと、またはすべてを選んでマークシート形式（⓪①②…）で演習できます。
+同じ親問に属する小問では、共通の問題文・図表・表をすべてに表示します。
