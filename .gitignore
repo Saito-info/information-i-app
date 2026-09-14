@@ -21,6 +21,16 @@
 # misc
 .DS_Store
 *.pem
+_pdf_list.txt
+_json_list.txt
+
+# local exam source PDFs / root JSON copies (app uses src/data + public images)
+/*.pdf
+/common_test_*.json
+/kawai_*.json
+/shinken_*.json
+/shisaku_*.json
+/essentials_informatics_terms.json
 
 # debug
 npm-debug.log*
