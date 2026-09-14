@@ -141,26 +141,29 @@ export function ExamQuizScreen({
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 py-3">
         <div className="mb-3 rounded-xl bg-white px-3 py-3 ring-1 ring-slate-100">
-          <div className="mb-2 flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             {current.label ? (
-              <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700">
+              <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
                 {current.label}
               </span>
             ) : null}
             {current.markSymbol ? (
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600">
-                [{current.markSymbol}]
+              <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-700">
+                マーク [{current.markSymbol}]
               </span>
-            ) : null}
+            ) : (
+              <span className="text-xs font-semibold text-slate-600">
+                マークを選択
+              </span>
+            )}
           </div>
-          <p className="max-h-28 overflow-y-auto whitespace-pre-wrap text-sm leading-relaxed text-slate-700">
-            {current.question}
+          <p className="mt-2 text-xs text-slate-400">
+            上のPDFを見ながら、解答の番号を選んでください
           </p>
         </div>
 
-        <p className="mb-2 text-xs font-semibold text-slate-500">マーク解答</p>
-        <div className="space-y-2 pb-4">
-          {current.choices.map((label, choiceIndex) => {
+        <div className="grid grid-cols-5 gap-2 pb-4">
+          {current.choices.map((_, choiceIndex) => {
             const isSelected = selected === choiceIndex;
             return (
               <button
@@ -169,16 +172,13 @@ export function ExamQuizScreen({
                 onClick={() =>
                   setAnswers((prev) => ({ ...prev, [current.id]: choiceIndex }))
                 }
-                className={`flex w-full items-start gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium transition ${
+                className={`flex aspect-square items-center justify-center rounded-2xl text-lg font-bold transition ${
                   isSelected
-                    ? "bg-blue-600 text-white"
-                    : "bg-white text-slate-700 ring-1 ring-slate-200"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                    : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-blue-50"
                 }`}
               >
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/5 text-xs font-bold">
-                  {markDigit(choiceIndex)}
-                </span>
-                <span className="leading-relaxed">{stripMark(label)}</span>
+                {markDigit(choiceIndex)}
               </button>
             );
           })}
@@ -201,8 +201,4 @@ export function ExamQuizScreen({
 
 function markDigit(n: number): string {
   return ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"][n] ?? String(n);
-}
-
-function stripMark(label: string): string {
-  return label.replace(/^[⓪①②③④⑤⑥⑦⑧⑨]\s*/, "");
 }
