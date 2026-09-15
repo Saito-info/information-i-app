@@ -3,8 +3,15 @@
 import { QuestionCountSelector } from "@/components/QuestionCountSelector";
 import type { QuestionCountOption, StudySettings } from "@/lib/types";
 
+/** 情報Ⅰの4分野（学習選択用） */
+export const STUDY_FIELDS = [
+  "情報社会の問題解決",
+  "コミュニケーションと情報デザイン",
+  "コンピュータとプログラミング",
+  "情報通信ネットワークとデータの活用",
+] as const;
+
 type StudySetupProps = {
-  categories: string[];
   categoryCounts: Record<string, number>;
   totalCount: number;
   settings: StudySettings;
@@ -14,7 +21,6 @@ type StudySetupProps = {
 };
 
 export function StudySetup({
-  categories,
   categoryCounts,
   totalCount,
   settings,
@@ -28,30 +34,31 @@ export function StudySetup({
         <p className="text-sm font-medium text-blue-600">学習モード</p>
         <h1 className="mt-1 text-2xl font-bold text-slate-800">出題設定</h1>
         <p className="mt-1 text-sm text-slate-500">
-          分野と出題数を選んでスタートしましょう。
+          4つの分野から選んで学習できます。
         </p>
       </header>
 
       <div className="space-y-2">
-        <label
-          htmlFor="category"
-          className="block text-sm font-semibold text-slate-700"
-        >
-          カテゴリ（分野）
+        <label className="block text-sm font-semibold text-slate-700">
+          分野
         </label>
-        <select
-          id="category"
-          value={settings.category}
-          onChange={(e) => onChange({ ...settings, category: e.target.value })}
-          className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-        >
-          <option value="all">すべて（{totalCount}語）</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}（{categoryCounts[cat] ?? 0}語）
-            </option>
+        <div className="space-y-2">
+          <FieldOption
+            selected={settings.category === "all"}
+            title={`すべて（${totalCount}語）`}
+            subtitle="4分野まとめて出題"
+            onClick={() => onChange({ ...settings, category: "all" })}
+          />
+          {STUDY_FIELDS.map((field) => (
+            <FieldOption
+              key={field}
+              selected={settings.category === field}
+              title={field}
+              subtitle={`${categoryCounts[field] ?? 0}語`}
+              onClick={() => onChange({ ...settings, category: field })}
+            />
           ))}
-        </select>
+        </div>
       </div>
 
       <QuestionCountSelector
@@ -75,5 +82,36 @@ export function StudySetup({
         スタート
       </button>
     </div>
+  );
+}
+
+function FieldOption({
+  selected,
+  title,
+  subtitle,
+  onClick,
+}: {
+  selected: boolean;
+  title: string;
+  subtitle: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`w-full rounded-xl px-4 py-3 text-left transition ${
+        selected
+          ? "bg-blue-600 text-white shadow-sm shadow-blue-200"
+          : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-blue-50"
+      }`}
+    >
+      <p className="text-sm font-semibold leading-snug">{title}</p>
+      <p
+        className={`mt-0.5 text-xs ${selected ? "text-blue-100" : "text-slate-400"}`}
+      >
+        {subtitle}
+      </p>
+    </button>
   );
 }

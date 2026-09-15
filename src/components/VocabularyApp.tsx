@@ -277,7 +277,6 @@ export function VocabularyApp({
 
         {phase === "setup" && tab === "study" && (
           <StudySetup
-            categories={categories}
             categoryCounts={categoryCounts}
             totalCount={terms.length}
             settings={studySettings}

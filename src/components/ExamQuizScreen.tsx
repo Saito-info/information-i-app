@@ -48,6 +48,8 @@ export function ExamQuizScreen({
 
   const selected = answers[current.id];
   const progress = ((index + 1) / questions.length) * 100;
+  const answeredCount = Object.keys(answers).length;
+  const canGrade = answeredCount > 0;
 
   function buildResults(interrupted: boolean): ExamResults {
     const answered = questions.filter((q) => answers[q.id] != null);
@@ -83,24 +85,26 @@ export function ExamQuizScreen({
     };
   }
 
-  function handleInterrupt() {
-    if (Object.keys(answers).length === 0) {
+  function handleGrade(interrupted: boolean) {
+    if (!canGrade) {
       onExit();
       return;
     }
+    const label = interrupted ? "ここまでで採点しますか？" : "採点しますか？";
     const ok = window.confirm(
-      "ここまでで採点しますか？\n終了後に解説（解答）を表示します。",
+      `${label}\n解答済み ${answeredCount}/${questions.length} 問を採点します。`,
     );
     if (!ok) return;
-    onFinish(buildResults(true));
+    onFinish(buildResults(interrupted));
   }
 
-  function handleNext() {
-    if (selected == null) return;
-    if (index + 1 >= questions.length) {
-      onFinish(buildResults(false));
-      return;
-    }
+  function handleBack() {
+    if (index <= 0) return;
+    setIndex((i) => i - 1);
+  }
+
+  function handleForward() {
+    if (index + 1 >= questions.length) return;
     setIndex((i) => i + 1);
   }
 
@@ -109,7 +113,7 @@ export function ExamQuizScreen({
       <div className="flex shrink-0 items-center justify-between gap-2 border-b border-blue-100 bg-white px-3 py-2">
         <button
           type="button"
-          onClick={handleInterrupt}
+          onClick={() => handleGrade(true)}
           className="text-xs font-medium text-slate-500"
         >
           中断して採点
@@ -120,6 +124,9 @@ export function ExamQuizScreen({
           </p>
           <p className="text-xs font-semibold text-slate-700">
             第{meta.fieldId}問 · {index + 1}/{questions.length}
+            <span className="ml-1 font-normal text-slate-400">
+              （解答済 {answeredCount}）
+            </span>
           </p>
         </div>
       </div>
@@ -158,7 +165,7 @@ export function ExamQuizScreen({
             )}
           </div>
           <p className="mt-2 text-xs text-slate-400">
-            上のPDFを見ながら、解答の番号を選んでください
+            上のPDFを見ながら番号を選び、進む／戻るで移動できます
           </p>
         </div>
 
@@ -185,14 +192,32 @@ export function ExamQuizScreen({
         </div>
       </div>
 
-      <div className="shrink-0 border-t border-slate-200 bg-white px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div className="shrink-0 space-y-2 border-t border-slate-200 bg-white px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            disabled={index <= 0}
+            onClick={handleBack}
+            className="rounded-2xl bg-slate-100 py-3 text-sm font-bold text-slate-700 disabled:opacity-40"
+          >
+            ← 戻る
+          </button>
+          <button
+            type="button"
+            disabled={index + 1 >= questions.length}
+            onClick={handleForward}
+            className="rounded-2xl bg-slate-100 py-3 text-sm font-bold text-slate-700 disabled:opacity-40"
+          >
+            進む →
+          </button>
+        </div>
         <button
           type="button"
-          disabled={selected == null}
-          onClick={handleNext}
+          disabled={!canGrade}
+          onClick={() => handleGrade(answeredCount < questions.length)}
           className="w-full rounded-2xl bg-blue-600 py-3.5 text-base font-bold text-white disabled:bg-slate-300"
         >
-          {index + 1 >= questions.length ? "終了して採点" : "次の設問へ"}
+          採点する（{answeredCount}/{questions.length}）
         </button>
       </div>
     </div>
