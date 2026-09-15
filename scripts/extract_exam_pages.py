@@ -119,46 +119,78 @@ CATALOG = [
 ]
 
 
+DIGIT_MAP = str.maketrans(
+    {
+        "１": "1",
+        "２": "2",
+        "３": "3",
+        "４": "4",
+        "①": "1",
+        "②": "2",
+        "③": "3",
+        "④": "4",
+    }
+)
+
+
+def compact_text(text: str) -> str:
+    t = (text or "").translate(DIGIT_MAP)
+    return re.sub(r"\s+", "", t)
+
+
 def find_section_starts(doc: pymupdf.Document) -> dict[str, int]:
     """Return 1-based start page for 第1〜4問 (first strong hit)."""
-    starts: dict[str, int] = {}
+    candidates: dict[str, list[int]] = {"1": [], "2": [], "3": [], "4": []}
     for i in range(len(doc)):
-        text = doc[i].get_text("text") or ""
+        compact = compact_text(doc[i].get_text("text") or "")
+        page = i + 1
         for n in ("1", "2", "3", "4"):
-            if n in starts:
+            if re.search(rf"第{n}問次の", compact) or re.search(
+                rf"第{n}問.{{0,12}}配点", compact
+            ):
+                candidates[n].append(page)
+
+    starts: dict[str, int] = {}
+    for n in ("1", "2", "3", "4"):
+        pages = candidates[n]
+        if not pages:
+            continue
+        prev = starts.get(str(int(n) - 1)) if n != "1" else 0
+        pick = next((p for p in pages if p > (prev or 0)), pages[0])
+        if n != "1" and pick <= 3 and len(pages) > 1:
+            pick = pages[1]
+        starts[n] = pick
+
+    ordered: dict[str, int] = {}
+    last = 0
+    for n in ("1", "2", "3", "4"):
+        if n not in starts:
+            continue
+        if starts[n] <= last:
+            alts = [p for p in candidates[n] if p > last]
+            if not alts:
                 continue
-            # Prefer heading-like patterns
-            patterns = [
-                rf"第\s*{n}\s*問",
-                rf"第{n}問",
-            ]
-            for pat in patterns:
-                if re.search(pat, text):
-                    # Skip TOC-ish early pages if many sections listed
-                    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-                    heading_hits = sum(
-                        1 for ln in lines[:20] if re.search(r"第\s*[1-4]\s*問", ln)
-                    )
-                    if heading_hits >= 3 and i < 3:
-                        continue
-                    starts[n] = i + 1
-                    break
-    return starts
+            starts[n] = alts[0]
+        ordered[n] = starts[n]
+        last = starts[n]
+    return ordered
 
 
 def ranges_from_starts(starts: dict[str, int], page_count: int) -> dict[str, dict]:
-    ordered = sorted(
-        ((n, starts[n]) for n in ("1", "2", "3", "4") if n in starts),
-        key=lambda x: x[1],
-    )
+    ordered = [(n, starts[n]) for n in ("1", "2", "3", "4") if n in starts]
     ranges: dict[str, dict] = {}
     if len(ordered) < 4:
-        # equal split fallback
-        size = max(1, page_count // 4)
+        content_start = starts.get("1", 1)
+        usable = page_count - content_start + 1
+        size = max(1, usable // 4)
         for idx, n in enumerate(("1", "2", "3", "4")):
-            s = idx * size + 1
-            e = page_count if idx == 3 else min(page_count, (idx + 1) * size)
-            ranges[n] = {"start": s, "end": e, "method": "equal-split"}
+            s = content_start + idx * size
+            e = (
+                page_count
+                if idx == 3
+                else min(page_count, content_start + (idx + 1) * size - 1)
+            )
+            ranges[n] = {"start": s, "end": max(s, e), "method": "equal-split"}
         return ranges
 
     for i, (n, s) in enumerate(ordered):

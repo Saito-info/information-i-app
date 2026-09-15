@@ -74,6 +74,8 @@ export type ExamResults = {
   wrongIds: string[];
   /** 解答済みかつ正解の設問ID */
   correctIds: string[];
+  /** 設問ID → 選択したマーク番号 */
+  answers: Record<string, number>;
 };
 
 export type StudyHistoryEntry = {
