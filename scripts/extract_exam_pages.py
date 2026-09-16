@@ -216,6 +216,51 @@ def render_pdf(pdf_path: Path, out_dir: Path, scale: float = 1.15) -> list[str]:
     return urls
 
 
+STRONG_ANSWER_START = [
+    r"解答・採点基準",
+    r"解答採点基準",
+    r"正解・配点一覧",
+    r"正解配点一覧",
+    r"正解・配点",
+    r"正答・配点",
+    r"解答一覧",
+    r"正解一覧",
+]
+
+
+def find_answer_start(doc: pymupdf.Document) -> int | None:
+    """1-based page where answer key / explanation booklet starts."""
+    n = len(doc)
+    for i in range(max(0, n // 2), n):
+        c = compact_text(doc[i].get_text("text") or "")
+        if any(re.search(p, c) for p in STRONG_ANSWER_START):
+            return i + 1
+        if "自己採点" in c and ("解答記号" in c or "正解" in c):
+            return i + 1
+    for i in range(int(n * 0.55), n):
+        c = compact_text(doc[i].get_text("text") or "")
+        if c.startswith("【解説】") or "【解説】第1問" in c or "【解説】第１問" in c:
+            return i + 1
+    return None
+
+
+def render_pdf_slice(
+    doc: pymupdf.Document, start: int, out_dir: Path, scale: float = 1.2
+) -> list[str]:
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+    out_dir.mkdir(parents=True)
+    urls: list[str] = []
+    mat = pymupdf.Matrix(scale, scale)
+    rel = out_dir.relative_to(ROOT / "public").as_posix()
+    for i in range(start - 1, len(doc)):
+        pix = doc[i].get_pixmap(matrix=mat, alpha=False)
+        name = f"p{i - (start - 1) + 1:02d}.png"
+        pix.save(out_dir / name)
+        urls.append(f"/{rel}/{name}")
+    return urls
+
+
 def main() -> None:
     DATA.mkdir(parents=True, exist_ok=True)
     if OUT_Q.exists():
@@ -240,7 +285,12 @@ def main() -> None:
         doc = pymupdf.open(qpdf)
         starts = find_section_starts(doc)
         ranges = ranges_from_starts(starts, len(doc))
-        doc.close()
+        answer_start = find_answer_start(doc)
+
+        if answer_start and ranges:
+            for n, r in ranges.items():
+                if r.get("end", 0) >= answer_start:
+                    r["end"] = max(r.get("start", 1), answer_start - 1)
 
         pages = {
             n: q_urls[r["start"] - 1 : r["end"]]
@@ -251,10 +301,15 @@ def main() -> None:
         if item["answerPdf"]:
             apdf = ROOT / item["answerPdf"]
             if apdf.exists() and apdf.stat().st_size > 1000:
-                # tiny text PDFs still render; skip empty
                 answer_urls = render_pdf(apdf, OUT_A / item["id"], scale=1.2)
             else:
                 print("  skip answer pdf", item["answerPdf"])
+        elif answer_start:
+            answer_urls = render_pdf_slice(
+                doc, answer_start, OUT_A / item["id"], scale=1.2
+            )
+
+        doc.close()
 
         entry = {
             "id": item["id"],
@@ -266,6 +321,7 @@ def main() -> None:
             "ranges": ranges,
             "pages": pages,
             "answerPages": answer_urls,
+            "answerStartPage": answer_start,
         }
         catalog_out.append(entry)
         print(
@@ -277,6 +333,8 @@ def main() -> None:
             {k: (v["start"], v["end"]) for k, v in ranges.items()},
             "answers",
             len(answer_urls),
+            "answerStart",
+            answer_start,
         )
 
     META_OUT.write_text(

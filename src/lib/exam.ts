@@ -22,7 +22,7 @@ import type {
   ExamSourceInfo,
 } from "@/lib/types";
 
-const CIRCLED = "⓪①②③④⑤⑥⑦⑧⑨";
+const CIRCLED = "⓪①②③④⑤⑥⑦⑧⑨⑩";
 
 type AnyRecord = Record<string, unknown>;
 
@@ -145,11 +145,37 @@ function markChoices(max = 9): string[] {
   );
 }
 
-function parseBlankAnswers(raw: unknown): Array<{ blank: string; index: number }> {
-  if (typeof raw === "number") return [{ blank: "", index: Math.trunc(raw) }];
+function splitMarkSymbols(markSymbol?: string): string[] {
+  if (!markSymbol) return [];
+  return markSymbol
+    .split(/[・･･\-−–—,/／\s]+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function parseBlankAnswers(
+  raw: unknown,
+  markSymbol?: string,
+): Array<{ blank: string; index: number }> {
+  const marks = splitMarkSymbols(markSymbol);
+
+  if (typeof raw === "number") {
+    if (marks.length > 1) {
+      const digits = String(Math.trunc(raw));
+      if (digits.length === marks.length && /^\d+$/.test(digits)) {
+        return marks.map((blank, i) => ({
+          blank,
+          index: Number(digits[i]),
+        }));
+      }
+    }
+    return [{ blank: marks[0] ?? "", index: Math.trunc(raw) }];
+  }
+
   if (raw && typeof raw === "object" && !Array.isArray(raw)) {
     const out: Array<{ blank: string; index: number }> = [];
     for (const [blank, value] of Object.entries(raw as Record<string, unknown>)) {
+      if (blank === "explanation") continue;
       const rec = asRecord(value);
       const idx = parseIndex(
         rec?.correct_index ?? rec?.correct_option ?? rec?.correct_value ?? value,
@@ -158,12 +184,15 @@ function parseBlankAnswers(raw: unknown): Array<{ blank: string; index: number }
     }
     return out;
   }
+
   if (typeof raw !== "string") return [];
   const s = raw.trim();
-  if (/^\d+$/.test(s)) return [{ blank: "", index: Number(s) }];
 
+  // "ア: 3, イ: 1" / "ア：③"
   const pairs = [
-    ...s.matchAll(/([ァ-ヶーA-Za-z]+)\s*[:：]\s*([0-9⓪①②③④⑤⑥⑦⑧⑨]+)/g),
+    ...s.matchAll(
+      /([ァ-ヶーA-Za-z]+)\s*[:：]\s*([0-9⓪①②③④⑤⑥⑦⑧⑨⑩]+)/g,
+    ),
   ];
   if (pairs.length) {
     return pairs
@@ -174,8 +203,27 @@ function parseBlankAnswers(raw: unknown): Array<{ blank: string; index: number }
       .filter((x): x is { blank: string; index: number } => Boolean(x));
   }
 
+  // "1-4" with marks ア・イ
+  if (/^[0-9]+(?:-[0-9]+)+$/.test(s) && marks.length) {
+    const nums = s.split("-").map((n) => Number(n));
+    if (nums.length === marks.length && nums.every((n) => Number.isFinite(n))) {
+      return marks.map((blank, i) => ({ blank, index: nums[i]! }));
+    }
+  }
+
+  // "47" / "4930" with matching mark count → one digit per blank
+  if (/^[0-9]+$/.test(s) && marks.length > 1 && s.length === marks.length) {
+    return marks.map((blank, i) => ({ blank, index: Number(s[i]) }));
+  }
+
+  if (/^[0-9]+$/.test(s)) {
+    return [{ blank: marks[0] ?? "", index: Number(s) }];
+  }
+
   const single = parseIndex(s);
-  return single == null ? [] : [{ blank: "", index: single }];
+  return single == null
+    ? []
+    : [{ blank: marks[0] ?? "", index: single }];
 }
 
 function flattenSource(source: SourceBundle): ExamQuestion[] {
@@ -216,12 +264,13 @@ function flattenSource(source: SourceBundle): ExamQuestion[] {
         ) {
           blanks = parseBlankAnswers(
             answerNode.correct_index ?? answerNode.correct_option,
+            markSymbol,
           );
         } else {
-          blanks = parseBlankAnswers(answerNode);
+          blanks = parseBlankAnswers(answerNode, markSymbol);
         }
       } else {
-        blanks = parseBlankAnswers(sub.correct_index);
+        blanks = parseBlankAnswers(sub.correct_index, markSymbol);
       }
       if (!blanks.length) continue;
 

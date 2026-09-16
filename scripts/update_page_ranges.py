@@ -98,27 +98,54 @@ def find_section_starts(doc: pymupdf.Document) -> dict[str, int]:
     return ordered
 
 
-def ranges_from_starts(starts: dict[str, int], page_count: int) -> dict[str, dict]:
+def ranges_from_starts(
+    starts: dict[str, int], page_count: int, answer_start: int | None = None
+) -> dict[str, dict]:
+    end_limit = (answer_start - 1) if answer_start else page_count
+    end_limit = max(1, end_limit)
     ordered = [(n, starts[n]) for n in ("1", "2", "3", "4") if n in starts]
     ranges: dict[str, dict] = {}
     if len(ordered) < 4:
         content_start = starts.get("1", 1)
-        usable = page_count - content_start + 1
+        usable = end_limit - content_start + 1
         size = max(1, usable // 4)
         for idx, n in enumerate(("1", "2", "3", "4")):
             s = content_start + idx * size
             e = (
-                page_count
+                end_limit
                 if idx == 3
-                else min(page_count, content_start + (idx + 1) * size - 1)
+                else min(end_limit, content_start + (idx + 1) * size - 1)
             )
             ranges[n] = {"start": s, "end": max(s, e), "method": "equal-split"}
         return ranges
 
     for i, (n, s) in enumerate(ordered):
-        e = (ordered[i + 1][1] - 1) if i + 1 < len(ordered) else page_count
-        ranges[n] = {"start": s, "end": max(s, e), "method": "text-detect"}
+        e = (ordered[i + 1][1] - 1) if i + 1 < len(ordered) else end_limit
+        ranges[n] = {"start": s, "end": max(s, min(e, end_limit)), "method": "text-detect"}
     return ranges
+
+
+STRONG_ANSWER_START = [
+    r"解答・採点基準",
+    r"解答採点基準",
+    r"正解・配点一覧",
+    r"正解配点一覧",
+    r"正解・配点",
+    r"正答・配点",
+    r"解答一覧",
+    r"正解一覧",
+]
+
+
+def find_answer_start(doc: pymupdf.Document) -> int | None:
+    n = len(doc)
+    for i in range(max(0, n // 2), n):
+        c = compact_text(doc[i].get_text("text") or "")
+        if any(re.search(p, c) for p in STRONG_ANSWER_START):
+            return i + 1
+        if "自己採点" in c and ("解答記号" in c or "正解" in c):
+            return i + 1
+    return None
 
 
 def main() -> None:
@@ -131,7 +158,8 @@ def main() -> None:
         doc = pymupdf.open(pdf)
         starts = MANUAL_STARTS.get(src["id"]) or find_section_starts(doc)
         method_note = "manual" if src["id"] in MANUAL_STARTS else None
-        ranges = ranges_from_starts(starts, len(doc))
+        answer_start = find_answer_start(doc)
+        ranges = ranges_from_starts(starts, len(doc), answer_start)
         if method_note:
             for r in ranges.values():
                 r["method"] = method_note
@@ -147,10 +175,14 @@ def main() -> None:
         }
         src["ranges"] = ranges
         src["pages"] = pages
+        if answer_start:
+            src["answerStartPage"] = answer_start
         print(
             src["id"],
             "starts",
             starts,
+            "answerStart",
+            answer_start,
             "ranges",
             {k: (v["start"], v["end"], v["method"]) for k, v in ranges.items()},
         )

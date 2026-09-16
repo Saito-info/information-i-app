@@ -409,7 +409,7 @@
         },
         "4": {
           "start": 32,
-          "end": 57,
+          "end": 42,
           "method": "text-detect"
         }
       },
@@ -461,25 +461,27 @@
           "/exam-pages/kawai-2025-1st/p39.png",
           "/exam-pages/kawai-2025-1st/p40.png",
           "/exam-pages/kawai-2025-1st/p41.png",
-          "/exam-pages/kawai-2025-1st/p42.png",
-          "/exam-pages/kawai-2025-1st/p43.png",
-          "/exam-pages/kawai-2025-1st/p44.png",
-          "/exam-pages/kawai-2025-1st/p45.png",
-          "/exam-pages/kawai-2025-1st/p46.png",
-          "/exam-pages/kawai-2025-1st/p47.png",
-          "/exam-pages/kawai-2025-1st/p48.png",
-          "/exam-pages/kawai-2025-1st/p49.png",
-          "/exam-pages/kawai-2025-1st/p50.png",
-          "/exam-pages/kawai-2025-1st/p51.png",
-          "/exam-pages/kawai-2025-1st/p52.png",
-          "/exam-pages/kawai-2025-1st/p53.png",
-          "/exam-pages/kawai-2025-1st/p54.png",
-          "/exam-pages/kawai-2025-1st/p55.png",
-          "/exam-pages/kawai-2025-1st/p56.png",
-          "/exam-pages/kawai-2025-1st/p57.png"
+          "/exam-pages/kawai-2025-1st/p42.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/kawai-2025-1st/p01.png",
+        "/exam-answers/kawai-2025-1st/p02.png",
+        "/exam-answers/kawai-2025-1st/p03.png",
+        "/exam-answers/kawai-2025-1st/p04.png",
+        "/exam-answers/kawai-2025-1st/p05.png",
+        "/exam-answers/kawai-2025-1st/p06.png",
+        "/exam-answers/kawai-2025-1st/p07.png",
+        "/exam-answers/kawai-2025-1st/p08.png",
+        "/exam-answers/kawai-2025-1st/p09.png",
+        "/exam-answers/kawai-2025-1st/p10.png",
+        "/exam-answers/kawai-2025-1st/p11.png",
+        "/exam-answers/kawai-2025-1st/p12.png",
+        "/exam-answers/kawai-2025-1st/p13.png",
+        "/exam-answers/kawai-2025-1st/p14.png",
+        "/exam-answers/kawai-2025-1st/p15.png"
+      ],
+      "answerStartPage": 43
     },
     {
       "id": "kawai-2025-2nd",
@@ -506,7 +508,7 @@
         },
         "4": {
           "start": 32,
-          "end": 54,
+          "end": 39,
           "method": "manual"
         }
       },
@@ -555,25 +557,27 @@
           "/exam-pages/kawai-2025-2nd/p36.png",
           "/exam-pages/kawai-2025-2nd/p37.png",
           "/exam-pages/kawai-2025-2nd/p38.png",
-          "/exam-pages/kawai-2025-2nd/p39.png",
-          "/exam-pages/kawai-2025-2nd/p40.png",
-          "/exam-pages/kawai-2025-2nd/p41.png",
-          "/exam-pages/kawai-2025-2nd/p42.png",
-          "/exam-pages/kawai-2025-2nd/p43.png",
-          "/exam-pages/kawai-2025-2nd/p44.png",
-          "/exam-pages/kawai-2025-2nd/p45.png",
-          "/exam-pages/kawai-2025-2nd/p46.png",
-          "/exam-pages/kawai-2025-2nd/p47.png",
-          "/exam-pages/kawai-2025-2nd/p48.png",
-          "/exam-pages/kawai-2025-2nd/p49.png",
-          "/exam-pages/kawai-2025-2nd/p50.png",
-          "/exam-pages/kawai-2025-2nd/p51.png",
-          "/exam-pages/kawai-2025-2nd/p52.png",
-          "/exam-pages/kawai-2025-2nd/p53.png",
-          "/exam-pages/kawai-2025-2nd/p54.png"
+          "/exam-pages/kawai-2025-2nd/p39.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/kawai-2025-2nd/p01.png",
+        "/exam-answers/kawai-2025-2nd/p02.png",
+        "/exam-answers/kawai-2025-2nd/p03.png",
+        "/exam-answers/kawai-2025-2nd/p04.png",
+        "/exam-answers/kawai-2025-2nd/p05.png",
+        "/exam-answers/kawai-2025-2nd/p06.png",
+        "/exam-answers/kawai-2025-2nd/p07.png",
+        "/exam-answers/kawai-2025-2nd/p08.png",
+        "/exam-answers/kawai-2025-2nd/p09.png",
+        "/exam-answers/kawai-2025-2nd/p10.png",
+        "/exam-answers/kawai-2025-2nd/p11.png",
+        "/exam-answers/kawai-2025-2nd/p12.png",
+        "/exam-answers/kawai-2025-2nd/p13.png",
+        "/exam-answers/kawai-2025-2nd/p14.png",
+        "/exam-answers/kawai-2025-2nd/p15.png"
+      ],
+      "answerStartPage": 40
     },
     {
       "id": "kawai-2025-3rd",
@@ -600,7 +604,7 @@
         },
         "4": {
           "start": 24,
-          "end": 44,
+          "end": 32,
           "method": "text-detect"
         }
       },
@@ -642,22 +646,24 @@
           "/exam-pages/kawai-2025-3rd/p29.png",
           "/exam-pages/kawai-2025-3rd/p30.png",
           "/exam-pages/kawai-2025-3rd/p31.png",
-          "/exam-pages/kawai-2025-3rd/p32.png",
-          "/exam-pages/kawai-2025-3rd/p33.png",
-          "/exam-pages/kawai-2025-3rd/p34.png",
-          "/exam-pages/kawai-2025-3rd/p35.png",
-          "/exam-pages/kawai-2025-3rd/p36.png",
-          "/exam-pages/kawai-2025-3rd/p37.png",
-          "/exam-pages/kawai-2025-3rd/p38.png",
-          "/exam-pages/kawai-2025-3rd/p39.png",
-          "/exam-pages/kawai-2025-3rd/p40.png",
-          "/exam-pages/kawai-2025-3rd/p41.png",
-          "/exam-pages/kawai-2025-3rd/p42.png",
-          "/exam-pages/kawai-2025-3rd/p43.png",
-          "/exam-pages/kawai-2025-3rd/p44.png"
+          "/exam-pages/kawai-2025-3rd/p32.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/kawai-2025-3rd/p01.png",
+        "/exam-answers/kawai-2025-3rd/p02.png",
+        "/exam-answers/kawai-2025-3rd/p03.png",
+        "/exam-answers/kawai-2025-3rd/p04.png",
+        "/exam-answers/kawai-2025-3rd/p05.png",
+        "/exam-answers/kawai-2025-3rd/p06.png",
+        "/exam-answers/kawai-2025-3rd/p07.png",
+        "/exam-answers/kawai-2025-3rd/p08.png",
+        "/exam-answers/kawai-2025-3rd/p09.png",
+        "/exam-answers/kawai-2025-3rd/p10.png",
+        "/exam-answers/kawai-2025-3rd/p11.png",
+        "/exam-answers/kawai-2025-3rd/p12.png"
+      ],
+      "answerStartPage": 33
     },
     {
       "id": "kawai-2025-pre",
@@ -684,7 +690,7 @@
         },
         "4": {
           "start": 36,
-          "end": 58,
+          "end": 43,
           "method": "text-detect"
         }
       },
@@ -737,25 +743,27 @@
           "/exam-pages/kawai-2025-pre/p40.png",
           "/exam-pages/kawai-2025-pre/p41.png",
           "/exam-pages/kawai-2025-pre/p42.png",
-          "/exam-pages/kawai-2025-pre/p43.png",
-          "/exam-pages/kawai-2025-pre/p44.png",
-          "/exam-pages/kawai-2025-pre/p45.png",
-          "/exam-pages/kawai-2025-pre/p46.png",
-          "/exam-pages/kawai-2025-pre/p47.png",
-          "/exam-pages/kawai-2025-pre/p48.png",
-          "/exam-pages/kawai-2025-pre/p49.png",
-          "/exam-pages/kawai-2025-pre/p50.png",
-          "/exam-pages/kawai-2025-pre/p51.png",
-          "/exam-pages/kawai-2025-pre/p52.png",
-          "/exam-pages/kawai-2025-pre/p53.png",
-          "/exam-pages/kawai-2025-pre/p54.png",
-          "/exam-pages/kawai-2025-pre/p55.png",
-          "/exam-pages/kawai-2025-pre/p56.png",
-          "/exam-pages/kawai-2025-pre/p57.png",
-          "/exam-pages/kawai-2025-pre/p58.png"
+          "/exam-pages/kawai-2025-pre/p43.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/kawai-2025-pre/p01.png",
+        "/exam-answers/kawai-2025-pre/p02.png",
+        "/exam-answers/kawai-2025-pre/p03.png",
+        "/exam-answers/kawai-2025-pre/p04.png",
+        "/exam-answers/kawai-2025-pre/p05.png",
+        "/exam-answers/kawai-2025-pre/p06.png",
+        "/exam-answers/kawai-2025-pre/p07.png",
+        "/exam-answers/kawai-2025-pre/p08.png",
+        "/exam-answers/kawai-2025-pre/p09.png",
+        "/exam-answers/kawai-2025-pre/p10.png",
+        "/exam-answers/kawai-2025-pre/p11.png",
+        "/exam-answers/kawai-2025-pre/p12.png",
+        "/exam-answers/kawai-2025-pre/p13.png",
+        "/exam-answers/kawai-2025-pre/p14.png",
+        "/exam-answers/kawai-2025-pre/p15.png"
+      ],
+      "answerStartPage": 44
     },
     {
       "id": "kawai-2026-2nd",
@@ -782,7 +790,7 @@
         },
         "4": {
           "start": 34,
-          "end": 63,
+          "end": 47,
           "method": "manual"
         }
       },
@@ -839,26 +847,28 @@
           "/exam-pages/kawai-2026-2nd/p44.png",
           "/exam-pages/kawai-2026-2nd/p45.png",
           "/exam-pages/kawai-2026-2nd/p46.png",
-          "/exam-pages/kawai-2026-2nd/p47.png",
-          "/exam-pages/kawai-2026-2nd/p48.png",
-          "/exam-pages/kawai-2026-2nd/p49.png",
-          "/exam-pages/kawai-2026-2nd/p50.png",
-          "/exam-pages/kawai-2026-2nd/p51.png",
-          "/exam-pages/kawai-2026-2nd/p52.png",
-          "/exam-pages/kawai-2026-2nd/p53.png",
-          "/exam-pages/kawai-2026-2nd/p54.png",
-          "/exam-pages/kawai-2026-2nd/p55.png",
-          "/exam-pages/kawai-2026-2nd/p56.png",
-          "/exam-pages/kawai-2026-2nd/p57.png",
-          "/exam-pages/kawai-2026-2nd/p58.png",
-          "/exam-pages/kawai-2026-2nd/p59.png",
-          "/exam-pages/kawai-2026-2nd/p60.png",
-          "/exam-pages/kawai-2026-2nd/p61.png",
-          "/exam-pages/kawai-2026-2nd/p62.png",
-          "/exam-pages/kawai-2026-2nd/p63.png"
+          "/exam-pages/kawai-2026-2nd/p47.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/kawai-2026-2nd/p01.png",
+        "/exam-answers/kawai-2026-2nd/p02.png",
+        "/exam-answers/kawai-2026-2nd/p03.png",
+        "/exam-answers/kawai-2026-2nd/p04.png",
+        "/exam-answers/kawai-2026-2nd/p05.png",
+        "/exam-answers/kawai-2026-2nd/p06.png",
+        "/exam-answers/kawai-2026-2nd/p07.png",
+        "/exam-answers/kawai-2026-2nd/p08.png",
+        "/exam-answers/kawai-2026-2nd/p09.png",
+        "/exam-answers/kawai-2026-2nd/p10.png",
+        "/exam-answers/kawai-2026-2nd/p11.png",
+        "/exam-answers/kawai-2026-2nd/p12.png",
+        "/exam-answers/kawai-2026-2nd/p13.png",
+        "/exam-answers/kawai-2026-2nd/p14.png",
+        "/exam-answers/kawai-2026-2nd/p15.png",
+        "/exam-answers/kawai-2026-2nd/p16.png"
+      ],
+      "answerStartPage": 48
     },
     {
       "id": "shinken-2025-06",
@@ -885,7 +895,7 @@
         },
         "4": {
           "start": 36,
-          "end": 54,
+          "end": 43,
           "method": "text-detect"
         }
       },
@@ -936,21 +946,23 @@
           "/exam-pages/shinken-2025-06/p40.png",
           "/exam-pages/shinken-2025-06/p41.png",
           "/exam-pages/shinken-2025-06/p42.png",
-          "/exam-pages/shinken-2025-06/p43.png",
-          "/exam-pages/shinken-2025-06/p44.png",
-          "/exam-pages/shinken-2025-06/p45.png",
-          "/exam-pages/shinken-2025-06/p46.png",
-          "/exam-pages/shinken-2025-06/p47.png",
-          "/exam-pages/shinken-2025-06/p48.png",
-          "/exam-pages/shinken-2025-06/p49.png",
-          "/exam-pages/shinken-2025-06/p50.png",
-          "/exam-pages/shinken-2025-06/p51.png",
-          "/exam-pages/shinken-2025-06/p52.png",
-          "/exam-pages/shinken-2025-06/p53.png",
-          "/exam-pages/shinken-2025-06/p54.png"
+          "/exam-pages/shinken-2025-06/p43.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/shinken-2025-06/p01.png",
+        "/exam-answers/shinken-2025-06/p02.png",
+        "/exam-answers/shinken-2025-06/p03.png",
+        "/exam-answers/shinken-2025-06/p04.png",
+        "/exam-answers/shinken-2025-06/p05.png",
+        "/exam-answers/shinken-2025-06/p06.png",
+        "/exam-answers/shinken-2025-06/p07.png",
+        "/exam-answers/shinken-2025-06/p08.png",
+        "/exam-answers/shinken-2025-06/p09.png",
+        "/exam-answers/shinken-2025-06/p10.png",
+        "/exam-answers/shinken-2025-06/p11.png"
+      ],
+      "answerStartPage": 44
     },
     {
       "id": "shinken-2025-09",
@@ -977,7 +989,7 @@
         },
         "4": {
           "start": 32,
-          "end": 52,
+          "end": 42,
           "method": "text-detect"
         }
       },
@@ -1027,20 +1039,22 @@
           "/exam-pages/shinken-2025-09/p39.png",
           "/exam-pages/shinken-2025-09/p40.png",
           "/exam-pages/shinken-2025-09/p41.png",
-          "/exam-pages/shinken-2025-09/p42.png",
-          "/exam-pages/shinken-2025-09/p43.png",
-          "/exam-pages/shinken-2025-09/p44.png",
-          "/exam-pages/shinken-2025-09/p45.png",
-          "/exam-pages/shinken-2025-09/p46.png",
-          "/exam-pages/shinken-2025-09/p47.png",
-          "/exam-pages/shinken-2025-09/p48.png",
-          "/exam-pages/shinken-2025-09/p49.png",
-          "/exam-pages/shinken-2025-09/p50.png",
-          "/exam-pages/shinken-2025-09/p51.png",
-          "/exam-pages/shinken-2025-09/p52.png"
+          "/exam-pages/shinken-2025-09/p42.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/shinken-2025-09/p01.png",
+        "/exam-answers/shinken-2025-09/p02.png",
+        "/exam-answers/shinken-2025-09/p03.png",
+        "/exam-answers/shinken-2025-09/p04.png",
+        "/exam-answers/shinken-2025-09/p05.png",
+        "/exam-answers/shinken-2025-09/p06.png",
+        "/exam-answers/shinken-2025-09/p07.png",
+        "/exam-answers/shinken-2025-09/p08.png",
+        "/exam-answers/shinken-2025-09/p09.png",
+        "/exam-answers/shinken-2025-09/p10.png"
+      ],
+      "answerStartPage": 43
     },
     {
       "id": "shinken-2025-11",
@@ -1067,7 +1081,7 @@
         },
         "4": {
           "start": 38,
-          "end": 60,
+          "end": 46,
           "method": "manual"
         }
       },
@@ -1121,24 +1135,26 @@
           "/exam-pages/shinken-2025-11/p43.png",
           "/exam-pages/shinken-2025-11/p44.png",
           "/exam-pages/shinken-2025-11/p45.png",
-          "/exam-pages/shinken-2025-11/p46.png",
-          "/exam-pages/shinken-2025-11/p47.png",
-          "/exam-pages/shinken-2025-11/p48.png",
-          "/exam-pages/shinken-2025-11/p49.png",
-          "/exam-pages/shinken-2025-11/p50.png",
-          "/exam-pages/shinken-2025-11/p51.png",
-          "/exam-pages/shinken-2025-11/p52.png",
-          "/exam-pages/shinken-2025-11/p53.png",
-          "/exam-pages/shinken-2025-11/p54.png",
-          "/exam-pages/shinken-2025-11/p55.png",
-          "/exam-pages/shinken-2025-11/p56.png",
-          "/exam-pages/shinken-2025-11/p57.png",
-          "/exam-pages/shinken-2025-11/p58.png",
-          "/exam-pages/shinken-2025-11/p59.png",
-          "/exam-pages/shinken-2025-11/p60.png"
+          "/exam-pages/shinken-2025-11/p46.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/shinken-2025-11/p01.png",
+        "/exam-answers/shinken-2025-11/p02.png",
+        "/exam-answers/shinken-2025-11/p03.png",
+        "/exam-answers/shinken-2025-11/p04.png",
+        "/exam-answers/shinken-2025-11/p05.png",
+        "/exam-answers/shinken-2025-11/p06.png",
+        "/exam-answers/shinken-2025-11/p07.png",
+        "/exam-answers/shinken-2025-11/p08.png",
+        "/exam-answers/shinken-2025-11/p09.png",
+        "/exam-answers/shinken-2025-11/p10.png",
+        "/exam-answers/shinken-2025-11/p11.png",
+        "/exam-answers/shinken-2025-11/p12.png",
+        "/exam-answers/shinken-2025-11/p13.png",
+        "/exam-answers/shinken-2025-11/p14.png"
+      ],
+      "answerStartPage": 47
     },
     {
       "id": "shinken-2026-06",
@@ -1165,7 +1181,7 @@
         },
         "4": {
           "start": 38,
-          "end": 57,
+          "end": 47,
           "method": "text-detect"
         }
       },
@@ -1220,20 +1236,22 @@
           "/exam-pages/shinken-2026-06/p44.png",
           "/exam-pages/shinken-2026-06/p45.png",
           "/exam-pages/shinken-2026-06/p46.png",
-          "/exam-pages/shinken-2026-06/p47.png",
-          "/exam-pages/shinken-2026-06/p48.png",
-          "/exam-pages/shinken-2026-06/p49.png",
-          "/exam-pages/shinken-2026-06/p50.png",
-          "/exam-pages/shinken-2026-06/p51.png",
-          "/exam-pages/shinken-2026-06/p52.png",
-          "/exam-pages/shinken-2026-06/p53.png",
-          "/exam-pages/shinken-2026-06/p54.png",
-          "/exam-pages/shinken-2026-06/p55.png",
-          "/exam-pages/shinken-2026-06/p56.png",
-          "/exam-pages/shinken-2026-06/p57.png"
+          "/exam-pages/shinken-2026-06/p47.png"
         ]
       },
-      "answerPages": []
+      "answerPages": [
+        "/exam-answers/shinken-2026-06/p01.png",
+        "/exam-answers/shinken-2026-06/p02.png",
+        "/exam-answers/shinken-2026-06/p03.png",
+        "/exam-answers/shinken-2026-06/p04.png",
+        "/exam-answers/shinken-2026-06/p05.png",
+        "/exam-answers/shinken-2026-06/p06.png",
+        "/exam-answers/shinken-2026-06/p07.png",
+        "/exam-answers/shinken-2026-06/p08.png",
+        "/exam-answers/shinken-2026-06/p09.png",
+        "/exam-answers/shinken-2026-06/p10.png"
+      ],
+      "answerStartPage": 48
     }
   ]
 }
