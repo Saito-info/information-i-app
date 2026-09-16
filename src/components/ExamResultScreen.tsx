@@ -38,7 +38,8 @@ export function ExamResultScreen({
           {results.interrupted ? "途中までの結果" : "お疲れさま！"}
         </h2>
         <p className="mt-1 text-sm text-slate-500">
-          {meta.sourceTitle} · 第{meta.fieldId}問
+          {meta.sourceTitle} ·{" "}
+          {meta.fieldId === "all" ? "すべて" : `第${meta.fieldId}問`}
         </p>
         <p className="mt-2 text-sm text-slate-600">
           {results.total}問中 {results.correct}問正解（正答率 {accuracy}%）
@@ -140,30 +141,37 @@ export function ExamResultScreen({
               <div className="h-[50vh]">
                 <PdfPageViewer
                   images={answerImages}
-                  title="解答・解説"
+                  title="解答・解説PDF"
                   className="h-full"
                 />
               </div>
             ) : (
-              <div className="max-h-[40vh] space-y-3 overflow-y-auto px-4 py-3">
-                <p className="text-xs text-slate-500">
-                  この試験には解答PDFがないため、解説テキストを表示します。
-                </p>
-                {reviewed.map((q) =>
-                  q.explanation ? (
-                    <div
-                      key={q.id}
-                      className="rounded-xl bg-slate-50 px-3 py-3 text-xs leading-relaxed text-slate-600"
-                    >
-                      <p className="mb-1 font-semibold text-slate-800">
-                        {q.label ?? q.id}
-                      </p>
-                      <p className="whitespace-pre-wrap">{q.explanation}</p>
-                    </div>
-                  ) : null,
-                )}
-              </div>
+              <p className="px-4 py-3 text-xs text-slate-500">
+                この試験には解答PDFがありません。下の解説テキストを参照してください。
+              </p>
             )}
+            <div className="max-h-[40vh] space-y-3 overflow-y-auto border-t border-slate-100 px-4 py-3">
+              <p className="text-xs font-semibold text-slate-600">解説テキスト</p>
+              {reviewed.map((q) =>
+                q.explanation ? (
+                  <div
+                    key={q.id}
+                    className="rounded-xl bg-slate-50 px-3 py-3 text-xs leading-relaxed text-slate-600"
+                  >
+                    <p className="mb-1 font-semibold text-slate-800">
+                      {q.label ?? q.id}
+                      {q.markSymbol ? ` [${q.markSymbol}]` : ""}
+                    </p>
+                    <p className="whitespace-pre-wrap">{q.explanation}</p>
+                  </div>
+                ) : null,
+              )}
+              {!reviewed.some((q) => q.explanation) ? (
+                <p className="text-xs text-slate-400">
+                  表示できる解説テキストがありません
+                </p>
+              ) : null}
+            </div>
           </div>
         ) : null}
       </section>

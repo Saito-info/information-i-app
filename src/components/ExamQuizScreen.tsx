@@ -124,7 +124,10 @@ export function ExamQuizScreen({
             {meta.sourceTitle}
           </p>
           <p className="text-xs font-semibold text-slate-700">
-            第{meta.fieldId}問 · {index + 1}/{questions.length}
+            {meta.fieldId === "all"
+              ? `${current.sectionTitle} · `
+              : `第${meta.fieldId}問 · `}
+            {index + 1}/{questions.length}
             <span className="ml-1 font-normal text-slate-400">
               （解答済 {answeredCount}）
             </span>
@@ -141,8 +144,9 @@ export function ExamQuizScreen({
 
       <div className="h-[42vh] shrink-0 border-b border-slate-200">
         <PdfPageViewer
+          key={current.fieldId + (pageImages[0] ?? "")}
           images={pageImages}
-          title={`問題PDF（第${meta.fieldId}問）`}
+          title={`問題PDF（${current.sectionTitle}）`}
           className="h-full"
         />
       </div>

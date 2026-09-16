@@ -35,6 +35,7 @@ import type {
   ExamResults,
   ExamSessionMeta,
   ExamSettings,
+  ExamSourceInfo,
   HistoryEntry,
   QuizResults,
   ReviewSettings,
@@ -48,13 +49,13 @@ type Phase = "setup" | "quiz" | "result";
 type VocabularyAppProps = {
   terms: TermItem[];
   categories: string[];
-  examSourceCount: number;
+  examSources: ExamSourceInfo[];
 };
 
 export function VocabularyApp({
   terms,
   categories,
-  examSourceCount,
+  examSources,
 }: VocabularyAppProps) {
   const [tab, setTab] = useState<AppTab>("study");
   const [phase, setPhase] = useState<Phase>("setup");
@@ -85,7 +86,8 @@ export function VocabularyApp({
   });
 
   const [examSettings, setExamSettings] = useState<ExamSettings>({
-    fieldId: "1",
+    sourceId: examSources[0]?.id ?? "",
+    fieldId: "all",
   });
 
   useEffect(() => {
@@ -288,7 +290,7 @@ export function VocabularyApp({
 
         {phase === "setup" && tab === "exam" && (
           <ExamSetup
-            sourceCount={examSourceCount}
+            sources={examSources}
             settings={examSettings}
             onChange={setExamSettings}
             onStart={startExam}

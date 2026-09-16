@@ -15,9 +15,11 @@ import shinken2026_06 from "@/data/exams/shinken_2026_06_info1.json";
 import shisaku2025 from "@/data/exams/shisaku_2025_info1.json";
 import type {
   ExamFieldId,
+  ExamFieldSelection,
   ExamQuestion,
   ExamSessionMeta,
   ExamSettings,
+  ExamSourceInfo,
 } from "@/lib/types";
 
 const CIRCLED = "⓪①②③④⑤⑥⑦⑧⑨";
@@ -292,6 +294,14 @@ export function getExamSourceCount(): number {
   return SOURCES.length;
 }
 
+export function getExamSources(): ExamSourceInfo[] {
+  return SOURCES.map((source) => ({
+    id: source.id,
+    title: source.title,
+    count: allQuestions.filter((q) => q.sourceId === source.id).length,
+  }));
+}
+
 export function getAllExamQuestions(): ExamQuestion[] {
   return allQuestions;
 }
@@ -306,38 +316,31 @@ export type ExamSession = {
   meta: ExamSessionMeta;
 };
 
-function pickRandom<T>(items: T[]): T | null {
-  if (!items.length) return null;
-  return items[Math.floor(Math.random() * items.length)] ?? null;
-}
-
 export function buildExamSession(settings: ExamSettings): ExamSession | null {
-  const fieldId = settings.fieldId;
-  const sourceIds = [
-    ...new Set(
-      allQuestions.filter((q) => q.fieldId === fieldId).map((q) => q.sourceId),
-    ),
-  ];
-  const sourceId = pickRandom(sourceIds);
-  if (!sourceId) return null;
+  const source = SOURCES.find((s) => s.id === settings.sourceId);
+  if (!source) return null;
 
-  const source = SOURCES.find((s) => s.id === sourceId);
-  const questions = allQuestions.filter(
-    (q) => q.sourceId === sourceId && q.fieldId === fieldId,
-  );
-  if (!questions.length || !source) return null;
+  const questions =
+    settings.fieldId === "all"
+      ? allQuestions.filter((q) => q.sourceId === settings.sourceId)
+      : allQuestions.filter(
+          (q) =>
+            q.sourceId === settings.sourceId && q.fieldId === settings.fieldId,
+        );
+
+  if (!questions.length) return null;
 
   return {
     questions,
     meta: {
-      sourceId,
+      sourceId: source.id,
       sourceTitle: source.title,
-      fieldId,
+      fieldId: settings.fieldId,
       answerPageImages: source.answerPages,
     },
   };
 }
 
-export function getFieldLabel(fieldId: ExamFieldId): string {
-  return `第${fieldId}問`;
+export function getFieldLabel(fieldId: ExamFieldSelection): string {
+  return fieldId === "all" ? "すべて" : `第${fieldId}問`;
 }

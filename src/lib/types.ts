@@ -36,6 +36,9 @@ export type QuizResults = {
 /** 共通テストの大問（第1〜4問） */
 export type ExamFieldId = "1" | "2" | "3" | "4";
 
+/** 出題範囲: 大問1つ or すべて */
+export type ExamFieldSelection = ExamFieldId | "all";
+
 export type ExamQuestion = {
   id: string;
   sourceId: string;
@@ -53,14 +56,23 @@ export type ExamQuestion = {
   answerPageImages: string[];
 };
 
+export type ExamSourceInfo = {
+  id: string;
+  title: string;
+  count: number;
+};
+
 export type ExamSettings = {
-  fieldId: ExamFieldId;
+  /** 受けるテスト（問題集） */
+  sourceId: string;
+  /** すべて / 第1〜4問 */
+  fieldId: ExamFieldSelection;
 };
 
 export type ExamSessionMeta = {
   sourceId: string;
   sourceTitle: string;
-  fieldId: ExamFieldId;
+  fieldId: ExamFieldSelection;
   answerPageImages: string[];
 };
 
@@ -96,7 +108,7 @@ export type ExamHistoryEntry = {
   title: string;
   sourceId: string;
   sourceTitle: string;
-  fieldId: ExamFieldId;
+  fieldId: ExamFieldSelection;
   correct: number;
   incorrect: number;
   total: number;
