@@ -230,5 +230,11 @@ export function ExamQuizScreen({
 }
 
 function markDigit(n: number): string {
-  return ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"][n] ?? String(n);
+  if (n >= 0 && n <= 10) {
+    return "⓪①②③④⑤⑥⑦⑧⑨⑩"[n] ?? String(n);
+  }
+  if (n >= 11 && n <= 15) {
+    return "abcde"[n - 11] ?? String(n);
+  }
+  return String(n);
 }

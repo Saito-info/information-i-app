@@ -508,7 +508,7 @@
         },
         "4": {
           "start": 32,
-          "end": 39,
+          "end": 40,
           "method": "manual"
         }
       },
@@ -557,7 +557,8 @@
           "/exam-pages/kawai-2025-2nd/p36.png",
           "/exam-pages/kawai-2025-2nd/p37.png",
           "/exam-pages/kawai-2025-2nd/p38.png",
-          "/exam-pages/kawai-2025-2nd/p39.png"
+          "/exam-pages/kawai-2025-2nd/p39.png",
+          "/exam-pages/kawai-2025-2nd/p40.png"
         ]
       },
       "answerPages": [
@@ -574,10 +575,9 @@
         "/exam-answers/kawai-2025-2nd/p11.png",
         "/exam-answers/kawai-2025-2nd/p12.png",
         "/exam-answers/kawai-2025-2nd/p13.png",
-        "/exam-answers/kawai-2025-2nd/p14.png",
-        "/exam-answers/kawai-2025-2nd/p15.png"
+        "/exam-answers/kawai-2025-2nd/p14.png"
       ],
-      "answerStartPage": 40
+      "answerStartPage": 41
     },
     {
       "id": "kawai-2025-3rd",

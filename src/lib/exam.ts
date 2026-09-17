@@ -23,6 +23,8 @@ import type {
 } from "@/lib/types";
 
 const CIRCLED = "⓪①②③④⑤⑥⑦⑧⑨⑩";
+/** a–e（共通テスト等の英字解答欄）→ 11–15 */
+const LETTER_ANSWERS = "abcde";
 
 type AnyRecord = Record<string, unknown>;
 
@@ -100,6 +102,8 @@ function parseIndex(raw: unknown): number | null {
   if (raw == null) return null;
   const s = String(raw).trim();
   if (!s) return null;
+  const letter = LETTER_ANSWERS.indexOf(s.toLowerCase());
+  if (letter >= 0) return 11 + letter;
   for (const ch of s) {
     const idx = CIRCLED.indexOf(ch);
     if (idx >= 0) return idx;
@@ -140,9 +144,11 @@ function normalizeOptions(raw: unknown): string[] | null {
 }
 
 function markChoices(max = 9): string[] {
-  return Array.from({ length: max + 1 }, (_, i) =>
-    normalizeChoiceLabel(String(i), i),
-  );
+  return Array.from({ length: max + 1 }, (_, i) => {
+    if (i <= 10) return normalizeChoiceLabel(String(i), i);
+    const letter = LETTER_ANSWERS[i - 11];
+    return letter ? letter : String(i);
+  });
 }
 
 function splitMarkSymbols(markSymbol?: string): string[] {
@@ -188,10 +194,10 @@ function parseBlankAnswers(
   if (typeof raw !== "string") return [];
   const s = raw.trim();
 
-  // "ア: 3, イ: 1" / "ア：③"
+  // "ア: 3, イ: 1" / "ア：③" / "サ: c"
   const pairs = [
     ...s.matchAll(
-      /([ァ-ヶーA-Za-z]+)\s*[:：]\s*([0-9⓪①②③④⑤⑥⑦⑧⑨⑩]+)/g,
+      /([ァ-ヶーA-Za-z]+)\s*[:：]\s*([0-9⓪①②③④⑤⑥⑦⑧⑨⑩a-eA-E]+)/g,
     ),
   ];
   if (pairs.length) {
