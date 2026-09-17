@@ -156,6 +156,7 @@ export function VocabularyApp({
         sourceTitle: "間違えた問題の復習",
         fieldId: qs[0]!.fieldId,
         answerPageImages: qs[0]!.answerPageImages,
+        explanationStartIndex: qs[0]!.explanationStartIndex ?? null,
       });
       setExamKind("review-exam");
       setExamResults(null);

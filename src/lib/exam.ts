@@ -34,6 +34,7 @@ type CatalogSource = {
   json: string;
   pages: Record<string, string[]>;
   answerPages: string[];
+  explanationStartIndex?: number | null;
 };
 
 type SourceBundle = {
@@ -42,6 +43,7 @@ type SourceBundle = {
   data: unknown;
   pages: Record<string, string[]>;
   answerPages: string[];
+  explanationStartIndex: number | null;
 };
 
 const RAW_BY_JSON: Record<string, unknown> = {
@@ -69,6 +71,8 @@ const SOURCES: SourceBundle[] = catalogSources.map((c) => ({
   data: RAW_BY_JSON[c.json],
   pages: c.pages ?? {},
   answerPages: c.answerPages ?? [],
+  explanationStartIndex:
+    typeof c.explanationStartIndex === "number" ? c.explanationStartIndex : null,
 }));
 
 function asRecord(v: unknown): AnyRecord | null {
@@ -248,6 +252,7 @@ function flattenSource(source: SourceBundle): ExamQuestion[] {
     const sectionTitle = `第${fieldId}問`;
     const pageImages = source.pages[fieldId] ?? [];
     const answerPageImages = source.answerPages;
+    const explanationStartIndex = source.explanationStartIndex;
 
     for (const [qi, subRaw] of asArray(section.sub_questions).entries()) {
       const sub = asRecord(subRaw);
@@ -309,6 +314,7 @@ function flattenSource(source: SourceBundle): ExamQuestion[] {
             explanation,
             pageImages,
             answerPageImages,
+            explanationStartIndex,
           });
         }
         continue;
@@ -336,6 +342,7 @@ function flattenSource(source: SourceBundle): ExamQuestion[] {
         explanation,
         pageImages,
         answerPageImages,
+        explanationStartIndex,
       });
     }
   }
@@ -392,6 +399,7 @@ export function buildExamSession(settings: ExamSettings): ExamSession | null {
       sourceTitle: source.title,
       fieldId: settings.fieldId,
       answerPageImages: source.answerPages,
+      explanationStartIndex: source.explanationStartIndex,
     },
   };
 }

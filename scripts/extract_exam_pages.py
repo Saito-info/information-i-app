@@ -298,16 +298,31 @@ def main() -> None:
         }
 
         answer_urls: list[str] = []
+        explanation_start_index = None
+        expl_pat = ("【解説】", "設問解説", "出題のねらい", "●設問解説")
+
         if item["answerPdf"]:
             apdf = ROOT / item["answerPdf"]
             if apdf.exists() and apdf.stat().st_size > 1000:
                 answer_urls = render_pdf(apdf, OUT_A / item["id"], scale=1.2)
+                adoc = pymupdf.open(apdf)
+                for i in range(len(adoc)):
+                    c = compact_text(adoc[i].get_text("text") or "")
+                    if any(p in c for p in expl_pat):
+                        explanation_start_index = i
+                        break
+                adoc.close()
             else:
                 print("  skip answer pdf", item["answerPdf"])
         elif answer_start:
             answer_urls = render_pdf_slice(
                 doc, answer_start, OUT_A / item["id"], scale=1.2
             )
+            for i in range(answer_start - 1, len(doc)):
+                c = compact_text(doc[i].get_text("text") or "")
+                if any(p in c for p in expl_pat):
+                    explanation_start_index = i - (answer_start - 1)
+                    break
 
         doc.close()
 
@@ -322,7 +337,9 @@ def main() -> None:
             "pages": pages,
             "answerPages": answer_urls,
             "answerStartPage": answer_start,
+            "explanationStartIndex": explanation_start_index,
         }
+
         catalog_out.append(entry)
         print(
             " ",
@@ -335,6 +352,8 @@ def main() -> None:
             len(answer_urls),
             "answerStart",
             answer_start,
+            "explIndex",
+            explanation_start_index,
         )
 
     META_OUT.write_text(

@@ -1,21 +1,32 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type PdfPageViewerProps = {
   images: string[];
   title?: string;
   className?: string;
+  /** 0-based initial page */
+  initialPage?: number;
 };
 
 export function PdfPageViewer({
   images,
   title,
   className = "",
+  initialPage = 0,
 }: PdfPageViewerProps) {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(() =>
+    Math.min(Math.max(0, initialPage), Math.max(0, images.length - 1)),
+  );
   const [zoom, setZoom] = useState(1);
   const scrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setPage(Math.min(Math.max(0, initialPage), Math.max(0, images.length - 1)));
+    setZoom(1);
+    scrollerRef.current?.scrollTo({ top: 0 });
+  }, [initialPage, images]);
 
   if (!images.length) {
     return (
@@ -30,7 +41,9 @@ export function PdfPageViewer({
   const current = images[Math.min(page, images.length - 1)]!;
 
   function zoomBy(delta: number) {
-    setZoom((z) => Math.min(3, Math.max(0.6, Math.round((z + delta) * 10) / 10)));
+    setZoom((z) =>
+      Math.min(3, Math.max(0.6, Math.round((z + delta) * 10) / 10)),
+    );
   }
 
   return (
@@ -82,7 +95,7 @@ export function PdfPageViewer({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={current}
-            alt={`問題ページ ${page + 1}`}
+            alt={`PDFページ ${page + 1}`}
             className="w-full rounded-md bg-white shadow-sm"
             draggable={false}
           />

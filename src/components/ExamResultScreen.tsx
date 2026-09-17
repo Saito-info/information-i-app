@@ -2,7 +2,7 @@
 
 import { PdfPageViewer } from "@/components/PdfPageViewer";
 import type { ExamQuestion, ExamResults, ExamSessionMeta } from "@/lib/types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type ExamResultScreenProps = {
   results: ExamResults;
@@ -11,13 +11,14 @@ type ExamResultScreenProps = {
   onBack: () => void;
 };
 
+type PdfMode = "answer" | "explanation";
+
 export function ExamResultScreen({
   results,
   meta,
   questions,
   onBack,
 }: ExamResultScreenProps) {
-  const [showPdf, setShowPdf] = useState(true);
   const accuracy =
     results.total > 0
       ? Math.round((results.correct / results.total) * 100)
@@ -28,7 +29,39 @@ export function ExamResultScreen({
       ? meta.answerPageImages
       : (questions[0]?.answerPageImages ?? []);
 
+  const explanationStartIndex = useMemo(() => {
+    if (typeof meta.explanationStartIndex === "number") {
+      return meta.explanationStartIndex;
+    }
+    const fromQ = questions[0]?.explanationStartIndex;
+    return typeof fromQ === "number" ? fromQ : null;
+  }, [meta.explanationStartIndex, questions]);
+
+  const hasExplanationPdf =
+    answerImages.length > 0 &&
+    explanationStartIndex != null &&
+    explanationStartIndex < answerImages.length &&
+    (explanationStartIndex > 0 || answerImages.length > 1);
+
+  const [pdfMode, setPdfMode] = useState<PdfMode>(
+    hasExplanationPdf ? "explanation" : "answer",
+  );
+  const [showPdf, setShowPdf] = useState(true);
+
+  const viewerInitialPage =
+    pdfMode === "explanation" && explanationStartIndex != null
+      ? explanationStartIndex
+      : 0;
+
   const reviewed = questions.filter((q) => results.answers[q.id] != null);
+
+  // プレースホルダ解説（「PDFを参照」だけ）は一覧に出さない
+  const realExplanations = reviewed.filter(
+    (q) =>
+      q.explanation &&
+      !q.explanation.includes("解答・解説PDF") &&
+      q.explanation.trim().length > 20,
+  );
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-col gap-4 px-4 py-4 pb-8">
@@ -94,7 +127,9 @@ export function ExamResultScreen({
                   <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs">
                     <span className="text-slate-600">
                       あなたの解答:{" "}
-                      <strong className={ok ? "text-emerald-700" : "text-rose-700"}>
+                      <strong
+                        className={ok ? "text-emerald-700" : "text-rose-700"}
+                      >
                         {yours != null ? markDigit(yours) : "—"}
                       </strong>
                     </span>
@@ -105,11 +140,6 @@ export function ExamResultScreen({
                       </strong>
                     </span>
                   </div>
-                  {!ok && q.explanation ? (
-                    <p className="mt-2 whitespace-pre-wrap text-[11px] leading-relaxed text-slate-500">
-                      {q.explanation}
-                    </p>
-                  ) : null}
                 </div>
               </li>
             );
@@ -138,22 +168,67 @@ export function ExamResultScreen({
         {showPdf ? (
           <div className="border-t border-slate-100">
             {answerImages.length ? (
-              <div className="h-[50vh]">
-                <PdfPageViewer
-                  images={answerImages}
-                  title="解答・解説PDF"
-                  className="h-full"
-                />
-              </div>
+              <>
+                <div className="flex gap-2 px-3 pt-3">
+                  <button
+                    type="button"
+                    onClick={() => setPdfMode("answer")}
+                    className={`flex-1 rounded-xl py-2 text-xs font-semibold transition ${
+                      pdfMode === "answer"
+                        ? "bg-blue-600 text-white"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
+                  >
+                    正答表
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPdfMode("explanation")}
+                    disabled={!hasExplanationPdf}
+                    className={`flex-1 rounded-xl py-2 text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                      pdfMode === "explanation"
+                        ? "bg-blue-600 text-white"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
+                  >
+                    解説
+                    {hasExplanationPdf && explanationStartIndex != null
+                      ? `（${explanationStartIndex + 1}ページ〜）`
+                      : ""}
+                  </button>
+                </div>
+                {!hasExplanationPdf ? (
+                  <p className="px-4 pt-2 text-[11px] leading-relaxed text-amber-700">
+                    この試験の収録PDFには正答表のみがあり、詳細な解説ページは含まれていません（共通テストの公式解答など）。
+                  </p>
+                ) : (
+                  <p className="px-4 pt-2 text-[11px] leading-relaxed text-slate-500">
+                    「解説」を選ぶと解説ページへ移動します。前後のページは下のボタンで切り替えられます。
+                  </p>
+                )}
+                <div className="mt-2 h-[62vh]">
+                  <PdfPageViewer
+                    key={`${pdfMode}-${viewerInitialPage}`}
+                    images={answerImages}
+                    title={
+                      pdfMode === "explanation" ? "解説PDF" : "正答表PDF"
+                    }
+                    initialPage={viewerInitialPage}
+                    className="h-full"
+                  />
+                </div>
+              </>
             ) : (
               <p className="px-4 py-3 text-xs text-slate-500">
-                この試験には解答PDFがありません。下の解説テキストを参照してください。
+                この試験には解答・解説PDFがありません。
               </p>
             )}
-            <div className="max-h-[40vh] space-y-3 overflow-y-auto border-t border-slate-100 px-4 py-3">
-              <p className="text-xs font-semibold text-slate-600">解説テキスト</p>
-              {reviewed.map((q) =>
-                q.explanation ? (
+            {realExplanations.length > 0 ? (
+              <div className="max-h-[30vh] space-y-3 overflow-y-auto border-t border-slate-100 px-4 py-3">
+                <p className="text-xs font-semibold text-slate-600">
+                  補足テキスト
+                </p>
+                {realExplanations.map((q) => (
                   <div
                     key={q.id}
                     className="rounded-xl bg-slate-50 px-3 py-3 text-xs leading-relaxed text-slate-600"
@@ -164,14 +239,9 @@ export function ExamResultScreen({
                     </p>
                     <p className="whitespace-pre-wrap">{q.explanation}</p>
                   </div>
-                ) : null,
-              )}
-              {!reviewed.some((q) => q.explanation) ? (
-                <p className="text-xs text-slate-400">
-                  表示できる解説テキストがありません
-                </p>
-              ) : null}
-            </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         ) : null}
       </section>

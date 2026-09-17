@@ -54,6 +54,7 @@ export type ExamQuestion = {
   explanation?: string;
   pageImages: string[];
   answerPageImages: string[];
+  explanationStartIndex?: number | null;
 };
 
 export type ExamSourceInfo = {
@@ -74,6 +75,8 @@ export type ExamSessionMeta = {
   sourceTitle: string;
   fieldId: ExamFieldSelection;
   answerPageImages: string[];
+  /** answerPageImages 内で解説が始まるインデックス（無い場合 null） */
+  explanationStartIndex: number | null;
 };
 
 export type ExamResults = {

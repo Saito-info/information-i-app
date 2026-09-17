@@ -73,7 +73,8 @@
       },
       "answerPages": [
         "/exam-answers/common-2025-hon/p01.png"
-      ]
+      ],
+      "explanationStartIndex": null
     },
     {
       "id": "common-2025-tsui",
@@ -149,7 +150,8 @@
       },
       "answerPages": [
         "/exam-answers/common-2025-tsui/p01.png"
-      ]
+      ],
+      "explanationStartIndex": null
     },
     {
       "id": "common-2026-hon",
@@ -226,7 +228,8 @@
       },
       "answerPages": [
         "/exam-answers/common-2026-hon/p01.png"
-      ]
+      ],
+      "explanationStartIndex": null
     },
     {
       "id": "common-2026-tsui",
@@ -305,7 +308,8 @@
       },
       "answerPages": [
         "/exam-answers/common-2026-tsui/p01.png"
-      ]
+      ],
+      "explanationStartIndex": null
     },
     {
       "id": "shisaku-2025",
@@ -382,7 +386,8 @@
       },
       "answerPages": [
         "/exam-answers/shisaku-2025/p01.png"
-      ]
+      ],
+      "explanationStartIndex": null
     },
     {
       "id": "kawai-2025-1st",
@@ -481,7 +486,8 @@
         "/exam-answers/kawai-2025-1st/p14.png",
         "/exam-answers/kawai-2025-1st/p15.png"
       ],
-      "answerStartPage": 43
+      "answerStartPage": 43,
+      "explanationStartIndex": 1
     },
     {
       "id": "kawai-2025-2nd",
@@ -577,7 +583,8 @@
         "/exam-answers/kawai-2025-2nd/p13.png",
         "/exam-answers/kawai-2025-2nd/p14.png"
       ],
-      "answerStartPage": 41
+      "answerStartPage": 41,
+      "explanationStartIndex": 1
     },
     {
       "id": "kawai-2025-3rd",
@@ -663,7 +670,8 @@
         "/exam-answers/kawai-2025-3rd/p11.png",
         "/exam-answers/kawai-2025-3rd/p12.png"
       ],
-      "answerStartPage": 33
+      "answerStartPage": 33,
+      "explanationStartIndex": 1
     },
     {
       "id": "kawai-2025-pre",
@@ -763,7 +771,8 @@
         "/exam-answers/kawai-2025-pre/p14.png",
         "/exam-answers/kawai-2025-pre/p15.png"
       ],
-      "answerStartPage": 44
+      "answerStartPage": 44,
+      "explanationStartIndex": 1
     },
     {
       "id": "kawai-2026-2nd",
@@ -868,7 +877,8 @@
         "/exam-answers/kawai-2026-2nd/p15.png",
         "/exam-answers/kawai-2026-2nd/p16.png"
       ],
-      "answerStartPage": 48
+      "answerStartPage": 48,
+      "explanationStartIndex": 1
     },
     {
       "id": "shinken-2025-06",
@@ -962,7 +972,8 @@
         "/exam-answers/shinken-2025-06/p10.png",
         "/exam-answers/shinken-2025-06/p11.png"
       ],
-      "answerStartPage": 44
+      "answerStartPage": 44,
+      "explanationStartIndex": 0
     },
     {
       "id": "shinken-2025-09",
@@ -1054,7 +1065,8 @@
         "/exam-answers/shinken-2025-09/p09.png",
         "/exam-answers/shinken-2025-09/p10.png"
       ],
-      "answerStartPage": 43
+      "answerStartPage": 43,
+      "explanationStartIndex": 0
     },
     {
       "id": "shinken-2025-11",
@@ -1154,7 +1166,8 @@
         "/exam-answers/shinken-2025-11/p13.png",
         "/exam-answers/shinken-2025-11/p14.png"
       ],
-      "answerStartPage": 47
+      "answerStartPage": 47,
+      "explanationStartIndex": 1
     },
     {
       "id": "shinken-2026-06",
@@ -1251,7 +1264,8 @@
         "/exam-answers/shinken-2026-06/p09.png",
         "/exam-answers/shinken-2026-06/p10.png"
       ],
-      "answerStartPage": 48
+      "answerStartPage": 48,
+      "explanationStartIndex": 1
     }
   ]
 }
