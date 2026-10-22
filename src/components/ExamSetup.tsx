@@ -11,6 +11,7 @@ type ExamSetupProps = {
   settings: ExamSettings;
   onChange: (settings: ExamSettings) => void;
   onStart: () => void;
+  onBrowseAnswers: () => void;
 };
 
 const FIELDS: { id: ExamFieldSelection; title: string; hint: string }[] = [
@@ -26,6 +27,7 @@ export function ExamSetup({
   settings,
   onChange,
   onStart,
+  onBrowseAnswers,
 }: ExamSetupProps) {
   const selectedSource = sources.find((s) => s.id === settings.sourceId);
   const canStart = Boolean(settings.sourceId && selectedSource);
@@ -104,20 +106,35 @@ export function ExamSetup({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onStart}
-        disabled={!canStart}
-        className="w-full rounded-2xl bg-blue-600 py-3.5 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
-      >
-        {selectedSource
-          ? `スタート（${selectedSource.title} / ${
-              settings.fieldId === "all"
-                ? "すべて"
-                : `第${settings.fieldId}問`
-            }）`
-          : "テストを選択してください"}
-      </button>
+      <div className="space-y-2 pb-2">
+        <button
+          type="button"
+          onClick={onStart}
+          disabled={!canStart}
+          className="w-full rounded-2xl bg-blue-600 py-3.5 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
+        >
+          {selectedSource
+            ? `スタート（${selectedSource.title} / ${
+                settings.fieldId === "all"
+                  ? "すべて"
+                  : `第${settings.fieldId}問`
+              }）`
+            : "テストを選択してください"}
+        </button>
+        <button
+          type="button"
+          onClick={onBrowseAnswers}
+          disabled={!canStart}
+          className="w-full rounded-2xl bg-white py-3.5 text-base font-bold text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300 disabled:ring-slate-100"
+        >
+          {selectedSource
+            ? `解答・解説を確認（${selectedSource.title}）`
+            : "解答・解説を確認"}
+        </button>
+        <p className="text-center text-xs text-slate-400">
+          問題を解かずに正答表と解説PDFだけを見たいとき
+        </p>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,675 @@
+{
+  "metadata": {
+    "title": "徹底演習 第1回",
+    "subject": "情報Ⅰ",
+    "total_score": 100,
+    "description": "解答記号ごとに分割したマーク採点用データ"
+  },
+  "questions": [
+    {
+      "section_id": "第1問",
+      "section_title": "第1問",
+      "section_score": 20,
+      "sub_questions": [
+        {
+          "question_id": "徹底演習 第1回 第1問 問1 [ア]",
+          "label": "問1",
+          "mark_symbol": "ア",
+          "score": 2,
+          "context": "徹底演習 第1回 第1問 問1（解答記号 ア）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問1（ア）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問1 [イ]",
+          "label": "問1",
+          "mark_symbol": "イ",
+          "score": 2,
+          "context": "徹底演習 第1回 第1問 問1（解答記号 イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問1（イ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問2 [ウ]",
+          "label": "問2",
+          "mark_symbol": "ウ",
+          "score": 2,
+          "context": "徹底演習 第1回 第1問 問2（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問2（ウ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問2 [エ]",
+          "label": "問2",
+          "mark_symbol": "エ",
+          "score": 3,
+          "context": "徹底演習 第1回 第1問 問2（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問2（エ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問3 [オ]",
+          "label": "問3",
+          "mark_symbol": "オ",
+          "score": 1,
+          "context": "徹底演習 第1回 第1問 問3（解答記号 オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問3（オ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問3 [カ]",
+          "label": "問3",
+          "mark_symbol": "カ",
+          "score": 1,
+          "context": "徹底演習 第1回 第1問 問3（解答記号 カ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問3（カ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問3 [キ・ク]",
+          "label": "問3",
+          "mark_symbol": "キ・ク",
+          "score": 4,
+          "context": "徹底演習 第1回 第1問 問3（解答記号 キ・ク）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "キ: 0, ク: 4",
+            "correct_index": "キ: 0, ク: 4"
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問3（キ・ク）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問4 [ケ]",
+          "label": "問4",
+          "mark_symbol": "ケ",
+          "score": 2,
+          "context": "徹底演習 第1回 第1問 問4（解答記号 ケ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問4（ケ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第1問 問4 [コ]",
+          "label": "問4",
+          "mark_symbol": "コ",
+          "score": 3,
+          "context": "徹底演習 第1回 第1問 問4（解答記号 コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問4（コ）を参照。"
+        }
+      ]
+    },
+    {
+      "section_id": "第2問",
+      "section_title": "第2問",
+      "section_score": 30,
+      "sub_questions": [
+        {
+          "question_id": "徹底演習 第1回 第2問 問1A [ア]",
+          "label": "問1A",
+          "mark_symbol": "ア",
+          "score": 2,
+          "context": "徹底演習 第1回 第2問 問1A（解答記号 ア）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問1A（ア）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問2A [イ]",
+          "label": "問2A",
+          "mark_symbol": "イ",
+          "score": 3,
+          "context": "徹底演習 第1回 第2問 問2A（解答記号 イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問2A（イ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問3A [ウ・エ・オ]",
+          "label": "問3A",
+          "mark_symbol": "ウ・エ・オ",
+          "score": 4,
+          "context": "徹底演習 第1回 第2問 問3A（解答記号 ウ・エ・オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ウ: 8, エ: 1, オ: 0",
+            "correct_index": "ウ: 8, エ: 1, オ: 0"
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問3A（ウ・エ・オ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問4A [カ]",
+          "label": "問4A",
+          "mark_symbol": "カ",
+          "score": 3,
+          "context": "徹底演習 第1回 第2問 問4A（解答記号 カ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問4A（カ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問5A [キ]",
+          "label": "問5A",
+          "mark_symbol": "キ",
+          "score": 3,
+          "context": "徹底演習 第1回 第2問 問5A（解答記号 キ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問5A（キ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問1B [ク]",
+          "label": "問1B",
+          "mark_symbol": "ク",
+          "score": 2,
+          "context": "徹底演習 第1回 第2問 問1B（解答記号 ク）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問1B（ク）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問2B [ケ・コ]",
+          "label": "問2B",
+          "mark_symbol": "ケ・コ",
+          "score": 2,
+          "context": "徹底演習 第1回 第2問 問2B（解答記号 ケ・コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ケ: 2, コ: 0",
+            "correct_index": "ケ: 2, コ: 0"
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問2B（ケ・コ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問2B [サ]",
+          "label": "問2B",
+          "mark_symbol": "サ",
+          "score": 2,
+          "context": "徹底演習 第1回 第2問 問2B（解答記号 サ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問2B（サ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問3B [シ]",
+          "label": "問3B",
+          "mark_symbol": "シ",
+          "score": 3,
+          "context": "徹底演習 第1回 第2問 問3B（解答記号 シ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "5",
+            "correct_index": 5
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問3B（シ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問4B [ス]",
+          "label": "問4B",
+          "mark_symbol": "ス",
+          "score": 3,
+          "context": "徹底演習 第1回 第2問 問4B（解答記号 ス）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問4B（ス）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第2問 問5B [セ]",
+          "label": "問5B",
+          "mark_symbol": "セ",
+          "score": 3,
+          "context": "徹底演習 第1回 第2問 問5B（解答記号 セ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問5B（セ）を参照。"
+        }
+      ]
+    },
+    {
+      "section_id": "第3問",
+      "section_title": "第3問",
+      "section_score": 25,
+      "sub_questions": [
+        {
+          "question_id": "徹底演習 第1回 第3問 問1 [ア・イ]",
+          "label": "問1",
+          "mark_symbol": "ア・イ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問1（解答記号 ア・イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ア: 0, イ: 1",
+            "correct_index": "ア: 0, イ: 1"
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（ア・イ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問1 [ウ]",
+          "label": "問1",
+          "mark_symbol": "ウ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問1（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（ウ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問1 [エ]",
+          "label": "問1",
+          "mark_symbol": "エ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問1（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "8",
+            "correct_index": 8
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（エ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問1 [オ]",
+          "label": "問1",
+          "mark_symbol": "オ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問1（解答記号 オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "c",
+            "correct_index": 13
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（オ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問2 [カ・キ]",
+          "label": "問2",
+          "mark_symbol": "カ・キ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問2（解答記号 カ・キ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "カ: 3, キ: 4",
+            "correct_index": "カ: 3, キ: 4"
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（カ・キ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問3 [ク・ケ]",
+          "label": "問3",
+          "mark_symbol": "ク・ケ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問3（解答記号 ク・ケ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ク: 0, ケ: 1",
+            "correct_index": "ク: 0, ケ: 1"
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（ク・ケ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問3 [コ]",
+          "label": "問3",
+          "mark_symbol": "コ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問3（解答記号 コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "7",
+            "correct_index": 7
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（コ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問3 [サ]",
+          "label": "問3",
+          "mark_symbol": "サ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問3（解答記号 サ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "6",
+            "correct_index": 6
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（サ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問3 [シ]",
+          "label": "問3",
+          "mark_symbol": "シ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問3（解答記号 シ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（シ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問3 [ス・セ]",
+          "label": "問3",
+          "mark_symbol": "ス・セ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問3（解答記号 ス・セ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ス: 0, セ: 1",
+            "correct_index": "ス: 0, セ: 1"
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（ス・セ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問3 [ソ]",
+          "label": "問3",
+          "mark_symbol": "ソ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問3（解答記号 ソ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（ソ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問4 [タ]",
+          "label": "問4",
+          "mark_symbol": "タ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問4（解答記号 タ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（タ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問4 [チ]",
+          "label": "問4",
+          "mark_symbol": "チ",
+          "score": 1,
+          "context": "徹底演習 第1回 第3問 問4（解答記号 チ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（チ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問4 [ツ]",
+          "label": "問4",
+          "mark_symbol": "ツ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問4（解答記号 ツ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（ツ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問4 [テ]",
+          "label": "問4",
+          "mark_symbol": "テ",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問4（解答記号 テ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "5",
+            "correct_index": 5
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（テ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第3問 問4 [ト]",
+          "label": "問4",
+          "mark_symbol": "ト",
+          "score": 2,
+          "context": "徹底演習 第1回 第3問 問4（解答記号 ト）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "6",
+            "correct_index": 6
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（ト）を参照。"
+        }
+      ]
+    },
+    {
+      "section_id": "第4問",
+      "section_title": "第4問",
+      "section_score": 25,
+      "sub_questions": [
+        {
+          "question_id": "徹底演習 第1回 第4問 問1 [ア]",
+          "label": "問1",
+          "mark_symbol": "ア",
+          "score": 1,
+          "context": "徹底演習 第1回 第4問 問1（解答記号 ア）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問1（ア）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問1 [イ]",
+          "label": "問1",
+          "mark_symbol": "イ",
+          "score": 1,
+          "context": "徹底演習 第1回 第4問 問1（解答記号 イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問1（イ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問1 [ウ]",
+          "label": "問1",
+          "mark_symbol": "ウ",
+          "score": 1,
+          "context": "徹底演習 第1回 第4問 問1（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問1（ウ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問2 [エ]",
+          "label": "問2",
+          "mark_symbol": "エ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問2（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問2（エ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問3 [オ]",
+          "label": "問3",
+          "mark_symbol": "オ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問3（解答記号 オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問3（オ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問4 [カ・キ・ク]",
+          "label": "問4",
+          "mark_symbol": "カ・キ・ク",
+          "score": 3,
+          "context": "徹底演習 第1回 第4問 問4（解答記号 カ・キ・ク）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "カ: 2, キ: 3, ク: 7",
+            "correct_index": "カ: 2, キ: 3, ク: 7"
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問4（カ・キ・ク）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問5 [ケ]",
+          "label": "問5",
+          "mark_symbol": "ケ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問5（解答記号 ケ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問5（ケ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問6 [コ・サ]",
+          "label": "問6",
+          "mark_symbol": "コ・サ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問6（解答記号 コ・サ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "コ: 4, サ: 4",
+            "correct_index": "コ: 4, サ: 4"
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問6（コ・サ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問6 [シ・ス]",
+          "label": "問6",
+          "mark_symbol": "シ・ス",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問6（解答記号 シ・ス）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "シ: 2, ス: 9",
+            "correct_index": "シ: 2, ス: 9"
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問6（シ・ス）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問6 [セ]",
+          "label": "問6",
+          "mark_symbol": "セ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問6（解答記号 セ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問6（セ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問6 [ソ]",
+          "label": "問6",
+          "mark_symbol": "ソ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問6（解答記号 ソ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問6（ソ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問6 [タ]",
+          "label": "問6",
+          "mark_symbol": "タ",
+          "score": 2,
+          "context": "徹底演習 第1回 第4問 問6（解答記号 タ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "5",
+            "correct_index": 5
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問6（タ）を参照。"
+        },
+        {
+          "question_id": "徹底演習 第1回 第4問 問7 [チ]",
+          "label": "問7",
+          "mark_symbol": "チ",
+          "score": 3,
+          "context": "徹底演習 第1回 第4問 問7（解答記号 チ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問7（チ）を参照。"
+        }
+      ]
+    }
+  ]
+}

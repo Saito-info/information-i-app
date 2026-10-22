@@ -63,6 +63,14 @@ export type ExamSourceInfo = {
   count: number;
 };
 
+/** 解答・解説閲覧用（問題を解かずにPDFを見る） */
+export type ExamSourceBrowseInfo = {
+  id: string;
+  title: string;
+  answerPageImages: string[];
+  explanationStartIndex: number | null;
+};
+
 export type ExamSettings = {
   /** 受けるテスト（問題集） */
   sourceId: string;

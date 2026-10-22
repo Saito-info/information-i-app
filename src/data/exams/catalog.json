@@ -1266,6 +1266,341 @@
       ],
       "answerStartPage": 48,
       "explanationStartIndex": 1
+    },
+    {
+      "id": "tettei-1",
+      "title": "徹底演習 第1回",
+      "json": "tettei_enshu_1_info1.json",
+      "questionPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第１回＿問題.pdf",
+      "answerPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第１回＿解答.pdf",
+      "pageCount": 22,
+      "ranges": {
+        "1": {
+          "start": 1,
+          "end": 5,
+          "method": "equal-split"
+        },
+        "2": {
+          "start": 6,
+          "end": 10,
+          "method": "equal-split"
+        },
+        "3": {
+          "start": 11,
+          "end": 15,
+          "method": "equal-split"
+        },
+        "4": {
+          "start": 16,
+          "end": 22,
+          "method": "equal-split"
+        }
+      },
+      "pages": {
+        "1": [
+          "/exam-pages/tettei-1/p01.png",
+          "/exam-pages/tettei-1/p02.png",
+          "/exam-pages/tettei-1/p03.png",
+          "/exam-pages/tettei-1/p04.png",
+          "/exam-pages/tettei-1/p05.png"
+        ],
+        "2": [
+          "/exam-pages/tettei-1/p06.png",
+          "/exam-pages/tettei-1/p07.png",
+          "/exam-pages/tettei-1/p08.png",
+          "/exam-pages/tettei-1/p09.png",
+          "/exam-pages/tettei-1/p10.png"
+        ],
+        "3": [
+          "/exam-pages/tettei-1/p11.png",
+          "/exam-pages/tettei-1/p12.png",
+          "/exam-pages/tettei-1/p13.png",
+          "/exam-pages/tettei-1/p14.png",
+          "/exam-pages/tettei-1/p15.png"
+        ],
+        "4": [
+          "/exam-pages/tettei-1/p16.png",
+          "/exam-pages/tettei-1/p17.png",
+          "/exam-pages/tettei-1/p18.png",
+          "/exam-pages/tettei-1/p19.png",
+          "/exam-pages/tettei-1/p20.png",
+          "/exam-pages/tettei-1/p21.png",
+          "/exam-pages/tettei-1/p22.png"
+        ]
+      },
+      "answerPages": [
+        "/exam-answers/tettei-1/p01.png",
+        "/exam-answers/tettei-1/p02.png",
+        "/exam-answers/tettei-1/p03.png",
+        "/exam-answers/tettei-1/p04.png",
+        "/exam-answers/tettei-1/p05.png",
+        "/exam-answers/tettei-1/p06.png",
+        "/exam-answers/tettei-1/p07.png",
+        "/exam-answers/tettei-1/p08.png",
+        "/exam-answers/tettei-1/p09.png",
+        "/exam-answers/tettei-1/p10.png"
+      ],
+      "answerStartPage": null,
+      "explanationStartIndex": 1
+    },
+    {
+      "id": "tettei-2",
+      "title": "徹底演習 第2回",
+      "json": "tettei_enshu_2_info1.json",
+      "questionPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第２回＿問題.pdf",
+      "answerPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第２回＿解答.pdf",
+      "pageCount": 20,
+      "ranges": {
+        "1": {
+          "start": 1,
+          "end": 5,
+          "method": "equal-split"
+        },
+        "2": {
+          "start": 6,
+          "end": 10,
+          "method": "equal-split"
+        },
+        "3": {
+          "start": 11,
+          "end": 15,
+          "method": "equal-split"
+        },
+        "4": {
+          "start": 16,
+          "end": 20,
+          "method": "equal-split"
+        }
+      },
+      "pages": {
+        "1": [
+          "/exam-pages/tettei-2/p01.png",
+          "/exam-pages/tettei-2/p02.png",
+          "/exam-pages/tettei-2/p03.png",
+          "/exam-pages/tettei-2/p04.png",
+          "/exam-pages/tettei-2/p05.png"
+        ],
+        "2": [
+          "/exam-pages/tettei-2/p06.png",
+          "/exam-pages/tettei-2/p07.png",
+          "/exam-pages/tettei-2/p08.png",
+          "/exam-pages/tettei-2/p09.png",
+          "/exam-pages/tettei-2/p10.png"
+        ],
+        "3": [
+          "/exam-pages/tettei-2/p11.png",
+          "/exam-pages/tettei-2/p12.png",
+          "/exam-pages/tettei-2/p13.png",
+          "/exam-pages/tettei-2/p14.png",
+          "/exam-pages/tettei-2/p15.png"
+        ],
+        "4": [
+          "/exam-pages/tettei-2/p16.png",
+          "/exam-pages/tettei-2/p17.png",
+          "/exam-pages/tettei-2/p18.png",
+          "/exam-pages/tettei-2/p19.png",
+          "/exam-pages/tettei-2/p20.png"
+        ]
+      },
+      "answerPages": [
+        "/exam-answers/tettei-2/p01.png",
+        "/exam-answers/tettei-2/p02.png",
+        "/exam-answers/tettei-2/p03.png",
+        "/exam-answers/tettei-2/p04.png",
+        "/exam-answers/tettei-2/p05.png",
+        "/exam-answers/tettei-2/p06.png",
+        "/exam-answers/tettei-2/p07.png",
+        "/exam-answers/tettei-2/p08.png",
+        "/exam-answers/tettei-2/p09.png",
+        "/exam-answers/tettei-2/p10.png"
+      ],
+      "answerStartPage": null,
+      "explanationStartIndex": 1
+    },
+    {
+      "id": "chokuzen-1",
+      "title": "直前演習 第1回",
+      "json": "chokuzen_enshu_1_info1.json",
+      "questionPdf": "共通テスト対策実力完成直前演習情報Ⅰ第１回＿問題.pdf",
+      "answerPdf": "共通テスト対策実力完成直前演習情報Ⅰ第１回＿解答.pdf",
+      "pageCount": 37,
+      "ranges": {
+        "1": {
+          "start": 1,
+          "end": 9,
+          "method": "equal-split"
+        },
+        "2": {
+          "start": 10,
+          "end": 18,
+          "method": "equal-split"
+        },
+        "3": {
+          "start": 19,
+          "end": 27,
+          "method": "equal-split"
+        },
+        "4": {
+          "start": 28,
+          "end": 37,
+          "method": "equal-split"
+        }
+      },
+      "pages": {
+        "1": [
+          "/exam-pages/chokuzen-1/p01.png",
+          "/exam-pages/chokuzen-1/p02.png",
+          "/exam-pages/chokuzen-1/p03.png",
+          "/exam-pages/chokuzen-1/p04.png",
+          "/exam-pages/chokuzen-1/p05.png",
+          "/exam-pages/chokuzen-1/p06.png",
+          "/exam-pages/chokuzen-1/p07.png",
+          "/exam-pages/chokuzen-1/p08.png",
+          "/exam-pages/chokuzen-1/p09.png"
+        ],
+        "2": [
+          "/exam-pages/chokuzen-1/p10.png",
+          "/exam-pages/chokuzen-1/p11.png",
+          "/exam-pages/chokuzen-1/p12.png",
+          "/exam-pages/chokuzen-1/p13.png",
+          "/exam-pages/chokuzen-1/p14.png",
+          "/exam-pages/chokuzen-1/p15.png",
+          "/exam-pages/chokuzen-1/p16.png",
+          "/exam-pages/chokuzen-1/p17.png",
+          "/exam-pages/chokuzen-1/p18.png"
+        ],
+        "3": [
+          "/exam-pages/chokuzen-1/p19.png",
+          "/exam-pages/chokuzen-1/p20.png",
+          "/exam-pages/chokuzen-1/p21.png",
+          "/exam-pages/chokuzen-1/p22.png",
+          "/exam-pages/chokuzen-1/p23.png",
+          "/exam-pages/chokuzen-1/p24.png",
+          "/exam-pages/chokuzen-1/p25.png",
+          "/exam-pages/chokuzen-1/p26.png",
+          "/exam-pages/chokuzen-1/p27.png"
+        ],
+        "4": [
+          "/exam-pages/chokuzen-1/p28.png",
+          "/exam-pages/chokuzen-1/p29.png",
+          "/exam-pages/chokuzen-1/p30.png",
+          "/exam-pages/chokuzen-1/p31.png",
+          "/exam-pages/chokuzen-1/p32.png",
+          "/exam-pages/chokuzen-1/p33.png",
+          "/exam-pages/chokuzen-1/p34.png",
+          "/exam-pages/chokuzen-1/p35.png",
+          "/exam-pages/chokuzen-1/p36.png",
+          "/exam-pages/chokuzen-1/p37.png"
+        ]
+      },
+      "answerPages": [
+        "/exam-answers/chokuzen-1/p01.png",
+        "/exam-answers/chokuzen-1/p02.png",
+        "/exam-answers/chokuzen-1/p03.png",
+        "/exam-answers/chokuzen-1/p04.png",
+        "/exam-answers/chokuzen-1/p05.png",
+        "/exam-answers/chokuzen-1/p06.png",
+        "/exam-answers/chokuzen-1/p07.png",
+        "/exam-answers/chokuzen-1/p08.png",
+        "/exam-answers/chokuzen-1/p09.png",
+        "/exam-answers/chokuzen-1/p10.png",
+        "/exam-answers/chokuzen-1/p11.png",
+        "/exam-answers/chokuzen-1/p12.png"
+      ],
+      "answerStartPage": null,
+      "explanationStartIndex": 1
+    },
+    {
+      "id": "chokuzen-5",
+      "title": "直前演習 第5回",
+      "json": "chokuzen_enshu_5_info1.json",
+      "questionPdf": "共通テスト対策実力完成直前演習情報Ⅰ第５回＿問題.pdf",
+      "answerPdf": "共通テスト対策実力完成直前演習情報Ⅰ第５回＿解答.pdf",
+      "pageCount": 35,
+      "ranges": {
+        "1": {
+          "start": 1,
+          "end": 8,
+          "method": "equal-split"
+        },
+        "2": {
+          "start": 9,
+          "end": 16,
+          "method": "equal-split"
+        },
+        "3": {
+          "start": 17,
+          "end": 24,
+          "method": "equal-split"
+        },
+        "4": {
+          "start": 25,
+          "end": 35,
+          "method": "equal-split"
+        }
+      },
+      "pages": {
+        "1": [
+          "/exam-pages/chokuzen-5/p01.png",
+          "/exam-pages/chokuzen-5/p02.png",
+          "/exam-pages/chokuzen-5/p03.png",
+          "/exam-pages/chokuzen-5/p04.png",
+          "/exam-pages/chokuzen-5/p05.png",
+          "/exam-pages/chokuzen-5/p06.png",
+          "/exam-pages/chokuzen-5/p07.png",
+          "/exam-pages/chokuzen-5/p08.png"
+        ],
+        "2": [
+          "/exam-pages/chokuzen-5/p09.png",
+          "/exam-pages/chokuzen-5/p10.png",
+          "/exam-pages/chokuzen-5/p11.png",
+          "/exam-pages/chokuzen-5/p12.png",
+          "/exam-pages/chokuzen-5/p13.png",
+          "/exam-pages/chokuzen-5/p14.png",
+          "/exam-pages/chokuzen-5/p15.png",
+          "/exam-pages/chokuzen-5/p16.png"
+        ],
+        "3": [
+          "/exam-pages/chokuzen-5/p17.png",
+          "/exam-pages/chokuzen-5/p18.png",
+          "/exam-pages/chokuzen-5/p19.png",
+          "/exam-pages/chokuzen-5/p20.png",
+          "/exam-pages/chokuzen-5/p21.png",
+          "/exam-pages/chokuzen-5/p22.png",
+          "/exam-pages/chokuzen-5/p23.png",
+          "/exam-pages/chokuzen-5/p24.png"
+        ],
+        "4": [
+          "/exam-pages/chokuzen-5/p25.png",
+          "/exam-pages/chokuzen-5/p26.png",
+          "/exam-pages/chokuzen-5/p27.png",
+          "/exam-pages/chokuzen-5/p28.png",
+          "/exam-pages/chokuzen-5/p29.png",
+          "/exam-pages/chokuzen-5/p30.png",
+          "/exam-pages/chokuzen-5/p31.png",
+          "/exam-pages/chokuzen-5/p32.png",
+          "/exam-pages/chokuzen-5/p33.png",
+          "/exam-pages/chokuzen-5/p34.png",
+          "/exam-pages/chokuzen-5/p35.png"
+        ]
+      },
+      "answerPages": [
+        "/exam-answers/chokuzen-5/p01.png",
+        "/exam-answers/chokuzen-5/p02.png",
+        "/exam-answers/chokuzen-5/p03.png",
+        "/exam-answers/chokuzen-5/p04.png",
+        "/exam-answers/chokuzen-5/p05.png",
+        "/exam-answers/chokuzen-5/p06.png",
+        "/exam-answers/chokuzen-5/p07.png",
+        "/exam-answers/chokuzen-5/p08.png",
+        "/exam-answers/chokuzen-5/p09.png",
+        "/exam-answers/chokuzen-5/p10.png",
+        "/exam-answers/chokuzen-5/p11.png",
+        "/exam-answers/chokuzen-5/p12.png",
+        "/exam-answers/chokuzen-5/p13.png"
+      ],
+      "answerStartPage": null,
+      "explanationStartIndex": 1
     }
   ]
 }

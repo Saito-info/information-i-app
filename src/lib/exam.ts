@@ -13,12 +13,17 @@ import shinken2025_09 from "@/data/exams/shinken_2025_09_info1.json";
 import shinken2025_11 from "@/data/exams/shinken_2025_11_info1.json";
 import shinken2026_06 from "@/data/exams/shinken_2026_06_info1.json";
 import shisaku2025 from "@/data/exams/shisaku_2025_info1.json";
+import tettei1 from "@/data/exams/tettei_enshu_1_info1.json";
+import tettei2 from "@/data/exams/tettei_enshu_2_info1.json";
+import chokuzen1 from "@/data/exams/chokuzen_enshu_1_info1.json";
+import chokuzen5 from "@/data/exams/chokuzen_enshu_5_info1.json";
 import type {
   ExamFieldId,
   ExamFieldSelection,
   ExamQuestion,
   ExamSessionMeta,
   ExamSettings,
+  ExamSourceBrowseInfo,
   ExamSourceInfo,
 } from "@/lib/types";
 
@@ -61,6 +66,10 @@ const RAW_BY_JSON: Record<string, unknown> = {
   "shinken_2025_11_info1.json": shinken2025_11,
   "shinken_2026_06_info1.json": shinken2026_06,
   "shisaku_2025_info1.json": shisaku2025,
+  "tettei_enshu_1_info1.json": tettei1,
+  "tettei_enshu_2_info1.json": tettei2,
+  "chokuzen_enshu_1_info1.json": chokuzen1,
+  "chokuzen_enshu_5_info1.json": chokuzen5,
 };
 
 const catalogSources = (catalogJson as { sources: CatalogSource[] }).sources;
@@ -362,6 +371,19 @@ export function getExamSources(): ExamSourceInfo[] {
     title: source.title,
     count: allQuestions.filter((q) => q.sourceId === source.id).length,
   }));
+}
+
+export function getExamSourceBrowseInfo(
+  sourceId: string,
+): ExamSourceBrowseInfo | null {
+  const source = SOURCES.find((s) => s.id === sourceId);
+  if (!source) return null;
+  return {
+    id: source.id,
+    title: source.title,
+    answerPageImages: source.answerPages,
+    explanationStartIndex: source.explanationStartIndex,
+  };
 }
 
 export function getAllExamQuestions(): ExamQuestion[] {

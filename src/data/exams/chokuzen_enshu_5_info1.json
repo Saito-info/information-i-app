@@ -1,0 +1,623 @@
+{
+  "metadata": {
+    "title": "直前演習 第5回",
+    "subject": "情報Ⅰ",
+    "total_score": 100,
+    "description": "解答記号ごとに分割したマーク採点用データ"
+  },
+  "questions": [
+    {
+      "section_id": "第1問",
+      "section_title": "第1問",
+      "section_score": 20,
+      "sub_questions": [
+        {
+          "question_id": "直前演習 第5回 第1問 問1 [ア]",
+          "label": "問1",
+          "mark_symbol": "ア",
+          "score": 1,
+          "context": "直前演習 第5回 第1問 問1（解答記号 ア）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問1（ア）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問1 [イ]",
+          "label": "問1",
+          "mark_symbol": "イ",
+          "score": 1,
+          "context": "直前演習 第5回 第1問 問1（解答記号 イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問1（イ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問1 [ウ]",
+          "label": "問1",
+          "mark_symbol": "ウ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問1（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問1（ウ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問2 [エ]",
+          "label": "問2",
+          "mark_symbol": "エ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問2（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問2（エ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問2 [オ]",
+          "label": "問2",
+          "mark_symbol": "オ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問2（解答記号 オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問2（オ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問2 [カ]",
+          "label": "問2",
+          "mark_symbol": "カ",
+          "score": 1,
+          "context": "直前演習 第5回 第1問 問2（解答記号 カ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問2（カ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問3 [キ]",
+          "label": "問3",
+          "mark_symbol": "キ",
+          "score": 1,
+          "context": "直前演習 第5回 第1問 問3（解答記号 キ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問3（キ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問3 [ク]",
+          "label": "問3",
+          "mark_symbol": "ク",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問3（解答記号 ク）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問3（ク）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問3 [ケ]",
+          "label": "問3",
+          "mark_symbol": "ケ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問3（解答記号 ケ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問3（ケ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問4 [コ]",
+          "label": "問4",
+          "mark_symbol": "コ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問4（解答記号 コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問4（コ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問4 [サ]",
+          "label": "問4",
+          "mark_symbol": "サ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問4（解答記号 サ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "6",
+            "correct_index": 6
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問4（サ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第1問 問4 [シ]",
+          "label": "問4",
+          "mark_symbol": "シ",
+          "score": 2,
+          "context": "直前演習 第5回 第1問 問4（解答記号 シ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第1問 問4（シ）を参照。"
+        }
+      ]
+    },
+    {
+      "section_id": "第2問",
+      "section_title": "第2問",
+      "section_score": 30,
+      "sub_questions": [
+        {
+          "question_id": "直前演習 第5回 第2問 問1A [ア・イ]",
+          "label": "問1A",
+          "mark_symbol": "ア・イ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問1A（解答記号 ア・イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ア: 6, イ: 9",
+            "correct_index": "ア: 6, イ: 9"
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問1A（ア・イ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問2A [ウ]",
+          "label": "問2A",
+          "mark_symbol": "ウ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問2A（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問2A（ウ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問2A [エ]",
+          "label": "問2A",
+          "mark_symbol": "エ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問2A（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "c",
+            "correct_index": 13
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問2A（エ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問3A [オ]",
+          "label": "問3A",
+          "mark_symbol": "オ",
+          "score": 2,
+          "context": "直前演習 第5回 第2問 問3A（解答記号 オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問3A（オ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問3A [カ]",
+          "label": "問3A",
+          "mark_symbol": "カ",
+          "score": 4,
+          "context": "直前演習 第5回 第2問 問3A（解答記号 カ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "6",
+            "correct_index": 6
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問3A（カ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問1B [キ]",
+          "label": "問1B",
+          "mark_symbol": "キ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問1B（解答記号 キ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問1B（キ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問2B [ク]",
+          "label": "問2B",
+          "mark_symbol": "ク",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問2B（解答記号 ク）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問2B（ク）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問3B [ケ]",
+          "label": "問3B",
+          "mark_symbol": "ケ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問3B（解答記号 ケ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問3B（ケ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問4B [コ]",
+          "label": "問4B",
+          "mark_symbol": "コ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問4B（解答記号 コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問4B（コ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第2問 問5B [サ]",
+          "label": "問5B",
+          "mark_symbol": "サ",
+          "score": 3,
+          "context": "直前演習 第5回 第2問 問5B（解答記号 サ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第2問 問5B（サ）を参照。"
+        }
+      ]
+    },
+    {
+      "section_id": "第3問",
+      "section_title": "第3問",
+      "section_score": 25,
+      "sub_questions": [
+        {
+          "question_id": "直前演習 第5回 第3問 問1 [ア]",
+          "label": "問1",
+          "mark_symbol": "ア",
+          "score": 1,
+          "context": "直前演習 第5回 第3問 問1（解答記号 ア）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（ア）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問1 [イ]",
+          "label": "問1",
+          "mark_symbol": "イ",
+          "score": 1,
+          "context": "直前演習 第5回 第3問 問1（解答記号 イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（イ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問1 [ウ]",
+          "label": "問1",
+          "mark_symbol": "ウ",
+          "score": 1,
+          "context": "直前演習 第5回 第3問 問1（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問1（ウ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問2 [エ]",
+          "label": "問2",
+          "mark_symbol": "エ",
+          "score": 2,
+          "context": "直前演習 第5回 第3問 問2（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "4",
+            "correct_index": 4
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（エ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問2 [オ]",
+          "label": "問2",
+          "mark_symbol": "オ",
+          "score": 2,
+          "context": "直前演習 第5回 第3問 問2（解答記号 オ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（オ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問2 [カ]",
+          "label": "問2",
+          "mark_symbol": "カ",
+          "score": 1,
+          "context": "直前演習 第5回 第3問 問2（解答記号 カ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（カ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問2 [キ]",
+          "label": "問2",
+          "mark_symbol": "キ",
+          "score": 2,
+          "context": "直前演習 第5回 第3問 問2（解答記号 キ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（キ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問2 [ク]",
+          "label": "問2",
+          "mark_symbol": "ク",
+          "score": 1,
+          "context": "直前演習 第5回 第3問 問2（解答記号 ク）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（ク）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問2 [ケ]",
+          "label": "問2",
+          "mark_symbol": "ケ",
+          "score": 1,
+          "context": "直前演習 第5回 第3問 問2（解答記号 ケ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問2（ケ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問3 [コ]",
+          "label": "問3",
+          "mark_symbol": "コ",
+          "score": 2,
+          "context": "直前演習 第5回 第3問 問3（解答記号 コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（コ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問3 [サ]",
+          "label": "問3",
+          "mark_symbol": "サ",
+          "score": 2,
+          "context": "直前演習 第5回 第3問 問3（解答記号 サ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（サ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問3 [シ]",
+          "label": "問3",
+          "mark_symbol": "シ",
+          "score": 3,
+          "context": "直前演習 第5回 第3問 問3（解答記号 シ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問3（シ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問4 [ス]",
+          "label": "問4",
+          "mark_symbol": "ス",
+          "score": 3,
+          "context": "直前演習 第5回 第3問 問4（解答記号 ス）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（ス）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第3問 問4 [セ]",
+          "label": "問4",
+          "mark_symbol": "セ",
+          "score": 3,
+          "context": "直前演習 第5回 第3問 問4（解答記号 セ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第3問 問4（セ）を参照。"
+        }
+      ]
+    },
+    {
+      "section_id": "第4問",
+      "section_title": "第4問",
+      "section_score": 25,
+      "sub_questions": [
+        {
+          "question_id": "直前演習 第5回 第4問 問1 [ア]",
+          "label": "問1",
+          "mark_symbol": "ア",
+          "score": 2,
+          "context": "直前演習 第5回 第4問 問1（解答記号 ア）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "2",
+            "correct_index": 2
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問1（ア）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問1 [イ]",
+          "label": "問1",
+          "mark_symbol": "イ",
+          "score": 2,
+          "context": "直前演習 第5回 第4問 問1（解答記号 イ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "1",
+            "correct_index": 1
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問1（イ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問1 [ウ]",
+          "label": "問1",
+          "mark_symbol": "ウ",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問1（解答記号 ウ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問1（ウ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問2 [エ]",
+          "label": "問2",
+          "mark_symbol": "エ",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問2（解答記号 エ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "3",
+            "correct_index": 3
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問2（エ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問2 [オ・カ・キ]",
+          "label": "問2",
+          "mark_symbol": "オ・カ・キ",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問2（解答記号 オ・カ・キ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "オ: 0, カ: 4, キ: 2",
+            "correct_index": "オ: 0, カ: 4, キ: 2"
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問2（オ・カ・キ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問2 [ク・ケ・コ]",
+          "label": "問2",
+          "mark_symbol": "ク・ケ・コ",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問2（解答記号 ク・ケ・コ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "ク: 0, ケ: 3, コ: 6",
+            "correct_index": "ク: 0, ケ: 3, コ: 6"
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問2（ク・ケ・コ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問2 [サ・シ]",
+          "label": "問2",
+          "mark_symbol": "サ・シ",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問2（解答記号 サ・シ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "サ: 5, シ: 8",
+            "correct_index": "サ: 5, シ: 8"
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問2（サ・シ）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問2 [ス]",
+          "label": "問2",
+          "mark_symbol": "ス",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問2（解答記号 ス）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "0",
+            "correct_index": 0
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問2（ス）を参照。"
+        },
+        {
+          "question_id": "直前演習 第5回 第4問 問3 [セ]",
+          "label": "問3",
+          "mark_symbol": "セ",
+          "score": 3,
+          "context": "直前演習 第5回 第4問 問3（解答記号 セ）。問題文・選択肢は問題PDFを参照し、マークで解答してください。",
+          "options": [],
+          "answer": {
+            "correct_option": "6",
+            "correct_index": 6
+          },
+          "explanation": "正解は解答・解説PDFの第4問 問3（セ）を参照。"
+        }
+      ]
+    }
+  ]
+}

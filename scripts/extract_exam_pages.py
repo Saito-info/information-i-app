@@ -116,6 +116,34 @@ CATALOG = [
         "questionPdf": "2026年度6月進研マーク模試.pdf",
         "answerPdf": None,
     },
+    {
+        "id": "tettei-1",
+        "title": "徹底演習 第1回",
+        "json": "tettei_enshu_1_info1.json",
+        "questionPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第１回＿問題.pdf",
+        "answerPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第１回＿解答.pdf",
+    },
+    {
+        "id": "tettei-2",
+        "title": "徹底演習 第2回",
+        "json": "tettei_enshu_2_info1.json",
+        "questionPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第２回＿問題.pdf",
+        "answerPdf": "大学入学共通テスト対策情報Ⅰ徹底演習第２回＿解答.pdf",
+    },
+    {
+        "id": "chokuzen-1",
+        "title": "直前演習 第1回",
+        "json": "chokuzen_enshu_1_info1.json",
+        "questionPdf": "共通テスト対策実力完成直前演習情報Ⅰ第１回＿問題.pdf",
+        "answerPdf": "共通テスト対策実力完成直前演習情報Ⅰ第１回＿解答.pdf",
+    },
+    {
+        "id": "chokuzen-5",
+        "title": "直前演習 第5回",
+        "json": "chokuzen_enshu_5_info1.json",
+        "questionPdf": "共通テスト対策実力完成直前演習情報Ⅰ第５回＿問題.pdf",
+        "answerPdf": "共通テスト対策実力完成直前演習情報Ⅰ第５回＿解答.pdf",
+    },
 ]
 
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { BottomNav } from "@/components/BottomNav";
+import { ExamBrowseScreen } from "@/components/ExamBrowseScreen";
 import { ExamQuizScreen } from "@/components/ExamQuizScreen";
 import { ExamResultScreen } from "@/components/ExamResultScreen";
 import { ExamSetup } from "@/components/ExamSetup";
@@ -13,6 +14,7 @@ import { TermsList } from "@/components/TermsList";
 import {
   buildExamSession,
   getExamQuestionsByIds,
+  getExamSourceBrowseInfo,
   getFieldLabel,
 } from "@/lib/exam";
 import { buildReviewDeck, buildStudyDeck } from "@/lib/quiz";
@@ -35,6 +37,7 @@ import type {
   ExamResults,
   ExamSessionMeta,
   ExamSettings,
+  ExamSourceBrowseInfo,
   ExamSourceInfo,
   HistoryEntry,
   QuizResults,
@@ -44,7 +47,7 @@ import type {
 } from "@/lib/types";
 import { useEffect, useMemo, useState } from "react";
 
-type Phase = "setup" | "quiz" | "result";
+type Phase = "setup" | "quiz" | "result" | "browse";
 
 type VocabularyAppProps = {
   terms: TermItem[];
@@ -71,6 +74,9 @@ export function VocabularyApp({
   });
   const [examWrongIds, setExamWrongIds] = useState<string[]>([]);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [browseInfo, setBrowseInfo] = useState<ExamSourceBrowseInfo | null>(
+    null,
+  );
 
   const [studySettings, setStudySettings] = useState<StudySettings>({
     category: "all",
@@ -130,6 +136,7 @@ export function VocabularyApp({
     setExamMeta(null);
     setResults(null);
     setExamResults(null);
+    setBrowseInfo(null);
     refreshSideData();
   }
 
@@ -186,7 +193,15 @@ export function VocabularyApp({
     setExamMeta(session.meta);
     setExamKind("exam");
     setExamResults(null);
+    setBrowseInfo(null);
     setPhase("quiz");
+  }
+
+  function openExamBrowse() {
+    const info = getExamSourceBrowseInfo(examSettings.sourceId);
+    if (!info) return;
+    setBrowseInfo(info);
+    setPhase("browse");
   }
 
   function handleFinish(nextResults: QuizResults) {
@@ -251,6 +266,7 @@ export function VocabularyApp({
     setExamMeta(null);
     setResults(null);
     setExamResults(null);
+    setBrowseInfo(null);
     refreshSideData();
   }
 
@@ -265,12 +281,13 @@ export function VocabularyApp({
     (tab === "exam" ||
       (tab === "review" && reviewSettings.mode === "exam"));
 
-  const inSession = termsQuiz || examQuiz;
+  const examBrowse = phase === "browse" && browseInfo != null && tab === "exam";
+  const inSession = termsQuiz || examQuiz || examBrowse;
 
   return (
     <div className="min-h-dvh bg-gradient-to-b from-blue-50 via-slate-50 to-white text-slate-800">
       <div className="mx-auto min-h-dvh max-w-lg pb-24">
-        {!examQuiz ? (
+        {!examQuiz && !examBrowse ? (
           <div className="border-b border-blue-100/80 bg-white/70 px-4 py-3 backdrop-blur">
             <p className="text-center text-sm font-bold tracking-wide text-blue-700">
               情報Ⅰ 単語帳
@@ -295,6 +312,7 @@ export function VocabularyApp({
             settings={examSettings}
             onChange={setExamSettings}
             onStart={startExam}
+            onBrowseAnswers={openExamBrowse}
           />
         )}
 
@@ -335,6 +353,14 @@ export function VocabularyApp({
             meta={examMeta}
             onFinish={handleExamFinish}
             onExit={backToSetup}
+          />
+        )}
+
+        {examBrowse && browseInfo && (
+          <ExamBrowseScreen
+            key={browseInfo.id}
+            source={browseInfo}
+            onBack={backToSetup}
           />
         )}
 
